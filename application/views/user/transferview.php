@@ -40,7 +40,9 @@ if(!$user_id){
     </div>
   <?php
   }?>
-    <h1> Transfer Funds </h1>
+  <div class="container box">
+           <h3 align="center"><?php echo "Transfer Funds"; ?></h3><br />
+
     <form role="form" method="post" action="<?php echo base_url('index.php/transfer/maketransfer'); ?>">
       <div class="form-group">
         <label for="exampleInputPin">Transfer this amount :</label>
@@ -58,7 +60,7 @@ if(!$user_id){
 
     </form>
 
-
+</div>
   </div>
 </div>
 </body>

@@ -40,7 +40,9 @@ if(!$user_id){
     </div>
   <?php
   }?>
-  <h1> WITHDRAW </h1>
+  <div class="container box">
+           <h3 align="center"><?php echo "Withdraw"; ?></h3><br />
+
     <form role="form" method="post" action="<?php echo base_url('index.php/withdraw/makewithdraw'); ?>">
       <div class="form-group">
         <label for="exampleInputPin">4 Digit Pin Number</label>
@@ -54,7 +56,7 @@ if(!$user_id){
 
     </form>
 
-
+</div>
   </div>
 
 </body>

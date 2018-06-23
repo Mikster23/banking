@@ -98,7 +98,58 @@ if(!$user_id){
   <?php  $this->view('partials/user_sidebar.php');?>
   <div class="content-wrapper">
       <?php echo "hi"; ?>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
 
+            <table class="table table-bordered table-striped">
+
+
+              <tr>
+                <th colspan="2"><h4 class="text-center">User Info</h3></th>
+
+              </tr>
+                <tr>
+                  <td>User id</td>
+                  <td><?php// echo $this->session->userdata('user_id'); ?></td>
+                </tr>
+                <tr>
+                  <td>User Email</td>
+                  <td><?php //echo $this->session->userdata('user_email');  ?></td>
+                </tr>
+                <tr>
+                  <td>User Firstname</td>
+                  <td><?php// echo $this->session->userdata('user_firstname');  ?></td>
+                </tr>
+                <tr>
+                  <td>User Lastname</td>
+                  <td><?php// echo $this->session->userdata('user_lastname');  ?></td>
+                </tr>
+                <tr>
+                  <td>User Age</td>
+                  <td><?php// echo $this->session->userdata('user_age');  ?></td>
+                </tr>
+                <tr>
+                  <td>User Mobile</td>
+                  <td><?php //echo $this->session->userdata('user_mobile');  ?></td>
+                </tr>
+                <tr>
+                  <td>User AccountNumber</td>
+                  <td><?php// echo $this->session->userdata('user_acctnum');  ?></td>
+                </tr>
+                <tr>
+                  <td>User Pin </td>
+                  <td><?php// echo $this->session->userdata('user_pin');  ?></td>
+                </tr>
+                <tr>
+                  <td>User Balance</td>
+                  <td><?php //echo $this->session->userdata('user_balance');  ?></td>
+                </tr>
+            </table>
+
+
+          </div>
+        </div>
     </div>
     <!-- Bootstrap core JavaScript-->
     <script type="text/javascript"  src="<?php echo base_url();?>assets/vendor/jquery/jquery.min.js"></script>

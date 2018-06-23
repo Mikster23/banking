@@ -32,6 +32,11 @@ if($success_msg){
 <div class="content-wrapper">
   <div class="container box">
            <h3 align="center"><?php echo "Transaction History"; ?></h3><br />
+
+             <div class="card-header">
+               <i class="fa fa-table"></i> TransctionHistory</div>
+             <div class="card-body">
+               <div class="table-responsive">
            <div class="table-responsive">
                 <br />
                 <table id="trans" class="table table-bordered table-striped">
@@ -45,9 +50,13 @@ if($success_msg){
                           </tr>
                      </thead>
                 </table>
+              </div>
+            </div>
+
+          </div>
            </div>
       </div>
-</div>
+  </div>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js"></script>
 <?php// echo site_url("/user/transhistory") ?>

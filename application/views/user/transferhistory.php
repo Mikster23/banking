@@ -32,7 +32,11 @@ if($success_msg){
 <div class="content-wrapper">
   <div class="container box">
            <h3 align="center"><?php echo "Transfer Fund History"; ?></h3><br />
-           <div class="table-responsive">
+           <div class="card mb-3">
+             <div class="card-header">
+               <i class="fa fa-table"></i> Transfer Fund History</div>
+             <div class="card-body">
+               <div class="table-responsive">
                 <br />
                 <table id="trans" class="table table-bordered table-striped">
                      <thead>
@@ -47,6 +51,10 @@ if($success_msg){
                           </tr>
                      </thead>
                 </table>
+              </div>
+            </div>
+          
+          </div>
            </div>
       </div>
 </div>
