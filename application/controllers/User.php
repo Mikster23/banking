@@ -34,8 +34,10 @@ function login_user(){
         $this->session->set_userdata('user_balance',$data['balance']);
         $type = (int) $data['user_type'];
         if($type ==1){
-          $this->load->view('user/index.php');
-          $this->load->view('partials/user_sidebar.php');
+            redirect('user/loaddash');
+             $this->load->view('partials/user_sidebar.php');
+
+                $this->load->view('partials/user_sidebar.php');
 
         }
         else{
@@ -54,6 +56,10 @@ function login_user(){
 function loadtransaction(){
 
   $this->load->view('user/transactionview.php');
+}
+function loaddash(){
+
+  $this->load->view('user/dashboard.php');
 }
 function user_profile(){
 

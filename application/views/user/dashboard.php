@@ -1,55 +1,49 @@
 <?php
-$user_id=$this->session->userdata('id');
+$user_id=$this->session->userdata('user_id');
+$user_balance=$this->session->userdata('user_balance');
+$user_pin=$this->session->userdata('user_pin');
+$user_acctnum=$this->session->userdata('user_acctnum');
 
 if(!$user_id){
-
-  redirect('index.php/user/loadlogin');
+ redirect('/user/loadlogin');
 }
 
  ?>
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>User Profile </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  </head>
-  <body>
+<html lang="en">
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
+<head>
 
-      <table class="table table-bordered table-striped">
+</head>
+<body>
+  <?php  $this->view('partials/user_sidebar.php');
+    $error_msg= $this->session->flashdata('error_msg');
+    $success_msg= $this->session->flashdata('success_msg');
+  ?>
 
 
-        <tr>
-          <th colspan="2"><h4 class="text-center">User Info</h3></th>
-
-        </tr>
-          <tr>
-            <td>User Name</td>
-            <td><?php echo $this->session->userdata('user_name'); ?></td>
-          </tr>
-          <tr>
-            <td>User Email</td>
-            <td><?php echo $this->session->userdata('user_email');  ?></td>
-          </tr>
-          <tr>
-            <td>User Age</td>
-            <td><?php echo $this->session->userdata('user_age');  ?></td>
-          </tr>
-          <tr>
-            <td>User Mobile</td>
-            <td><?php echo $this->session->userdata('user_mobile');  ?></td>
-          </tr>
-      </table>
-
-
+<div class="content-wrapper">
+<?php
+  if($error_msg){
+    ?>
+    <div class="alert alert-danger">
+      <?php echo $error_msg; ?>
     </div>
+    <?php
+  }?>
+
+  <?php
+  if($success_msg){
+    ?>
+    <div class="alert alert-success">
+      <?php echo $success_msg; ?>
+    </div>
+  <?php
+  }?>
+ <?php echo " Dashboard" ; ?>
+
   </div>
-<a href="<?php echo base_url('user/user_logout');?>" >  <button type="button" class="btn-primary">Logout</button></a>
-</div>
-  </body>
+
+</body>
+
 </html>
