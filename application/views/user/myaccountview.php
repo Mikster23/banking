@@ -97,10 +97,10 @@ if(!$user_id){
 
   <?php  $this->view('partials/user_sidebar.php');?>
   <div class="content-wrapper">
-      <?php echo "hi"; ?>
+
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-12">
 
             <table class="table table-bordered table-striped">
 
@@ -110,40 +110,40 @@ if(!$user_id){
 
               </tr>
                 <tr>
-                  <td>User id</td>
-                  <td><?php// echo $this->session->userdata('user_id'); ?></td>
+                   <td><b>User id</b></td>
+                  <td><?php echo $this->session->userdata('user_id'); ?></td>
                 </tr>
                 <tr>
-                  <td>User Email</td>
-                  <td><?php //echo $this->session->userdata('user_email');  ?></td>
+                  <td><b>User Email</b></td>
+                  <td><?php echo $this->session->userdata('user_email');  ?></td>
                 </tr>
                 <tr>
-                  <td>User Firstname</td>
-                  <td><?php// echo $this->session->userdata('user_firstname');  ?></td>
+                  <td><b>User Firstname</b></td>
+                  <td><?php echo $this->session->userdata('user_firstname');  ?></td>
                 </tr>
                 <tr>
-                  <td>User Lastname</td>
-                  <td><?php// echo $this->session->userdata('user_lastname');  ?></td>
+                  <td><b>User Lastname</b></td>
+                  <td><?php echo $this->session->userdata('user_lastname');  ?></td>
                 </tr>
                 <tr>
-                  <td>User Age</td>
-                  <td><?php// echo $this->session->userdata('user_age');  ?></td>
+                  <td><b>User Age</b></td>
+                  <td><?php echo $this->session->userdata('user_age');  ?></td>
                 </tr>
                 <tr>
-                  <td>User Mobile</td>
-                  <td><?php //echo $this->session->userdata('user_mobile');  ?></td>
+                  <td><b>User Mobile</b></td>
+                  <td><?php echo $this->session->userdata('user_mobile');  ?></td>
                 </tr>
                 <tr>
-                  <td>User AccountNumber</td>
-                  <td><?php// echo $this->session->userdata('user_acctnum');  ?></td>
+                  <td><b>User AccountNumber</b></td>
+                  <td><?php echo $this->session->userdata('user_acctnum');  ?></td>
                 </tr>
                 <tr>
-                  <td>User Pin </td>
-                  <td><?php// echo $this->session->userdata('user_pin');  ?></td>
+                  <td><b>User Pin </b></td>
+                  <td><?php echo  $this->session->userdata('user_pin');  ?></td>
                 </tr>
                 <tr>
-                  <td>User Balance</td>
-                  <td><?php //echo $this->session->userdata('user_balance');  ?></td>
+                  <td><b>Withdrawable Balance</b></td>
+                  <td><?php echo "PHP : " . $this->session->userdata('user_balance');  ?></td>
                 </tr>
             </table>
 

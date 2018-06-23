@@ -12,6 +12,7 @@ public function __construct(){
 
 }
 
+
 function login_user(){
   $user_login=array(
 
@@ -56,6 +57,9 @@ function login_user(){
 function loadtransaction(){
 
   $this->load->view('user/transactionview.php');
+}
+function loadmyaccount(){
+  $this->load->view('user/myaccountview.php');
 }
 function loaddash(){
 
