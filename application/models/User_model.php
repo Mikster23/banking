@@ -20,6 +20,7 @@ public function user_history($history){
 
   $this->db->insert('transaction', $history);
 }
+/*
 public function make_query()
      {
           $this->db->select($this->select_column);
@@ -37,13 +38,18 @@ public function make_query()
           {
                $this->db->order_by('id', 'DESC');
           }
-     }
+     }*/
 public function get_history($id){
+/*  if(isset($_POST["order"]))
+         {
+              $order_column = array(null, "action", "amount", "created_at");
+              $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+         }*/
   if(isset($_POST["search"]["value"]))  {
 
     $this->db->select('accountnum,action,amount,created_at');
     $this->db->from('transaction');
-
+    $this->db->limit($_POST['length'], $_POST['start']);
     $this->db->or_like("action", $_POST["search"]["value"]);
     $this->db->or_like("amount", $_POST["search"]["value"]);
     $this->db->or_like("created_at", $_POST["search"]["value"]);
@@ -70,6 +76,41 @@ public function get_history($id){
   else{
     return false;
   }
+
+
+
+
+}
+
+public function get_transferhistory($id){
+/*  if(isset($_POST["order"]))
+         {
+              $order_column = array(null, "action", "amount", "created_at");
+              $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+         }*/
+  if(isset($_POST["search"]["value"]))  {
+
+    $this->db->select('accountnum,action,amount,remarks,to_accountnum,created_at');
+    $this->db->from('transaction');
+    $this->db->limit($_POST['length'], $_POST['start']);
+    $this->db->or_like("action", $_POST["search"]["value"]);
+    $this->db->or_like("amount", $_POST["search"]["value"]);
+    $this->db->or_like("remarks", $_POST["search"]["value"]);
+    $this->db->or_like("created_at", $_POST["search"]["value"]);
+    $this->db->where('accountnum',$id);
+    $where = "to_accountnum is  NOT NULL";
+    $this->db->where($where);
+    if($query=$this->db->get())
+    {
+       $result =  $query->result();
+        //return $query->row_array();
+        return $result;
+    }
+    else{
+      return false;
+    }
+  }
+
 
 
 

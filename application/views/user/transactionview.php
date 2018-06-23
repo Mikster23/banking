@@ -54,7 +54,7 @@ if($success_msg){
 <script>
 $(document).ready(function () {
 
-    $('#transtfoot th').each( function () {
+    $('#transthead th').each( function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="Search '+title+'" />');
     });

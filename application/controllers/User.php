@@ -111,6 +111,66 @@ $user_trans=array(
 
   //  $this->load->view('user/transactionview.php', $data);
 }
+
+
+public function transferhistory(){
+$id =  (int)$this->session->userdata('user_acctnum');
+//echo $id;
+$user_trans=array(
+
+'accountnum'=>$id
+
+
+  );
+  $data = array();
+  $data2= $this->user_model->get_transferhistory($user_trans['accountnum']);
+  /*$data2 = array(
+        'accountnum' => $data2[0],
+        'action' => $data2[1],
+        'amount' => $data2[2],
+        'created_at' => $data2[3]
+    );*/
+
+
+    $data = array();
+  //  $actions = 'Transfer Funds';
+         foreach($data2 as $row)
+         {
+              $sub_array = array();
+
+
+//  $temp = implode("",$row->action);;
+
+if($row->to_accountnum === NULL){
+
+
+}
+  else  if($row->accountnum == $id || $row->to_accountnum == $id)
+     {
+        $sub_array[] = $id;
+        $sub_array[] = $row->action;
+        $sub_array[] = $row->amount;
+        $sub_array[] = $row->remarks;
+        $sub_array[] = $row->to_accountnum;
+        $sub_array[] = $row->created_at;
+        $data[] = $sub_array;
+      }
+
+
+       }
+         $output = array(
+
+                       "data"                    =>     $data
+                  );
+    //print_r($data2);
+
+ echo json_encode($output);
+          //   print_r($output);
+//print_r($data);
+  //  echo json_encode($this->user->with('id')->get($id));
+
+  //  $this->load->view('user/transactionview.php', $data);
+}
 public function register_user(){
     $pin = mt_rand(1000, 9999);
     $acctnum = mt_rand(100000000, 999999999);

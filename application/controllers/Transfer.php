@@ -15,6 +15,10 @@ public function index()
 {
   $this->load->view('user/transferview.php');
 }
+public function loadfund()
+{
+  $this->load->view('user/transferhistory.php');
+}
 
 
 public function maketransfer()

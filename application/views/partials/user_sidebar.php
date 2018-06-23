@@ -65,7 +65,7 @@
               <a href="<?php echo base_url('index.php/transfer'); ?> ">Send Money</a>
             </li>
             <li>
-              <a href="register.html">Transfer Fund History</a>
+                <a href="<?php echo base_url('index.php/transfer/loadfund'); ?> ">Transfer History</a>
             </li>
           </ul>
         </li>
