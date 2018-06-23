@@ -32,7 +32,12 @@ $pintrue =   $this->session->userdata('user_pin');
 if($pin != $pintrue){
 echo $pin . "fake == true" . $pintrue;
   $this->session->set_flashdata('error_msg', 'Wrong Pin Number');
-redirect('/deposit');
+redirect('/withdraw');
+}
+else if($amount > $bal){
+  $this->session->set_flashdata('error_msg', 'Insufficient Balance');
+  redirect('/withdraw');
+
 }
 else{
   $history=array(
@@ -44,7 +49,7 @@ else{
 $this->user_model->user_history($history);
 
 $this->session->set_flashdata('success_msg', 'Withdraw Successful!');
-  $user_deposit=array(
+  $user_withdraw=array(
 
 //  'pin'=>$this->input->post('user_pin'),
   'balance' => $bal-$amount
@@ -54,10 +59,10 @@ $this->session->set_flashdata('success_msg', 'Withdraw Successful!');
     $this->session->set_userdata('user_balance',$bal-$amount);
     $id =  $this->session->userdata('user_id');
 
-      $deposit_check=$this->user_model->user_withdraw($id,$user_deposit);
+      $withdraw_check=$this->user_model->user_withdraw($id,$user_withdraw);
 
 echo json_encode(array("status" => TRUE));
-redirect('/deposit');
+redirect('/withdraw');
 }
 }
 }

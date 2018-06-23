@@ -46,6 +46,47 @@ public function login_user($email,$pass){
 
 
 }
+
+public function checkexist_acctnum($acctnum){
+
+    $this->db->select('*');
+    $this->db->from('user');
+  $this->db->where('accountnum',$acctnum);
+     $query = $this->db->get();
+     if ($query->num_rows() > 0){
+         return true;
+     }
+     else{
+         return false;
+     }
+
+
+}
+public function getbalance_acctnum($acctnum){
+  echo $acctnum . "hi s";
+  $this->db->select('balance');
+  $this->db->from('user');
+  $this->db->where('accountnum',$acctnum);
+
+   if($query=$this->db->get())
+   {
+       return $query->row_array();
+   }
+   else{
+     return false;
+   }
+
+
+}
+public function transfer($acctnum,$amount){
+
+    $this->db->where('accountnum', $acctnum);
+    $this->db->update('user', $amount);
+  		return $this->db->affected_rows();
+
+
+}
+
 public function email_check($email){
 
   $this->db->select('*');

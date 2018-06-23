@@ -95,7 +95,7 @@ if(!$user_id){
   <link href="<?php echo base_url('assets/css/sb-admin.css'); ?>" rel="stylesheet">
 </head>
 
-  <?php $this->view('partials/user_sidebar.php');?>
+  <?php  $this->view('partials/user_sidebar.php');?>
   <div class="content-wrapper">
       <?php echo "hi"; ?>
     </div>

@@ -44,6 +44,7 @@ else{
 $this->user_model->user_history($history);
 
 $this->session->set_flashdata('success_msg', 'Deposit Successful!');
+
   $user_deposit=array(
 
 //  'pin'=>$this->input->post('user_pin'),

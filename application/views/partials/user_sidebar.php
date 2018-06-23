@@ -61,7 +61,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="login.html">Send Money</a>
+              <a href="<?php echo base_url('index.php/transfer'); ?> ">Send Money</a>
             </li>
             <li>
               <a href="register.html">Transfer Fund History</a>
