@@ -1,7 +1,7 @@
 <?php
 class User_model extends CI_model{
 
-
+ var $select_column = array("accountnum", "action", "amount", "created_at");
 
 public function register_user($user){
 
@@ -19,6 +19,61 @@ public function user_deposit($id, $user_deposit){
 public function user_history($history){
 
   $this->db->insert('transaction', $history);
+}
+public function make_query()
+     {
+          $this->db->select($this->select_column);
+          $this->db->from('user');
+          if(isset($_POST["search"]["value"]))
+          {
+               $this->db->like("first_name", $_POST["search"]["value"]);
+               $this->db->or_like("last_name", $_POST["search"]["value"]);
+          }
+          if(isset($_POST["order"]))
+          {
+               $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+          }
+          else
+          {
+               $this->db->order_by('id', 'DESC');
+          }
+     }
+public function get_history($id){
+  if(isset($_POST["search"]["value"]))  {
+
+    $this->db->select('accountnum,action,amount,created_at');
+    $this->db->from('transaction');
+
+    $this->db->or_like("action", $_POST["search"]["value"]);
+    $this->db->or_like("amount", $_POST["search"]["value"]);
+    $this->db->or_like("created_at", $_POST["search"]["value"]);
+    $this->db->where('accountnum',$id);
+    if($query=$this->db->get())
+    {
+       $result =  $query->result();
+        //return $query->row_array();
+        return $result;
+    }
+    else{
+      return false;
+    }
+  }
+
+  $this->db->from('transaction');
+  $this->db->where('accountnum',$id);
+  if($query=$this->db->get())
+  {
+     $result =  $query->result();
+      //return $query->row_array();
+      return $result;
+  }
+  else{
+    return false;
+  }
+
+
+
+
 }
 public function user_withdraw($id, $user_deposit){
 

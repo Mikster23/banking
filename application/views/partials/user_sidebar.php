@@ -50,7 +50,8 @@
               <a href="cards.html">Time Deposit</a>
             </li>
             <li>
-              <a href="cards.html">Transacation History</a>
+
+              <a href="<?php echo base_url('index.php/user/loadtransaction');?>">Transaction History</a>
             </li>
           </ul>
         </li>

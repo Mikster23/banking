@@ -32,20 +32,29 @@ function login_user(){
         $this->session->set_userdata('user_acctnum',$data['accountnum']);
         $this->session->set_userdata('user_pin',$data['pin']);
         $this->session->set_userdata('user_balance',$data['balance']);
+        $type = (int) $data['user_type'];
+        if($type ==1){
+          $this->load->view('user/index.php');
+          $this->load->view('partials/user_sidebar.php');
 
-        $this->load->view('user/index.php');
-        $this->load->view('partials/user_sidebar.php');
-
+        }
+        else{
+            $this->session->set_flashdata('error_msg', 'Error occured,Try again.');
+            redirect('/');
+        }
       }
+
+
       else{
         $this->session->set_flashdata('error_msg', 'Error occured,Try again.');
-        $this->load->view("index.php");
+      $this->load->view("index.php");
 
       }
-
-
 }
+function loadtransaction(){
 
+  $this->load->view('user/transactionview.php');
+}
 function user_profile(){
 
 $this->load->view('user_profile.php');
@@ -59,6 +68,48 @@ public function index()
 public function loadlogin(){
 $this->load->view('index.php');
 
+}
+public function transhistory(){
+$id =  (int)$this->session->userdata('user_acctnum');
+//echo $id;
+$user_trans=array(
+
+'accountnum'=>$id
+
+
+  );
+  $data = array();
+  $data2= $this->user_model->get_history($user_trans['accountnum']);
+  /*$data2 = array(
+        'accountnum' => $data2[0],
+        'action' => $data2[1],
+        'amount' => $data2[2],
+        'created_at' => $data2[3]
+    );*/
+
+    $data = array();
+         foreach($data2 as $row)
+         {
+              $sub_array = array();
+          if($row->accountnum == $id){
+              $sub_array[] = $id;
+              $sub_array[] = $row->action;
+              $sub_array[] = $row->amount;
+              $sub_array[] = $row->created_at;
+              $data[] = $sub_array; }
+         }
+         $output = array(
+
+                       "data"                    =>     $data
+                  );
+    //print_r($data2);
+
+ echo json_encode($output);
+          //   print_r($output);
+//print_r($data);
+  //  echo json_encode($this->user->with('id')->get($id));
+
+  //  $this->load->view('user/transactionview.php', $data);
 }
 public function register_user(){
     $pin = mt_rand(1000, 9999);
