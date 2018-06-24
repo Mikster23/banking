@@ -24,11 +24,15 @@ public function loadfund()
 public function maketransfer()
 {
   $amount= (int)$this->input->post('user_amount');
+  $camount= (int)$this->input->post('user_amount');
   $remarks = $this->input->post('user_remarks');
   $bal =   $this->session->userdata('user_balance');
   $sourceacct = (int) $this->input->post('user_fromacctnum');
   $destinationacct = (int) $this->input->post('user_toacctnum');
   $rembal = 0;
+
+if(!empty($camount) && !empty($sourceacct) && !empty($destinationacct))
+{
   $sacct=array(
 
   'accountnum'=>$sourceacct
@@ -151,6 +155,11 @@ else{
 
   $this->session->set_flashdata('error_msg', 'Account Does not Exist');
   redirect('/tellertransfer');
+}
+}else{
+  $this->session->set_flashdata('error_msg', 'Please Enter account number and amount');
+  redirect('/tellertransfer');
+
 }
 }
 

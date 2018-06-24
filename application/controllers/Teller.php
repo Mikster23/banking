@@ -16,6 +16,10 @@ function loaddash(){
   $this->load->view('teller/dashboard.php');
 
 }
+function loadmanage(){
+$this->load->view('teller/manageview.php');
+
+}
 
 }
 ?>

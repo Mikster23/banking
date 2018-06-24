@@ -19,12 +19,34 @@
                       <h3 class="panel-title">Registration</h3>
                   </div>
                   <div class="panel-body">
+                    <?php
+                      $error_msg= $this->session->flashdata('error_msg');
+                      $success_msg= $this->session->flashdata('success_msg');
+                    ?>
 
+
+                    <?php
+                    if($error_msg){
+                      ?>
+                      <div class="alert alert-danger">
+                        <?php echo $error_msg; ?>
+                      </div>
+                      <?php
+                    }?>
+
+                    <?php
+                    if($success_msg){
+                      ?>
+                      <div class="alert alert-success">
+                        <?php echo $success_msg; ?>
+                      </div>
+                    <?php
+                    }?>
                   <?php
-                  $error_msg=$this->session->flashdata('error_msg');
+                /*  $error_msg=$this->session->flashdata('error_msg');
                   if($error_msg){
                     echo $error_msg;
-                  }
+                  }*/
                    ?>
 
                       <form role="form" method="post" action="<?php echo base_url('user/register_user'); ?>">

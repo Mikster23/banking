@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Manage_model extends CI_Model
 {
 
-	var $table = 'books';
+	var $table = 'user';
 
 
 	public function __construct()
@@ -17,7 +17,7 @@ class Manage_model extends CI_Model
 
 public function get_all_books()
 {
-$this->db->from('books');
+$this->db->from('user');
 $query=$this->db->get();
 return $query->result();
 }
@@ -26,7 +26,7 @@ return $query->result();
 	public function get_by_id($id)
 	{
 		$this->db->from($this->table);
-		$this->db->where('book_id',$id);
+		$this->db->where('id',$id);
 		$query = $this->db->get();
 
 		return $query->row();
@@ -46,9 +46,46 @@ return $query->result();
 
 	public function delete_by_id($id)
 	{
-		$this->db->where('book_id', $id);
+		$this->db->where('id', $id);
 		$this->db->delete($this->table);
 	}
 
+  function getacct(){
 
+     $response = array();
+
+     // Select record
+     $this->db->select('*');
+    $this->db->from('account_type');
+     $q = $this->db->get();
+     $response = $q->result_array();
+
+     return $response;
+   }
+   function getacctname(){
+
+      $response = array();
+
+      // Select record
+      $this->db->select('name');
+     $this->db->from('account_type');
+      $q = $this->db->get();
+      $response = $q->result_array();
+
+      return $response;
+    }
+
+
+   function getuser(){
+
+      $response = array();
+
+      // Select record
+      $this->db->select('*');
+      $this->db->from('user_type');
+      $q = $this->db->get();
+      $response = $q->result_array();
+
+      return $response;
+    }
 }

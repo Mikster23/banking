@@ -82,7 +82,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Client">
-          <a class="nav-link" href="<?php echo base_url('user/loadmyaccount'); ?>">
+          <a class="nav-link" href="<?php echo base_url('manage'); ?>">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Manage Client Account</span>
           </a>

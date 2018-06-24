@@ -24,10 +24,13 @@ public function loadfund()
 public function maketransfer()
 {
   $amount= (int)$this->input->post('user_amount');
+  $camount= $this->input->post('user_amount');
   $remarks = $this->input->post('user_remarks');
   $bal =   $this->session->userdata('user_balance');
   $toacct = (int) $this->input->post('user_acctnum');
   $rembal = 0;
+if(!empty($camount) && !empty($toacct))
+{
   $acct=array(
 
   'accountnum'=>$toacct
@@ -110,6 +113,12 @@ else{
 
   $this->session->set_flashdata('error_msg', 'Account Does not Exist');
   redirect('/transfer');
+}
+}
+else{
+  $this->session->set_flashdata('error_msg', 'Please Fill account number and amount');
+  redirect('/transfer');
+
 }
 }
 }
