@@ -31,7 +31,7 @@ if($success_msg){
 }?>
 <div class="content-wrapper">
   <div class="container box">
-    <div class="container">
+
       <h1>Manage User Accounts</h1>
   </center>
       <h3>User List</h3>
@@ -81,20 +81,18 @@ if($success_msg){
         <tfoot>
           <tr>
             <th>Accountnumber</th>
-            <th>Firstnam</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>User_type</th>
-            <th>Account_type</th>
-            <th>Balance</th>
-
             <th>Action</th>
+            <th>Amounts</th>
+            <th>Remarks</th>
+            <th>To Accountnumber</th>
+            <th>Date</th>
+
+
           </tr>
         </tfoot>
       </table>
 
-    </div>
+
 
            </div>
       </div>
@@ -103,12 +101,25 @@ if($success_msg){
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js"></script>
 <?php// echo site_url("/user/transhistory") ?>
 <script>
-$(document).ready(function () {
+$('#table_id tfoot th').each( function () {
+    var title = $(this).text();
+    $(this).html('<input type="text" placeholder="Search '+title+'" />');
+});
 
-  $(document).ready( function () {
+
+
+
       $('#table_id').DataTable();
-  } );
 
+
+
+       table.columns().every( function () {
+           var that = this;
+           $('input', this.footer()).on('keyup change', function() {
+               if (that.search() !== this.value) {
+                   that.search(this.value).draw();
+               }
+           });
        });
 </script>
 </body>
