@@ -79,7 +79,8 @@ $this->teller_model->user_history($history);
   //  $tempbal =    $this->session->userdata('user_balance');
   //  $this->session->set_userdata('user_withdrawablebalance',$tempbal-$data3['minbalance']);
         if($checkbal >= $min){
-          $this->session->set_flashdata('success_msg', 'Withdraw Successful!');
+          $this->session->set_flashdata('success_msg', 'PHP : '. $amount.' Successfully Withdraw from: ' .'<br> '. "Account number : ". $data2['accountnum'].
+          "<br> Account Holder Name : ".$data2['lastname'].','.$data2['firstname']);
           $withdraw_check=$this->teller_model->user_withdraw($userid,$user_withdraw);
 
           echo json_encode(array("status" => TRUE));

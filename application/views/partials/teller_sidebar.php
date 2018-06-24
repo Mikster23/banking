@@ -62,7 +62,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="<?php //echo base_url('index.php/transfer'); ?> ">Send Money</a>
+              <a href="<?php echo base_url('index.php/tellertransfer'); ?> ">Send Money</a>
             </li>
             <li>
                 <a href="<?php //echo base_url('index.php/transfer/loadfund'); ?> ">Transfer History</a>
@@ -83,7 +83,7 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Client">
           <a class="nav-link" href="<?php echo base_url('index.php/user/loadmyaccount'); ?>">
-            <i class="fa fa-fw fa-link"></i>
+            <i class="fa fa-pencil-square-o"></i>
             <span class="nav-link-text">Manage Client Account</span>
           </a>
         </li>
