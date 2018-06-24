@@ -6,7 +6,7 @@ public function __construct(){
 
         parent::__construct();
 
-  	$this->load->model('user_model');
+  	$this->load->model('teller_model');
       $this->load->database('default');
 
 
@@ -14,6 +14,7 @@ public function __construct(){
 function loaddash(){
 
   $this->load->view('teller/dashboard.php');
+
 }
 
 }

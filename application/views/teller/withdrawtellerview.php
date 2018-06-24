@@ -40,9 +40,26 @@ if(!$user_id){
     </div>
   <?php
   }?>
- <?php echo " Hello Teller! " ; ?>
 
-  </div>
+    <div class="container box">
+             <h3 align="center"><?php echo "Client Withdraw"; ?></h3><br />
+
+
+    <form role="form" method="post" action="<?php echo base_url('index.php/tellerwithdraw/tellermakewithdraw'); ?>">
+      <div class="form-group">
+        <label for="exampleInputPin">To Account Number</label>
+        <input class="form-control" name="user_accountnum" type="number"  placeholder="Enter Client Account Number">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputAmount">Amount</label>
+        <input class="form-control" name="user_amount" type="number" placeholder="Enter Amount">
+      </div>
+      <input class="btn btn-primary btn-block" type="submit" value="Deposit" name="deposit" >
+
+    </form>
+
+</div>
+
 
 </body>
 
