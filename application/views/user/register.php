@@ -27,7 +27,7 @@
                   }
                    ?>
 
-                      <form role="form" method="post" action="<?php echo base_url('index.php/user/register_user'); ?>">
+                      <form role="form" method="post" action="<?php echo base_url('user/register_user'); ?>">
                           <fieldset>
                               <div class="form-group">
                                   <input class="form-control" placeholder="FirstName" name="user_firstname" type="text" autofocus>
@@ -73,7 +73,7 @@
 
                           </fieldset>
                       </form>
-                      <center><b>Already registered ?</b> <br></b><a href="<?php echo base_url('index.php/user/loadlogin'); ?>">Login here</a></center><!--for centered text-->
+                      <center><b>Already registered ?</b> <br></b><a href="<?php echo base_url('user/loadlogin'); ?>">Login here</a></center><!--for centered text-->
                   </div>
               </div>
           </div>

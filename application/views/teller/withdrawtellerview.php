@@ -45,7 +45,7 @@ if(!$user_id){
              <h3 align="center"><?php echo "Client Withdraw"; ?></h3><br />
 
 
-    <form role="form" method="post" action="<?php echo base_url('index.php/tellerwithdraw/tellermakewithdraw'); ?>">
+    <form role="form" method="post" action="<?php echo base_url('tellerwithdraw/tellermakewithdraw'); ?>">
       <div class="form-group">
         <label for="exampleInputPin">To Account Number</label>
         <input class="form-control" name="user_accountnum" type="number"  placeholder="Enter Client Account Number">

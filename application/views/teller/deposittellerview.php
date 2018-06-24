@@ -45,7 +45,7 @@ if(!$user_id){
              <h3 align="center"><?php echo "Deposit To Client"; ?></h3><br />
 
 
-    <form role="form" method="post" action="<?php echo base_url('index.php/tellerdeposit/tellermakedeposit'); ?>">
+    <form role="form" method="post" action="<?php echo base_url('tellerdeposit/tellermakedeposit'); ?>">
       <div class="form-group">
         <label for="exampleInputPin">To Account Number</label>
         <input class="form-control" name="user_accountnum" type="number"  placeholder="Enter Client Account Number">

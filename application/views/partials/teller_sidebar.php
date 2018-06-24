@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="<?php echo base_url('index.php/teller/loaddash');?>">
+          <a class="nav-link" href="<?php echo base_url('teller/loaddash');?>">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
@@ -40,18 +40,18 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="<?php echo base_url('index.php/tellerdeposit');?>">Deposit</a>
+              <a href="<?php echo base_url('tellerdeposit');?>">Deposit</a>
             </li>
             <li>
 
-              <a href="<?php echo base_url('index.php/tellerwithdraw');?>">Withdraw</a>
+              <a href="<?php echo base_url('tellerwithdraw');?>">Withdraw</a>
             </li>
             <li>
               <a href="cards.html">Time Deposit</a>
             </li>
             <li>
 
-              <a href="<?php //echo base_url('index.php/user/loadtransaction');?>">Transaction History</a>
+              <a href="<?php //echo base_url('user/loadtransaction');?>">Transaction History</a>
             </li>
           </ul>
         </li>
@@ -62,10 +62,10 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="<?php //echo base_url('index.php/transfer'); ?> ">Send Money</a>
+              <a href="<?php //echo base_url('transfer'); ?> ">Send Money</a>
             </li>
             <li>
-                <a href="<?php //echo base_url('index.php/transfer/loadfund'); ?> ">Transfer History</a>
+                <a href="<?php //echo base_url('transfer/loadfund'); ?> ">Transfer History</a>
             </li>
           </ul>
         </li>
@@ -76,13 +76,13 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Account">
-          <a class="nav-link" href="<?php //echo base_url('index.php/user/loadmyaccount'); ?>">
+          <a class="nav-link" href="<?php //echo base_url('user/loadmyaccount'); ?>">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">My Account</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Client">
-          <a class="nav-link" href="<?php echo base_url('index.php/user/loadmyaccount'); ?>">
+          <a class="nav-link" href="<?php echo base_url('user/loadmyaccount'); ?>">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Manage Client Account</span>
           </a>
