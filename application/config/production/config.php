@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = '';
-$config['base_url'] = 'https://'.$_SERVER['SERVER_NAME'].'/banking';
+$config['base_url'] = 'https://'.$_SERVER['SERVER_NAME'].'';
 
 /*
 |--------------------------------------------------------------------------
