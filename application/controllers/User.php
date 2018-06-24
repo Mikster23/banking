@@ -133,7 +133,7 @@ public function index()
 
   $data['account_type'] = $this->user_model->getacct();
   $this->load->view('user/register.php',$data);
-  print_r($data);
+  //print_r($data);
 }
 public function loadlogin(){
 $this->load->view('index.php');

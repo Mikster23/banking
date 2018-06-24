@@ -53,7 +53,27 @@ public function maketransfer()
 
 
     $sourcedata2 = $this->teller_model->getbalance_acctnum($sacct['accountnum']);
+    $destinationdata2 = $this->teller_model->getbalance_acctnum($dacct['accountnum']);
+    $sourcebalance = (int) $sourcedata2['balance'];
+    $destinationbalance = (int) $destinationdata2['balance'];
 
+    $min=array(
+
+    'id'=> (int) $sourcedata2['account_type']
+
+
+      );
+
+      $checkwithdraw=$this->teller_model->checkmindeposit($min['id']);
+      $checkbal = $sourcebalance-$amount;
+      $balcheck = (int) $checkwithdraw['minbalance'];
+      $allow = $sourcebalance - $balcheck;
+      if($amount > $allow){
+        $this->session->set_flashdata('error_msg', 'The amount is over the allowed withdrawable balance of the source account number!' . '<br> Allowable withdraw : PHP ' .$allow );
+      redirect('/tellertransfer');
+
+    }
+    $sourcebalafter = $sourcebalance - $amount;
 
 if($sourcedata && $destinationdata)
 {
@@ -61,8 +81,8 @@ if($sourcedata && $destinationdata)
 
 
 
-/*
-    $tobalance =  $data2['balance'];
+
+  //  $tobalance =  $data2['balance'];
 
   //  $this->session->set_userdata('user_id',$data['id']);
 
@@ -71,57 +91,58 @@ if($sourcedata && $destinationdata)
 
 
 
-    $amount= (int)$this->input->post('user_amount');
-    $baltransfer = $tobalance +  $amount;
-    $toacct = (int)$this->input->post('user_acctnum');
-    $bal =   $this->session->userdata('user_balance');
-    $id =  $this->session->userdata('user_id');
+  //  $amount= (int)$this->input->post('user_amount');
+  //  $baltransfer = $tobalance +  $amount;
+   $toacct = (int)$this->input->post('user_toacctnum');
+    //$bal =   $this->session->userdata('user_balance');
+//    $id =  $this->session->userdata('user_id');
     $pin = $this->input->post('user_pin');
-
+    $destbalance =  (double) $destinationdata2['balance'] +$amount;
     $transfer=array(
 
   //  'pin'=>$this->input->post('user_pin'),
-    'balance' => $baltransfer
+    'balance' => $destbalance
 
 
 
       );
 
-
-    $trans_check=$this->user_model->transfer($toacct,$transfer);
+    $sourcebalance = (double) $sourcedata2['balance'] -$amount;
+    $trans_check=$this->teller_model->transfer($toacct,$transfer);
 
     $user_withdraw=array(
 
     //  'pin'=>$this->input->post('user_pin'),
-      'balance' => $bal-$amount
+      'balance' => $sourcebalance
 
 
     );
-     $data2=$this->user_model->checkmindeposit($min['id']);
-    $this->session->set_userdata('user_balance',$bal-$amount);
-    $id =  $this->session->userdata('user_id');
-    $tempbal =    $this->session->userdata('user_balance');
-    $tempwith    = $this->session->userdata('user_withdrawablebalance');
-    $this->session->set_userdata('user_withdrawablebalance',$tempwith - $amount);
-    $withdraw_check=$this->user_model->user_withdraw($id,$user_withdraw);
+    //$data2=$this->user_model->checkmindeposit($min['id']);
+  //  $this->session->set_userdata('user_balance',$bal-$amount);
+  //  $id =  $this->session->userdata('user_id');
+  //  $tempbal =    $this->session->userdata('user_balance');
+  //  $tempwith    = $this->session->userdata('user_withdrawablebalance');
+  //  $this->session->set_userdata('user_withdrawablebalance',$tempwith - $amount);
+    $sourceid = $sourcedata2['id'];
+    $withdraw_check=$this->teller_model->user_withdraw($sourceid,$user_withdraw);
 
 
 
     $history=array(
-    'accountnum'=>(int)$this->session->userdata('user_acctnum'),
-    'action'=>'Transfer Funds',
-    'to_accountnum' => $toacct,
+    'accountnum'=>$sourceacct,
+    'action'=>'Transfer Funds by Teller',
+    'to_accountnum' => $destinationacct,
     'amount'=>$amount,
     'remarks'=>$remarks
       );
-    $this->user_model->user_history($history);
+    $this->teller_model->user_history($history);
 
 
-  echo $this->session->set_flashdata('success_msg', 'TRANSFER SUCCESSFUL');
+   $this->session->set_flashdata('success_msg', 'TRANSFER SUCCESSFUL');
 
 
-echo json_encode(array("status" => TRUE)); */
-  $this->session->set_flashdata('error_msg', 'Success');
+echo json_encode(array("status" => TRUE));
+  //$this->session->set_flashdata('success_msg', 'Success');
 redirect('/tellertransfer');
 }
 

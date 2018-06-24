@@ -16,7 +16,7 @@ if(!$user_id){
 
 </head>
 <body>
-  <?php  $this->view('partials/user_sidebar.php');
+  <?php  $this->view('partials/teller_sidebar.php');
     $error_msg= $this->session->flashdata('error_msg');
     $success_msg= $this->session->flashdata('success_msg');
   ?>

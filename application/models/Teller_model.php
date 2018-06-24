@@ -99,7 +99,14 @@ class Teller_model extends CI_model{
 
   }
 
+  public function transfer($acctnum,$amount){
 
+      $this->db->where('accountnum', $acctnum);
+      $this->db->update('user', $amount);
+    		return $this->db->affected_rows();
+
+
+  }
 
 }
 
