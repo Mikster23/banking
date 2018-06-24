@@ -69,6 +69,7 @@ $(document).ready(function () {
     });
 
     var table = $('#trans').DataTable({
+            "pageLength": 10,
             "processing":true,
             "serverSide":true,
             "order":[],

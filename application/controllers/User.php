@@ -14,16 +14,27 @@ public function __construct(){
 
 
 function login_user(){
+
+
   $user_login=array(
 
   'email'=>$this->input->post('user_email'),
   'password'=>md5($this->input->post('user_password'))
 
     );
+    $min=array(
+
+    'id'=>(int)$this->session->userdata('user_accttype')
+
+
+      );
+
+      $data2=$this->user_model->checkmindeposit($min['id']);
 
     $data=$this->user_model->login_user($user_login['email'],$user_login['password']);
-      if($data)
+    if($data)
       {
+
         $this->session->set_userdata('user_id',$data['id']);
         $this->session->set_userdata('user_email',$data['email']);
         $this->session->set_userdata('user_firstname',$data['firstname']);
@@ -32,13 +43,51 @@ function login_user(){
         $this->session->set_userdata('user_mobile',$data['mobile']);
         $this->session->set_userdata('user_acctnum',$data['accountnum']);
         $this->session->set_userdata('user_pin',$data['pin']);
-        $this->session->set_userdata('user_balance',$data['balance']);
+          $this->session->set_userdata('user_balance',$data['balance']);
+        $this->session->set_userdata('user_withdrawablebalance',$data['balance']  - $data2['minbalance']);
+
+        $this->session->set_userdata('user_accttype',$data['account_type']);
+
+
+      if($data2){
+
+
+        $mindep = $data2['minbalance'];
+          $curbal =  (int)$this->session->userdata('user_balance');
+      if($curbal < $mindep){
+            echo $curbal;
+            $this->session->set_flashdata('error_msg', "Please Meet The minimum Deposit Fee for the Acct : PHP".$mindep. " Go to the nearest ATM or Bank to Deposit");
+          redirect('/');
+   }
+        $this->session->set_userdata('user_acctname',$data2['name']);
+      //  $this->session->set_userdata('user_balance',$data['balance'] - $data2['minbalance']);
+        $this->session->set_userdata('user_totalbalance',$data['balance'] - $data2['minbalance']);
         $type = (int) $data['user_type'];
+
         if($type ==1){
+          /*  $acct=  (int)$this->session->userdata('user_acctnum');
+            $user_chect=array(
+
+              'name' => $acct
+
+
+            );
+
+            $data2=$this->user_model->login_user($user_check['email'],$user_login['password']);
+            if($data2)*/
             redirect('user/loaddash');
              $this->load->view('partials/user_sidebar.php');
 
                 $this->load->view('partials/user_sidebar.php');
+
+        }
+        else if($type ==2){
+
+          redirect('teller/loaddash');
+           $this->load->view('partials/teller_sidebar.php');
+
+              $this->load->view('partials/teller_sidebar.php');
+
 
         }
         else{
@@ -49,10 +98,17 @@ function login_user(){
 
 
       else{
-        $this->session->set_flashdata('error_msg', 'Error occured,Try again.');
+        $this->session->set_flashdata('error_msg', "walaws");
       $this->load->view("index.php");
 
       }
+    }
+    else{
+      $this->session->set_flashdata('error_msg', "error occured");
+    $this->load->view("index.php");
+
+    }
+
 }
 function loadtransaction(){
 
@@ -73,7 +129,11 @@ $this->load->view('user_profile.php');
 
 public function index()
 {
-  $this->load->view('user/register.php');
+
+
+  $data['account_type'] = $this->user_model->getacct();
+  $this->load->view('user/register.php',$data);
+  print_r($data);
 }
 public function loadlogin(){
 $this->load->view('index.php');
@@ -101,7 +161,7 @@ $user_trans=array(
          foreach($data2 as $row)
          {
               $sub_array = array();
-          if($row->accountnum == $id){
+          if($row->accountnum == $id ){
               $sub_array[] = $id;
               $sub_array[] = $row->action;
               $sub_array[] = $row->amount;
@@ -155,7 +215,8 @@ if($row->to_accountnum === NULL){
 
 
 }
-  else  if($row->accountnum == $id || $row->to_accountnum == $id)
+//  else  if($row->accountnum == $id || $row->to_accountnum == $id)
+else
      {
         $sub_array[] = $id;
         $sub_array[] = $row->action;
@@ -181,9 +242,24 @@ if($row->to_accountnum === NULL){
 
   //  $this->load->view('user/transactionview.php', $data);
 }
+
+public function getmindep(){
+   // POST data
+   $postData = $this->input->post();
+
+   // load model
+   $this->load->model('user_model');
+
+   // get data
+   $data = $this->user_model->getacct($postData);
+   echo json_encode($data);
+ }
+
 public function register_user(){
+
     $pin = mt_rand(1000, 9999);
     $acctnum = mt_rand(100000000, 999999999);
+
       $user=array(
       'firstname'=>$this->input->post('user_firstname'),
       'lastname'=>$this->input->post('user_lastname'),
@@ -193,6 +269,7 @@ public function register_user(){
       'birthday'=>$this->input->post('user_birthday'),
       'age'=>$this->input->post('user_age'),
       'mobile'=>$this->input->post('user_mobile'),
+      'account_type' => $this->input->post('user_accttype'),
       'pin' => $pin,
       'accountnum' => $acctnum
         );

@@ -53,6 +53,18 @@
                                   <input class="form-control" placeholder="Age" name="user_age" type="number" value="">
                               </div>
 
+                                  <div class="form-group">
+                                      <select name ="user_accttype" id='sel_acct'>
+                                        <option>-- Select Account Type --</option>
+                                        <?php
+
+                                        foreach($account_type as $acct){
+                                           echo ' hi '.$acct;
+                                          echo "<option value='".$acct['id']."'>".$acct['name']."</option>";
+                                        }
+                                        ?>
+                                     </select>
+                                </div>
                               <div class="form-group">
                                   <input class="form-control" placeholder="Mobile No" name="user_mobile" type="number" value="">
                               </div>
@@ -69,7 +81,37 @@
   </div>
 
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <script type='text/javascript'>
+    // baseURL variable
+    var baseURL= "<?php echo base_url();?>";
+
+    $(document).ready(function(){
+
+      // City change
+      $('#sel_acct').change(function(){
+        var acct = $(this).val();
+
+        // AJAX request
+        $.ajax({
+
+          url:   "<?php echo base_url("index.php/user/register_user"); ?>",
+          method: 'post',
+          data: {acct: acct},
+          dataType: 'json',
+          success: function(response){
+
+            // Remove options
+
+
+            // Add options
+            $.each(response,function(index,data){
+               $('#sel_depart').append('<option value="'+data['id']+'">'+data['depart_name']+'</option>');
+            });
+          }
+       });
+     });
 
 
 </span>

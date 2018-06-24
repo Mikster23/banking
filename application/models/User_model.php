@@ -199,6 +199,37 @@ public function email_check($email){
 }
 
 
+function getacct(){
+
+   $response = array();
+
+   // Select record
+   $this->db->select('*');
+  $this->db->from('account_type');
+   $q = $this->db->get();
+   $response = $q->result_array();
+
+   return $response;
+ }
+
+ function checkmindeposit($id){
+
+
+   $this->db->select('*');
+   $this->db->from('account_type');
+   $this->db->where('id',$id);
+
+
+   if($query=$this->db->get())
+   {
+       return $query->row_array();
+   }
+   else{
+     return false;
+   }
+
+ }
+
 }
 
 

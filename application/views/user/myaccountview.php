@@ -134,16 +134,24 @@ if(!$user_id){
                   <td><?php echo $this->session->userdata('user_mobile');  ?></td>
                 </tr>
                 <tr>
-                  <td><b>User AccountNumber</b></td>
+                  <td><b>User Account Number</b></td>
                   <td><?php echo $this->session->userdata('user_acctnum');  ?></td>
+                </tr>
+                <tr>
+                  <td><b>User Account Type</b></td>
+                  <td><?php echo $this->session->userdata('user_acctname');  ?></td>
                 </tr>
                 <tr>
                   <td><b>User Pin </b></td>
                   <td><?php echo  $this->session->userdata('user_pin');  ?></td>
                 </tr>
                 <tr>
-                  <td><b>Withdrawable Balance</b></td>
+                  <td><b>Total Remaining Balance</b></td>
                   <td><?php echo "PHP : " . $this->session->userdata('user_balance');  ?></td>
+                </tr>
+                <tr>
+                  <td><b>Withdrawable Balance</b></td>
+                  <td><?php echo "PHP : " . $this->session->userdata('user_withdrawablebalance');  ?></td>
                 </tr>
             </table>
 

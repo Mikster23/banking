@@ -56,7 +56,18 @@ $this->session->set_flashdata('success_msg', 'Withdraw Successful!');
 
 
     );
+    $min=array(
+
+    'id'=>(int)$this->session->userdata('user_accttype')
+
+
+      );
+
+      $data2=$this->user_model->checkmindeposit($min['id']);
+
     $this->session->set_userdata('user_balance',$bal-$amount);
+    $tempbal =    $this->session->userdata('user_balance');
+    $this->session->set_userdata('user_withdrawablebalance',$tempbal-$data2['minbalance']);
     $id =  $this->session->userdata('user_id');
 
       $withdraw_check=$this->user_model->user_withdraw($id,$user_withdraw);
