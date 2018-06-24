@@ -43,7 +43,7 @@ if(!$user_id){
   <div class="container box">
            <h3 align="center"><?php echo "Transfer Funds"; ?></h3><br />
 
-    <form role="form" method="post" action="<?php echo base_url('index.php/transfer/maketransfer'); ?>">
+    <form role="form" method="post" action="<?php echo base_url('transfer/maketransfer'); ?>">
       <div class="form-group">
         <label for="exampleInputPin">Transfer this amount :</label>
         <input class="form-control" name="user_amount" type="number"  placeholder="Enter Amount">

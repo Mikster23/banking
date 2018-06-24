@@ -43,7 +43,7 @@ if(!$user_id){
   <div class="container box">
            <h3 align="center"><?php echo "Withdraw"; ?></h3><br />
 
-    <form role="form" method="post" action="<?php echo base_url('index.php/withdraw/makewithdraw'); ?>">
+    <form role="form" method="post" action="<?php echo base_url('withdraw/makewithdraw'); ?>">
       <div class="form-group">
         <label for="exampleInputPin">4 Digit Pin Number</label>
         <input class="form-control" name="user_pin" type="number"  placeholder="Enter Pin">
