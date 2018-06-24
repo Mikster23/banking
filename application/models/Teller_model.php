@@ -64,6 +64,12 @@ class Teller_model extends CI_model{
     $this->db->update('user', $user_withdraw);
   		return $this->db->affected_rows();
   }
+  public function get_all_human()
+  {
+  $this->db->from('transaction');
+  $query=$this->db->get();
+  return $query->result();
+  }
 
 
 

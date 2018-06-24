@@ -20,6 +20,11 @@ function loadmanage(){
 $this->load->view('teller/manageview.php');
 
 }
+function loadtransaction(){
+  $arr['person'] = $this->teller_model->get_all_human();
+$this->load->view('teller/tellertransactionview.php',$arr);
+
+}
 
 }
 ?>

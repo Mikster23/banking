@@ -32,6 +32,7 @@ function login_user(){
       $data2=$this->user_model->checkmindeposit($min['id']);
 
     $data=$this->user_model->login_user($user_login['email'],$user_login['password']);
+
     if($data)
       {
 

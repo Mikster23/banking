@@ -51,7 +51,7 @@
             </li>
             <li>
 
-              <a href="<?php //echo base_url('user/loadtransaction');?>">Transaction History</a>
+              <a href="<?php echo base_url('teller/loadtransaction');?>">Transaction History</a>
             </li>
           </ul>
         </li>

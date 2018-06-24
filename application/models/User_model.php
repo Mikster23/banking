@@ -211,6 +211,12 @@ function getacct(){
 
    return $response;
  }
+ public function get_all_human()
+ {
+ $this->db->from('user');
+ $query=$this->db->get();
+ return $query->result();
+ }
 
  function checkmindeposit($id){
 
