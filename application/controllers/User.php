@@ -50,15 +50,16 @@ function login_user(){
         $this->session->set_userdata('user_accttype',$data['account_type']);
 
 
-      if($data2){
+
 
 
         $mindep = $data2['minbalance'];
           $curbal =  (int)$this->session->userdata('user_balance');
+
       if($curbal < $mindep){
             echo $curbal;
-            $this->session->set_flashdata('error_msg', "Please Meet The minimum Deposit Fee for the Acct : PHP".$mindep. " Go to the nearest ATM or Bank to Deposit");
-          redirect('/');
+            $this->session->set_flashdata('error_msg', "Your Current Balance : PHP ". $data['balance']."Your Account is Below the Minimum Balance : PHP".$mindep. " Go to the nearest ATM or Bank to Deposit");
+        //  redirect('/');
    }
         $this->session->set_userdata('user_acctname',$data2['name']);
       //  $this->session->set_userdata('user_balance',$data['balance'] - $data2['minbalance']);
@@ -95,14 +96,7 @@ function login_user(){
             $this->session->set_flashdata('error_msg', 'Error occured,Try again.');
             redirect('/');
         }
-      }
 
-
-      else{
-        $this->session->set_flashdata('error_msg', "walaws");
-      $this->load->view("index.php");
-
-      }
     }
     else{
       $this->session->set_flashdata('error_msg', "error occured");
