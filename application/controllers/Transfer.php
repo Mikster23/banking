@@ -138,7 +138,7 @@ else{
 else{
 
 
-      $this->session->set_flashdata('error_msg', 'Insufficient Withdrawable Balance'.$amount."wb : ".$wb);
+      $this->session->set_flashdata('error_msg', 'Insufficient Withdrawable Balance');
       redirect('/transfer');
 
 }

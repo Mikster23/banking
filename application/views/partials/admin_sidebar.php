@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="<?php echo base_url('user/loaddash');?>">
+          <a class="nav-link" href="<?php echo base_url('index.php/user/loaddash');?>">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
@@ -36,22 +36,22 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Transactions</span>
+            <span class="nav-link-text">Tranasactions</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="<?php echo base_url('deposit');?>">Deposit</a>
+              <a href="<?php echo base_url('index.php/deposit');?>">Deposit</a>
             </li>
             <li>
 
-              <a href="<?php echo base_url('withdraw');?>">Withdraw</a>
+              <a href="<?php echo base_url('index.php/withdraw');?>">Withdraw</a>
             </li>
             <li>
-              <a href="<?php echo base_url('timedeposit');?>">Time Deposit</a>
+              <a href="cards.html">Time Deposit</a>
             </li>
             <li>
 
-              <a href="<?php echo base_url('user/loadtransaction');?>">Transaction History</a>
+              <a href="<?php echo base_url('index.php/user/loadtransaction');?>">Transaction History</a>
             </li>
           </ul>
         </li>
@@ -62,21 +62,27 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="<?php echo base_url('transfer'); ?> ">Send Money</a>
+              <a href="<?php echo base_url('index.php/transfer'); ?> ">Send Money</a>
             </li>
             <li>
-                <a href="<?php echo base_url('transfer/loadfund'); ?> ">Transfer History</a>
+                <a href="<?php echo base_url('index.php/transfer/loadfund'); ?> ">Transfer History</a>
             </li>
           </ul>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="User Profile">
+          <a class="nav-link" href="<?php echo site_url('cruduser'); ?> ">
+            <i class="fa fa-fw fa-user"></i>
+            <span class="nav-link-text">Manage Users</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
-          <a class="nav-link" href="<?php echo base_url('paybill')?>">
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Pay Bills</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Account">
-          <a class="nav-link" href="<?php echo base_url('user/loadmyaccount'); ?>">
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">My Account</span>
           </a>
@@ -93,7 +99,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out" ></i>Logout</a>
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
     </div>

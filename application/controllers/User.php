@@ -58,7 +58,7 @@ function login_user(){
 
       if($curbal < $mindep){
             echo $curbal;
-            $this->session->set_flashdata('error_msg', "Your Current Balance : PHP ". $data['balance']."Your Account is Below the Minimum Balance : PHP".$mindep. " Go to the nearest ATM or Bank to Deposit");
+            $this->session->set_flashdata('error_msg', "Your Current Balance : PHP ". $data['balance']."<br> Your Account is Below the Minimum Balance : PHP ". $mindep. " Go to the nearest ATM or Bank to Deposit");
         //  redirect('/');
    }
         $this->session->set_userdata('user_acctname',$data2['name']);
@@ -89,6 +89,15 @@ function login_user(){
            $this->load->view('partials/teller_sidebar.php');
 
               $this->load->view('partials/teller_sidebar.php');
+
+
+        }
+        else if($type ==3){
+
+          redirect('cruduser/loaddash');
+           $this->load->view('partials/admin_sidebar.php');
+
+              $this->load->view('partials/admin_sidebar.php');
 
 
         }

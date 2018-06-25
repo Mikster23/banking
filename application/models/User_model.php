@@ -236,7 +236,72 @@ function getacct(){
 
  }
 
+ public function user_timeDeposit($tDeposit){
+
+   $this->db->insert('timedeposit', $tDeposit);
+ }
+ public function update_timeDeposit($id,$data){
+
+ $this->db->where('id', $id);
+  $this->db->update('timedeposit', $data);
+ return $this->db->affected_rows();
+ }
+
+ public function user_timeDepositTr($addT){
+
+   $this->db->insert('transaction', $addT);
+ }
+ public function view_timeDeposit(){
+
+ 	$this->db->select('*');
+     $this->db->from('timedeposit');
+     $query = $this->db->get();
+      if ($query->num_rows() > 0){
+ 			 $result =  $query->result();
+ 			 return $result;
+ 		}
+      else{
+          return false;
+      }
+ }
+ public function get_timeDeposit($id){
+
+ 	$this->db->select('*');
+     $this->db->from('timedeposit');
+ 	$this->db->where('tDeptID',$id);
+     $query = $this->db->get();
+      if ($query->num_rows() > 0){
+ 			 $result =  $query->result();
+ 			 return $result;
+ 		}
+      else{
+          return false;
+      }
+ }
+
+
+ public function getmerch(){
+
+    $response = array();
+
+    // Select record
+    $this->db->select('*');
+   $this->db->from('merchant');
+    $q = $this->db->get();
+    $response = $q->result_array();
+
+    return $response;
+  }
+
+  public function paybill($data){
+
+
+  $this->db->insert('payhistory', $data);
+
+  }
+
 }
+
 
 
 ?>
