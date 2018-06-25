@@ -53,7 +53,7 @@ else{
     );
 $this->user_model->user_history($history);
 
-$this->session->set_flashdata('success_msg', 'Deposit Successful!');
+
 
   $user_deposit=array(
 
@@ -62,15 +62,26 @@ $this->session->set_flashdata('success_msg', 'Deposit Successful!');
 
 
     );
+
+    $min=array(
+
+    'id'=>(int)$this->session->userdata('user_accttype')
+
+
+      );
       $data2=$this->user_model->checkmindeposit($min['id']);
+      $min = (int)$data2['minbalance'];
     $this->session->set_userdata('user_balance',$bal+$amount);
+    $tot = ($bal+$amount)-$min;
+
+
     $tempbal =    $this->session->userdata('user_balance');
     $tempwith    = $this->session->userdata('user_withdrawablebalance');
-    $this->session->set_userdata('user_withdrawablebalance',$tempwith + $amount);
+    $this->session->set_userdata('user_withdrawablebalance',$tot);
     $id =  $this->session->userdata('user_id');
     $clause = "where id =";
       $deposit_check=$this->user_model->user_deposit($id,$user_deposit);
-
+$this->session->set_flashdata('success_msg', 'Deposit Successful!'.$tot);
 echo json_encode(array("status" => TRUE));
 redirect('/deposit');
 }

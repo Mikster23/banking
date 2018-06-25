@@ -65,7 +65,7 @@ class Manage extends CI_Controller {
           'accountnum' => $acctnum,
           'user_type' => 1
 				);
-			$insert = $this->manage_model->book_add($data);
+			$insert = $this->manage_model->human_add($data);
 			echo json_encode(array("status" => TRUE));
 		}
 		public function ajax_edit($id)
@@ -79,13 +79,34 @@ class Manage extends CI_Controller {
 
 		public function manage_update()
 	{
+
+	/*	$('[name="user_accountnum"]').val(data.accountnum);
+		$('[name="user_firstname"]').val(data.firstname);
+		$('[name="user_lastname"]').val(data.lastname);
+		$('[name="user_address"]').val(data.address);
+		$('[name="user_email"]').val(data.email);
+		$('[name="user_password"]').val(data.password);
+		$('[name="user_birthday"]').val(data.birthday);
+		$('[name="user_age"]').val(data.age);
+		$('[name="user_mobile"]').val(data.mobile);
+		$('[name="user_balance"]').val(data.balance);
+		$('[name="user_accounttype"]').val(data.accttype);*/
+		//$data = $this->manage_model->get_by_id($id);
+
+
 		$data = array(
-				'book_isbn' => $this->input->post('book_isbn'),
-				'book_title' => $this->input->post('book_title'),
-				'book_author' => $this->input->post('book_author'),
-				'book_category' => $this->input->post('book_category'),
+				'firstname' => $this->input->post('user_firstname'),
+				'lastname' => $this->input->post('user_lastname'),
+				'address' => $this->input->post('user_address'),
+				'email' => $this->input->post('user_email'),
+				'password' => $this->input->post('user_password'),
+				'birthday' => $this->input->post('user_birthday'),
+				'age' => $this->input->post('user_age'),
+				'mobile' => $this->input->post('user_mobile'),
+				'account_type' => $this->input->post('user_accttype')
+
 			);
-		$this->manage_model->book_update(array('book_id' => $this->input->post('book_id')), $data);
+		$this->manage_model->human_update(array('accountnum' => $this->input->post('user_accountnum')), $data);
 		echo json_encode(array("status" => TRUE));
 	}
 

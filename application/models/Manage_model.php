@@ -32,14 +32,15 @@ return $query->result();
 		return $query->row();
 	}
 
-	public function book_add($data)
+	public function human_add($data)
 	{
 		$this->db->insert($this->table, $data);
 		return $this->db->insert_id();
 	}
 
-	public function book_update($where, $data)
+	public function human_update($where, $data)
 	{
+
 		$this->db->update($this->table, $data, $where);
 		return $this->db->affected_rows();
 	}

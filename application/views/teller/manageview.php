@@ -169,7 +169,7 @@
         dataType: "JSON",
         success: function(data)
         {
-
+            $('[name="user_accountnum"]').val(data.accountnum);
             $('[name="user_firstname"]').val(data.firstname);
             $('[name="user_lastname"]').val(data.lastname);
             $('[name="user_address"]').val(data.address);
@@ -199,11 +199,11 @@
       var url;
       if(save_method == 'add')
       {
-          url = "<?php echo site_url('manage/manage_add')?>";
+          url = "<?php echo base_url('manage/manage_add')?>";
       }
       else
       {
-        url = "<?php echo site_url('manage/manage_update')?>";
+        url = "<?php echo base_url('manage/manage_update')?>";
       }
 
        // ajax adding data to database
@@ -215,7 +215,7 @@
             success: function(data)
             {
                //if success close modal and reload ajax table
-               alert('add success');
+               alert(' success');
                $('#modal_form').modal('hide');
               location.reload();// for reload a page
             },
