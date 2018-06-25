@@ -29,6 +29,8 @@ public function maketransfer()
   $bal =   $this->session->userdata('user_balance');
   $toacct = (int) $this->input->post('user_acctnum');
   $rembal = 0;
+    $wb = (int) $this->session->userdata('user_withdrawablebalance');
+if( $amount <= $wb){
 if(!empty($camount) && !empty($toacct))
 {
   $acct=array(
@@ -77,18 +79,31 @@ if($data && $data2)
     $user_withdraw=array(
 
     //  'pin'=>$this->input->post('user_pin'),
-      'balance' => $bal-$amount
+    'balance' => $bal-$amount
 
 
-    );
-     $data2=$this->user_model->checkmindeposit($min['id']);
-    $this->session->set_userdata('user_balance',$bal-$amount);
-    $id =  $this->session->userdata('user_id');
-    $tempbal =    $this->session->userdata('user_balance');
-    $tempwith    = $this->session->userdata('user_withdrawablebalance');
-    $this->session->set_userdata('user_withdrawablebalance',$tempwith - $amount);
-    $withdraw_check=$this->user_model->user_withdraw($id,$user_withdraw);
+      );
+      $min=array(
 
+      'id'=>(int)$this->session->userdata('user_accttype')
+
+
+        );
+          $data2=$this->user_model->checkmindeposit($min['id']);
+        $min = (int)$data2['minbalance'];
+        $tot = ($bal-$amount) - $min;
+        $tbal = $bal-$amount;
+
+      $tempbal =    $this->session->userdata('user_balance');
+      $this->session->set_userdata('user_balance',$bal-$amount);
+
+      $this->session->set_userdata('user_withdrawablebalance',$tot);
+
+
+      $id =  $this->session->userdata('user_id');
+
+    //$this->session->set_flashdata('success_msg', 'Withdraw Successfuasdasdl!'.$wb);
+     $withdraw_check=$this->user_model->user_withdraw($id,$user_withdraw);
 
 
     $history=array(
@@ -107,17 +122,24 @@ if($data && $data2)
 echo json_encode(array("status" => TRUE));
 redirect('/transfer');
 }
-
-
 else{
 
-  $this->session->set_flashdata('error_msg', 'Account Does not Exist');
-  redirect('/transfer');
+    $this->session->set_flashdata('error_msg', 'Account Does not Exist');
+    redirect('/transfer');
 }
+
 }
 else{
   $this->session->set_flashdata('error_msg', 'Please Fill account number and amount');
   redirect('/transfer');
+
+}
+}
+else{
+
+
+      $this->session->set_flashdata('error_msg', 'Insufficient Withdrawable Balance'.$amount."wb : ".$wb);
+      redirect('/transfer');
 
 }
 }
