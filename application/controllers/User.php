@@ -99,7 +99,7 @@ function login_user(){
         }
         else if($type ==3){
 
-          redirect('cruduser/loaddash');
+          redirect('cruduser');
            $this->load->view('partials/admin_sidebar.php');
 
               $this->load->view('partials/admin_sidebar.php');

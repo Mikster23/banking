@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="<?php echo base_url('index.php/user/loaddash');?>">
+          <a class="nav-link" href="<?php echo base_url('admin/loaddash');?>">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
@@ -40,11 +40,11 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="<?php echo base_url('index.php/deposit');?>">Deposit</a>
+              <a href="<?php echo base_url('deposit');?>">Deposit</a>
             </li>
             <li>
 
-              <a href="<?php echo base_url('index.php/withdraw');?>">Withdraw</a>
+              <a href="<?php echo base_url('withdraw');?>">Withdraw</a>
             </li>
 
             <li>
