@@ -32,7 +32,12 @@ function login_user(){
       $data2=$this->user_model->checkmindeposit($min['id']);
 
     $data=$this->user_model->login_user($user_login['email'],$user_login['password']);
+    if((int)$data['status']==0){
+      $this->session->set_flashdata('error_msg', "Account is not Yet Approved please wait.");
+      redirect("/");
 
+
+    }
     if($data)
       {
 
@@ -44,7 +49,7 @@ function login_user(){
         $this->session->set_userdata('user_mobile',$data['mobile']);
         $this->session->set_userdata('user_acctnum',$data['accountnum']);
         $this->session->set_userdata('user_pin',$data['pin']);
-          $this->session->set_userdata('user_balance',$data['balance']);
+        $this->session->set_userdata('user_balance',$data['balance']);
         $this->session->set_userdata('user_withdrawablebalance',$data['balance']  - $data2['minbalance']);
 
         $this->session->set_userdata('user_accttype',$data['account_type']);
@@ -277,19 +282,36 @@ public function register_user(){
       'pin' => $pin,
       'accountnum' => $acctnum
         );
+
+
         print_r($user);
+
+      echo "latest iD ". $latestid;
+      print_r($addacct);
 
 $email_check=$this->user_model->email_check($user['email']);
 
 if($email_check){
+
   $this->user_model->register_user($user);
+
+  $maxid = $this->user_model->getlatest_id();
+
+
+$latestid = $maxid['id'];
+  $addacct=array(
+  'holder_id'=>(int)$latestid,
+  'account_name' => $this->input->post('user_accttype'),
+  'accountnum' => $acctnum
+);
+  $this->user_model->register_acct($addacct);
   $this->session->set_flashdata('success_msg', 'Registered successfully.Now login to your account.');
   redirect('/user/loadlogin');
 
 }
 else{
 
-  $this->session->set_flashdata('error_msg', 'Error occured,Try again.');
+  $this->session->set_flashdata('error_msg', 'Email Already Exist.');
   redirect('user');
 
 

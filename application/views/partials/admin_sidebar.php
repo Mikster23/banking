@@ -46,6 +46,7 @@
 
               <a href="<?php echo base_url('index.php/withdraw');?>">Withdraw</a>
             </li>
+
             <li>
               <a href="cards.html">Time Deposit</a>
             </li>
@@ -55,26 +56,24 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Transfer Fund">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Accounts">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Transfer Fund</span>
+            <span class="nav-link-text">Manage Accounts</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="<?php echo base_url('index.php/transfer'); ?> ">Send Money</a>
+              <a href="<?php echo base_url('account/loadadd'); ?> ">Manage Account types</a>
             </li>
             <li>
-                <a href="<?php echo base_url('index.php/transfer/loadfund'); ?> ">Transfer History</a>
+              <a href="<?php echo base_url('cruduser'); ?> ">Manage User Account</a>
+            </li>
+            <li>
+                <a href="<?php echo base_url('account'); ?> ">Pending Online Banking Account</a>
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="User Profile">
-          <a class="nav-link" href="<?php echo site_url('cruduser'); ?> ">
-            <i class="fa fa-fw fa-user"></i>
-            <span class="nav-link-text">Manage Users</span>
-          </a>
-        </li>
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
           <a class="nav-link" href="#">
             <i class="fa fa-fw fa-link"></i>

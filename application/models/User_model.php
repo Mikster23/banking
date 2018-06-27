@@ -9,6 +9,28 @@ public function register_user($user){
 $this->db->insert('user', $user);
 
 }
+
+public function getlatest_id(){
+  $this->db->select_max('id');
+  $this->db->from('user');
+  //$query = $this->db->get();
+
+  if($query=$this->db->get())
+  {
+      return $query->row_array();
+  }
+  else{
+    return false;
+  }
+}
+
+public function register_acct($accounts){
+
+
+$this->db->insert('accounts', $accounts);
+
+}
+
 public function user_deposit($id, $user_deposit){
 
 
