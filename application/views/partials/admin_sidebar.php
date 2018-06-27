@@ -66,10 +66,10 @@
               <a href="<?php echo base_url('account/loadadd'); ?> ">Manage Account types</a>
             </li>
             <li>
-              <a href="<?php echo base_url('cruduser'); ?> ">Manage User Account</a>
+              <a href="<?php echo base_url('crud'); ?> ">Manage User Account</a>
             </li>
             <li>
-                <a href="<?php echo base_url('account'); ?> ">Pending Online Banking Account</a>
+                <a href="<?php echo base_url('accounts'); ?> ">Pending Online Banking Account</a>
             </li>
           </ul>
         </li>
