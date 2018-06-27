@@ -69,7 +69,7 @@
               <a href="<?php echo base_url('crud'); ?> ">Manage User Account</a>
             </li>
             <li>
-                <a href="<?php echo base_url('accounts'); ?> ">Pending Online Banking Account</a>
+                <a href="<?php echo base_url('/accounts'); ?> ">Pending Online Banking Account</a>
             </li>
           </ul>
         </li>
