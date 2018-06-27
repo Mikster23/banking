@@ -10,7 +10,7 @@ class CrudUser extends CI_Controller {
 
     function loaddash(){
 
-      $this->load->view('admin/dashboard.php');
+      $this->load->view('admin/dashboard');
 
     }
     public function index()
