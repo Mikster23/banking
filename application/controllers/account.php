@@ -153,3 +153,4 @@ $this->load->view('admin/newacct.php');
         $this->load->view('admin/members', $data);
     }
 }
+?>
