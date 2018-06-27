@@ -6,6 +6,8 @@ class account extends CI_Controller {
         parent::__construct();
         $this->load->model('crud_model');
         $this->load->helper('url_helper');
+        $this->load->database('default');
+
     }
   public function accept(){
   $id = $this->uri->segment(3);

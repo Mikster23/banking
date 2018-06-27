@@ -1,11 +1,13 @@
 <?php
-class Cruduser extends CI_Controller {
+class Crud extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('crud_model');
        $this->load->helper('url_helper');
+       $this->load->database('default');
+
     }
 
     function loaddash(){
@@ -13,8 +15,6 @@ class Cruduser extends CI_Controller {
       $data['user'] = $this->crud_model->get_news();
       //$data['title'] = 'News archive';
       $this->load->view('admin/members', $data);
-      $this->load->database('default');
-
   //  redirect('cruduser');
 
     }
