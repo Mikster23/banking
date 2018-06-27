@@ -5,12 +5,14 @@ class Cruduser extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('crud_model');
-    //    $this->load->helper('url_helper');
+       $this->load->helper('url_helper');
     }
 
     function loaddash(){
 
-     $this->load->view('admin/members');
+      $data['user'] = $this->crud_model->get_news();
+      //$data['title'] = 'News archive';
+      $this->load->view('admin/members', $data);
   //  redirect('cruduser');
 
     }
