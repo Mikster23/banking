@@ -18,6 +18,14 @@ class Crud extends CI_Controller {
   //  redirect('cruduser');
 
     }
+    function loadacc(){
+
+      $data['user'] = $this->crud_model->get_news();
+      //$data['title'] = 'News archive';
+      $this->load->view('admin/members', $data);
+  //  redirect('cruduser');
+
+    }
     public function index()
     {
       //  $data['user'] = $this->crud_model->get_news();

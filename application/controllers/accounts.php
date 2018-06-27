@@ -1,5 +1,5 @@
 <?php
-class accounts extends CI_Controller {
+class Accounts extends CI_Controller {
 
     public function __construct()
     {
