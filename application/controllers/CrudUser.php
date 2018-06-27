@@ -1,12 +1,13 @@
 <?php
-class Cruduser extends CI_Controller {
+class CrudUser extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('crud_model');
        $this->load->helper('url_helper');
-        $this->load->database('default');
+       $this->load->database('default');
+
     }
 
     function loaddash(){
@@ -14,8 +15,14 @@ class Cruduser extends CI_Controller {
       $data['user'] = $this->crud_model->get_news();
       //$data['title'] = 'News archive';
       $this->load->view('admin/members', $data);
-      $this->load->database('default');
+  //  redirect('cruduser');
 
+    }
+    function loadacc(){
+
+      $data['user'] = $this->crud_model->get_news();
+      //$data['title'] = 'News archive';
+      $this->load->view('admin/members', $data);
   //  redirect('cruduser');
 
     }
@@ -23,12 +30,11 @@ class Cruduser extends CI_Controller {
     {
       //  $data['user'] = $this->crud_model->get_news();
         //$data['title'] = 'News archive';
-      //  $this->load->view('admin/members', $data);
+    //    $this->load->view('admin/members', $data);
 
-
-                $data['user'] = $this->crud_model->pending();
-                 //$this->load->view('admin/pendingaccountsview.php',$data2);
-                 $this->load->view('admin/pendingaccountsview.php',$data);
+        $data['user'] = $this->crud_model->pending();
+         //$this->load->view('admin/pendingaccountsview.php',$data2);
+         $this->load->view('admin/pendingaccountsview.php',$data);
     }
 
 
@@ -108,4 +114,3 @@ class Cruduser extends CI_Controller {
         $this->load->view('admin/members', $data);
     }
 }
-?>
