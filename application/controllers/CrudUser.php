@@ -5,7 +5,7 @@ class Cruduser extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('crud_model');
-        $this->load->helper('url_helper');
+    //    $this->load->helper('url_helper');
     }
 
     function loaddash(){
