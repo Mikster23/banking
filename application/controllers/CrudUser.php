@@ -6,6 +6,7 @@ class Cruduser extends CI_Controller {
         parent::__construct();
         $this->load->model('crud_model');
        $this->load->helper('url_helper');
+        $this->load->database('default');
     }
 
     function loaddash(){
@@ -20,9 +21,14 @@ class Cruduser extends CI_Controller {
     }
     public function index()
     {
-        $data['user'] = $this->crud_model->get_news();
+      //  $data['user'] = $this->crud_model->get_news();
         //$data['title'] = 'News archive';
-        $this->load->view('admin/members', $data);
+      //  $this->load->view('admin/members', $data);
+
+
+                $data['user'] = $this->crud_model->pending();
+                 //$this->load->view('admin/pendingaccountsview.php',$data2);
+                 $this->load->view('admin/pendingaccountsview.php',$data);
     }
 
 
