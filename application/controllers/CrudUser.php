@@ -10,8 +10,8 @@ class Cruduser extends CI_Controller {
 
     function loaddash(){
 
-    //  $this->load->view('admin/dashboard');
-    redirect('cruduser');
+     $this->load->view('admin/members');
+  //  redirect('cruduser');
 
     }
     public function index()
