@@ -1,5 +1,5 @@
 <?php
-class CrudUser extends CI_Controller {
+class Cruduser extends CI_Controller {
 
     public function __construct()
     {
@@ -10,7 +10,8 @@ class CrudUser extends CI_Controller {
 
     function loaddash(){
 
-      $this->load->view('admin/dashboard');
+    //  $this->load->view('admin/dashboard');
+    redirect('cruduser');
 
     }
     public function index()
