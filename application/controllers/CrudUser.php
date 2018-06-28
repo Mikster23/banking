@@ -1,5 +1,5 @@
 <?php
-class CrudUser extends CI_Controller {
+class Cruduser extends CI_Controller {
 
     public function __construct()
     {
