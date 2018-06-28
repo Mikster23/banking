@@ -1,5 +1,5 @@
 <?php
-class account extends CI_Controller {
+class Account extends CI_Controller {
 
     public function __construct()
     {
@@ -28,7 +28,7 @@ $this->email->subject('Account Activation');
 $this->email->message('Hello your account has been successfully activated you may log in to your account now');
 $this->email->send();
 
-/*
+
   $accept=array(
 
   'status' => $status
@@ -39,7 +39,7 @@ $this->email->send();
       $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ACTIVATED.");
       redirect("account");
 
-    }*/
+    }
 
   }
     function loaddash(){
