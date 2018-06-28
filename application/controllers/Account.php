@@ -31,7 +31,7 @@ $this->email->to('mharon.gundayao@gmail.com');
 $this->email->subject('Account Activation');
 $this->email->message('Hello your account has been successfully activated you may log in to your account now');
 $this->email->send();
-redirect('/');
+//redirect('accept');
 /*
   $accept=array(
 
