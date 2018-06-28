@@ -26,7 +26,7 @@ class Account extends CI_Controller {
     $config['smtp_pass'] = '123Qwe1!';
 
   $this->load->library('email',$config);
-$this->email->from('Feu Banking System', 'Admin');
+$this->email->from('devfeutechbanking@gmail.com', 'Admin');
 $this->email->to('mharon.gundayao@gmail.com');
 $this->email->subject('Account Activation');
 $this->email->message('Hello your account has been successfully activated you may log in to your account now');
