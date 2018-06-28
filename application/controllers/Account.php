@@ -30,7 +30,13 @@ $this->email->from('devfeutechbanking@gmail.com', 'Admin');
 $this->email->to('mharon.gundayao@gmail.com');
 $this->email->subject('Account Activation');
 $this->email->message('Hello your account has been successfully activated you may log in to your account now');
-$this->email->send();
+if($this->email->send()){
+
+echo " Success";
+}
+else{
+  echo " not success";
+}
 //redirect('accept');
 /*
   $accept=array(
