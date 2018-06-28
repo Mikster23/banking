@@ -19,9 +19,13 @@ class Account extends CI_Controller {
 
     $data = $this->crud_model->gethuman($id);
     $email = $data['email'];
+    $config['protocol'] = 'smtp';
+    $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+    $config['smtp_port'] = 465;
+    $config['smtp_user'] = 'devfeutechbanking@gmail.com';
+    $config['smtp_pass'] = '123Qwe1!';
 
-  $this->load->library('email');
-
+  $this->load->library('email',$config);
 $this->email->from('Feu Banking System', 'Admin');
 $this->email->to('mharon.gundayao@gmail.com');
 $this->email->subject('Account Activation');
