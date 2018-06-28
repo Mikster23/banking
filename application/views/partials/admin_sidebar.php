@@ -66,10 +66,10 @@
               <a href="<?php echo base_url('account/loadadd'); ?> ">Manage Account types</a>
             </li>
             <li>
-              <a href="<?php echo base_url('cruduser'); ?> ">Manage User Account</a>
+              <a href="<?php echo base_url('account/loadmem'); ?> ">Manage User Account</a>
             </li>
             <li>
-                <a href="<?php echo base_url('/accounts'); ?> ">Pending Online Banking Account</a>
+                <a href="<?php echo base_url('account'); ?> ">Pending Online Banking Account</a>
             </li>
           </ul>
         </li>
@@ -97,7 +97,7 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <a class="nav-link" href="<?php echo base_url('index.php') ?>" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>

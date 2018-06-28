@@ -47,7 +47,7 @@ $this->email->message('Hello your account has been successfully activated you ma
 $result = $this->email->send();
 echo $result;
 //redirect('accept');
-/*
+
   $accept=array(
 
   'status' => $status
@@ -58,12 +58,17 @@ echo $result;
       $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ACTIVATED.");
       redirect("account");
 
-    } */
+    }
 
   }
     function loaddash(){
 
       $this->load->view('admin/dashboard.php');
+
+    }
+    function loadmem(){
+    $data['user'] = $this->crud_model->get_news();
+      $this->load->view('admin/members.php',$data);
 
     }
     function loadadd(){
@@ -76,6 +81,11 @@ echo $result;
       $this->load->helper('form');
       $this->load->library('form_validation');
 $this->load->view('admin/newacct.php');
+    }
+
+    function logout(){
+$this->session->sess_destroy();
+$this->load->view('index.php');
     }
     public function index()
   {

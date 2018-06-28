@@ -130,7 +130,7 @@
           <!--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
         </div>
             <button class="button button2" type="submit" name="addMem" id="catID">Save</button>
-        
+
         <button class="button button2" id="issueBut2">Cancel</button>
 
       </div>
@@ -160,7 +160,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="logout.php">Logout</a>
+              <a class="btn btn-primary" href="<?php echo base_url('account/logout');?>">Logout</a>
             </div>
           </div>
         </div>

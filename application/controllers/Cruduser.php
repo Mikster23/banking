@@ -11,14 +11,14 @@ class Cruduser extends CI_Controller {
     }
 
     function loaddash(){
-
-      $data['user'] = $this->crud_model->get_news();
+$this->load->view('admin/dashboard');
+    //  $data['user'] = $this->crud_model->get_news();
       //$data['title'] = 'News archive';
-      $this->load->view('admin/members', $data);
+  //    $this->load->view('admin/members', $data);
   //  redirect('cruduser');
 
     }
-    function loadacc(){
+    function loadmember(){
 
       $data['user'] = $this->crud_model->get_news();
       //$data['title'] = 'News archive';
@@ -46,23 +46,24 @@ class Cruduser extends CI_Controller {
 
         $data['title'] = 'Create a news item';
 
-        $this->form_validation->set_rules('m_fname', 'M_fname', 'required');
-        $this->form_validation->set_rules('m_lname', 'M_lname', 'required');
+       $this->form_validation->set_rules();
+        $this->form_validation->set_rules();
 
-        if ($this->form_validation->run() === FALSE)
-        {
+      //  if ($this->form_validation->run() === FALSE)
+        //{
             //$this->load->view('templates/header', $data);
             $this->load->view('admin/newMember');
             //$this->load->view('templates/footer');
 
-        }
+        //}
+        /*
         else
         {
             $this->crud_model->set_news();
 
             $data['user'] = $this->crud_model->get_news();
             $this->load->view('admin/members', $data);
-        }
+        }*/
     }
 
     public function edit()
@@ -94,6 +95,7 @@ class Cruduser extends CI_Controller {
             $this->crud_model->set_news($id);
             //$this->load->view('news/success');
             $data['user'] = $this->crud_model->get_news();
+            $this->session->set_flashdata('success_msg', 'User Successfully Edited!.');
             $this->load->view('admin/members', $data);
         }
     }
