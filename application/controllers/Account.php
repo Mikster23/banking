@@ -18,25 +18,33 @@ class Account extends CI_Controller {
   $status = 1;
 
     $data = $this->crud_model->gethuman($id);
+/*
     $email = $data['email'];
     $config['protocol'] = 'smtp';
     $config['smtp_host'] = 'ssl://smtp.googlemail.com';
     $config['smtp_port'] = 465;
     $config['smtp_user'] = 'devfeutechbanking@gmail.com';
-    $config['smtp_pass'] = '123Qwe1!';
+    $config['smtp_pass'] = '123Qwe1!';*/
 
-  $this->load->library('email',$config);
+    $config = Array(
+    'protocol' => 'smtp',
+    'smtp_host' => 'ssl://smtp.googlemail.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'devfeutechbanking@gmail.com',
+    'smtp_pass' => '123Qwe1!',
+    'mailtype'  => 'html',
+    'charset'   => 'iso-8859-1'
+);
+$this->load->library('email', $config);
+$this->email->set_newline("\r\n");
+
+  //$this->load->library('email',$config);
 $this->email->from('devfeutechbanking@gmail.com', 'Admin');
 $this->email->to('mharon.gundayao@gmail.com');
 $this->email->subject('Account Activation');
 $this->email->message('Hello your account has been successfully activated you may log in to your account now');
-if($this->email->send()){
-
-echo " Success";
-}
-else{
-  echo " not success";
-}
+$result = $this->email->send();
+echo $result;
 //redirect('accept');
 /*
   $accept=array(
