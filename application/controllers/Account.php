@@ -18,8 +18,9 @@ class Account extends CI_Controller {
   $status = 1;
 
     $data = $this->crud_model->gethuman($id);
+      $email = $data['email'];
 /*
-    $email = $data['email'];
+
     $config['protocol'] = 'smtp';
     $config['smtp_host'] = 'ssl://smtp.googlemail.com';
     $config['smtp_port'] = 465;
@@ -40,7 +41,7 @@ $this->email->set_newline("\r\n");
 
   //$this->load->library('email',$config);
 $this->email->from('devfeutechbanking@gmail.com', 'Admin');
-$this->email->to('mharon.gundayao@gmail.com');
+$this->email->to($email);
 $this->email->subject('Account Activation');
 $this->email->message('Hello your account has been successfully activated you may log in to your account now');
 $result = $this->email->send();
@@ -57,7 +58,7 @@ echo $result;
       $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ACTIVATED.");
       redirect("account");
 
-    }*/
+    } */
 
   }
     function loaddash(){
