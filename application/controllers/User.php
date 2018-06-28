@@ -323,13 +323,35 @@ else{
 
 public function enrollacct()
 {
+  $pin = (int)$this->input->post('user_pin');
+  $tpin = (int)$this->session->userdata('user_pin');
+
+  if($pin != $tpin){
+$this->session->set_flashdata('error_msg', 'Wrong User Pin');
+redirect('user/loadenroll');
+
+  }
+  else{
+  $acctnum = mt_rand(100000000, 999999999);
+  $latestid = (int)$this->session->userdata('user_id');
+    $addacct=array(
+    'holder_id'=>(int)$latestid,
+    'account_name' => $this->input->post('user_accttype'),
+    'accountnum' => $acctnum
+  );
+  $this->session->set_flashdata('success_msg', 'Enrollment Success Please Wait for the Confirmation of The Administrator');
+    $this->user_model->register_acct($addacct);
+  redirect('user/loadenroll');
+}
+
 
 
 }
 public function loadenroll(){
-
-
-$this->load->view('user/enrollacctview');
+$this->load->helper('form');
+  $data['account_type'] = $this->user_model->getacct();
+$data['acctype'] = $this->user_model->getacct();
+$this->load->view('user/enrollacctview',$data);
 
 
 }

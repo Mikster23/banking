@@ -97,17 +97,7 @@
                     <div class="col-25">
                       <label for="mpenaltys">Account Type: *</label>
                     </div>
-                    <div class="col-75">
-                      <select id="accnttype" name="m_accnttype">
-                        <?php if($news_item['account_type'] == "SAVINGS"){
-                        ?>  <option value="SAVINGS" selected>Savings</option>
-                        <option value="ETC" >Etc.</option> <?php
-                      } else{
-                        ?>  <option value="SAVINGS">Savings</option>
-                        <option value="ETC" selected>Etc.</option> <?php
-                      } ?>
-                      </select>
-                    </div>
+
                   </div>
                   <div class="row">
                     <div class="col-25">
@@ -116,12 +106,30 @@
                     <div class="col-75">
                       <select id="type" name="m_type" value="<?php echo $news_item['user_type']; ?>">
                         <?php if($news_item['user_type'] == 1){
-                          ?>  <option value="1" selected>Administrator</option>
-                          <option value="0">User</option> <?php
-                        } else{
-                          ?> <option value="1">Administrator</option>
-                          <option value="0" selected>User</option> <?php
-                        } ?>
+                          ?>
+                           <option value="1" selected>User</option>
+                            <option value="2" >Teller</option>
+                            <option value="3">Administrator</option>
+                           <?php
+                        } else if ($news_item['user_type'] == 2){
+                          ?>   <option value="2" selected>Teller</option>
+                          <option value="3">Administrator</option>
+                          <option value="1" >User</option>
+
+                          <?php
+                        }   else if( $news_item['user_type'] == 3){
+
+                            ?>
+                              <option value="3" selected>Administrator</option>
+                            <option value="2">Teller</option>
+
+                            <option value="1">User</option>
+                        <?php
+
+                        }
+
+
+                        ?>
                       </select>
                     </div>
                   </div>

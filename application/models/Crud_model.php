@@ -95,8 +95,11 @@ class Crud_model extends CI_Model {
     public function set_news($id = 0)
     {
         $this->load->helper('url');
-
+$val = 0;
         //$slug = url_title($this->input->post('title'), 'dash', TRUE);
+
+
+
 
         $data = array(
             'firstname' => $this->input->post('m_fname'),
@@ -109,8 +112,7 @@ class Crud_model extends CI_Model {
             'accountnum' => $this->input->post('m_accnt'),
             'pin' => $this->input->post('m_pin'),
             'password' => $this->input->post('m_pass'),
-            'account_type' => $this->input->post('m_accnttype'),
-            'user_type' => $this->input->post('m_type')
+            'user_type' => (int)$this->input->post('m_type')
         );
 
         if ($id == 0) {

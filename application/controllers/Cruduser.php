@@ -80,7 +80,7 @@ $this->load->view('admin/dashboard');
 
         $data['title'] = 'Edit a news item';
         $data['news_item'] = $this->crud_model->get_news_by_id($id);
-
+        $data['account_type'] = $this->crud_model->getacctype();
         $this->form_validation->set_rules('m_fname', 'M_fname', 'required');
         $this->form_validation->set_rules('m_lname', 'M_lname', 'required');
 

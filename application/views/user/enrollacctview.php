@@ -1,77 +1,61 @@
-<?php  $this->view('partials/admin_sidebar.php');
+<?php  $this->view('partials/user_sidebar.php');
   $error_msg= $this->session->flashdata('error_msg');
   $success_msg= $this->session->flashdata('success_msg');
 ?>
-<?php echo form_open('account/enrollacct'); ?>
+<?php echo form_open('user/enrollacct'); ?>
 
     <div class="content-wrapper">
+      <?php
+      if($error_msg){
+        ?>
+        <div class="alert alert-danger">
+          <?php echo $error_msg; ?>
+        </div>
+        <?php
+      }?>
+
+      <?php
+      if($success_msg){
+        ?>
+        <div class="alert alert-success">
+          <?php echo $success_msg; ?>
+        </div>
+      <?php
+      }?>
       <div class="container-fluid">
         <!-- Example DataTables Card-->
         <div class="card mb-3" style="margin-top:0.5vw;">
           <div class="card-header">
-            <i class="fa fa-user"></i><b> Enroll Account</b></div>
+            <i class="fa fa-user"></i><b> Add Account_Type</b></div>
             <div class="card-body">
               <div class="container">
                   <div class="row">
-                    <div class="col-25">
-                      <label for="mdays">Account Name: </label>
-                    </div>
-                    <div class="col-75">
-                      <input type="text" id="accname" name="acc_name" style="background:white;" value="">
-                    </div>
+  <label for="mdays">Select Account Type to Enroll: </label>
+  <div class ="col-25">
+                                                      <div class="form-group" >
+                                                          <select name ="user_accttype" id='sel_acct' required >
+                                                            <option>-- Select Account Type --</option>
+                                                            <?php
+
+                                                            foreach($account_type as $acct){
+                                                               echo ' hi '.$acct;
+                                                              echo "<option value='".$acct['id']."'>".$acct['name']."</option>";
+                                                            }
+                                                            ?>
+                                                         </select>
+                                                    </div>
+                                                  </div>
                   </div>
                   <div class="row">
                     <div class="col-25">
-                      <label for="mdays">Maintaining Balance: </label>
+                      <label for="mdays">Enter Account PIN: </label>
                     </div>
                     <div class="col-75">
-                      <input  id="accmaintain" name="acc_maintain" style="background:white;" value="" type = "number">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="mdays">Opening Balance: </label>
-                    </div>
-                    <div class="col-75">
-                      <input  id="accopening" name="acc_opening" style="background:white;" value="" type = "number">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="mdays">OTC Fee: </label>
-                    </div>
-                    <div class="col-75">
-                      <input  id="accatm" name="acc_otc" style="background:white;" value="" type = "number">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="mdays">ATM Fee: </label>
-                    </div>
-                    <div class="col-75">
-                      <input  id="accatm" name="acc_atm" style="background:white;" value="" type = "number">
+                      <input  id="accinter" name="user_pin" style="background:white;" value="" type = "number">
                     </div>
                   </div>
 
 
-
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="mdays">Inter Fee: </label>
-                    </div>
-                    <div class="col-75">
-                      <input  id="accinter" name="acc_inter" style="background:white;" value="" type = "number">
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="mdays">Interest: </label>
-                    </div>
-                    <div class="col-75">
-                      <input  id="accinterest" name="acc_interest" style="background:white;" value="" type="number" placeholder="0.00" required name="price" min="0" value="0" step="0.01">
-                    </div>
-                  </div>
 
                   </div>
 
@@ -79,10 +63,64 @@
             </div>
           <!--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
         </div>
-            <button class="button button2" type="submit" name="addMem" id="catID">Add</button>
+        <button class="button button2" type="submit" name="addMem" id="catID">Enroll</button>
         <button class="button button2" id="issueBut2">Cancel</button>
+        <div class="card mb-3" style="margin-top:0.5vw;">
+          <div class="card-header">
+            <i class="fa fa-table"></i> INFORMATION FOR ACCOUNT TYPE</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
 
+                  <th style="text-align:center;">Account Name</th>
+                  <th style="text-align:center;">Maintaining Balance</th>
+                  <th style="text-align:center;">Opening Balance</th>
+                  <th style="text-align:center;">ATM Charge Fee</th>
+                  <th style="text-align:center;">Over The Counter Charge Fee.</th>
+                  <th style="text-align:center;">Transfer Balance  Fee.</th>
+                  <th style="text-align:center;">Interest Rate Per Year</th>
+
+                </thead>
+                <tfoot>
+                  <tr>
+
+
+                                      <th style="text-align:center;">Account Name</th>
+                                      <th style="text-align:center;">Maintaining Balance</th>
+                                      <th style="text-align:center;">Opening Balance</th>
+                                      <th style="text-align:center;">ATM Fee</th>
+                                      <th style="text-align:center;">OTC Fee.</th>
+                                      <th style="text-align:center;">Transfer Fee.</th>
+                                      <th style="text-align:center;">Interest Rate Per Year</th>
+                    <td></td>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <?php foreach ($acctype as $acc_item): ?>
+                    <tr>
+
+                      <td style="text-align:center;"><?php echo $acc_item['name']; ?></td>
+                      <td style="text-align:center;"><?php echo $acc_item['minbalance']; ?></td>
+                      <td style="text-align:center;"><?php echo $acc_item['opening_balance']; ?></td>
+                      <td style="text-align:center;"><?php echo $acc_item['atm_fee']; ?></td>
+                      <td style="text-align:center;"><?php echo $acc_item['otc_fee']; ?></td>
+                      <td style="text-align:center;"><?php echo $acc_item['inter_fee']; ?></td>
+                      <td style="text-align:center;"><?php echo $acc_item['interest']; ?></td>
+
+
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
+        </div>
       </div>
+
+
+
       <!-- /.container-fluid-->
       <!-- /.content-wrapper-->
       <footer class="sticky-footer">
@@ -109,11 +147,12 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="<?php echo base_url('account/logout');?>">Logout</a>
+              <a class="btn btn-primary" href="logout.php">Logout</a>
             </div>
           </div>
         </div>
       </div>
+
       <!-- Bootstrap core JavaScript-->
       <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
       <script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -131,7 +170,7 @@
       <script>
         var btn = document.getElementById('issueBut2');
         btn.addEventListener('click', function() {
-        document.location.href = 'user/dashboard.php';
+        document.location.href = 'addacctypeview.php';
         });
       </script>
 
