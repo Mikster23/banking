@@ -43,7 +43,7 @@ $this->email->set_newline("\r\n");
 $this->email->from('devfeutechbanking@gmail.com', 'Admin');
 $this->email->to($email);
 $this->email->subject('Account Activation');
-$this->email->message('Hello your account has been successfully activated you may log in to your account now');
+$this->email->message('Hello your account has been successfully activated you may log in to your account now https://feutech-banking-system.herokuapp.com');
 $result = $this->email->send();
 echo $result;
 //redirect('accept');

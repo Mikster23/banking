@@ -49,9 +49,13 @@
             <li>
               <a href="<?php echo base_url('timedeposit');?>">Time Deposit</a>
             </li>
+
             <li>
 
               <a href="<?php echo base_url('user/loadtransaction');?>">Transaction History</a>
+            </li>
+            <li>
+              <a href="<?php echo base_url('user/loadenroll');?>">Enroll Additional Account</a>
             </li>
           </ul>
         </li>

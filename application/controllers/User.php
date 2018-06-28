@@ -13,6 +13,8 @@ public function __construct(){
 }
 
 
+
+
 function login_user(){
 
 
@@ -316,6 +318,19 @@ else{
 
 
 }
+
+}
+
+public function enrollacct()
+{
+
+
+}
+public function loadenroll(){
+
+
+$this->load->view('user/enrollacctview');
+
 
 }
 

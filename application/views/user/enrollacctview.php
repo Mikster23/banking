@@ -1,15 +1,15 @@
-<?php  $this->view('partials/user_sidebar.php');
+<?php  $this->view('partials/admin_sidebar.php');
   $error_msg= $this->session->flashdata('error_msg');
   $success_msg= $this->session->flashdata('success_msg');
 ?>
-<?php echo form_open('user/enrollacct'); ?>
+<?php echo form_open('account/enrollacct'); ?>
 
     <div class="content-wrapper">
       <div class="container-fluid">
         <!-- Example DataTables Card-->
         <div class="card mb-3" style="margin-top:0.5vw;">
           <div class="card-header">
-            <i class="fa fa-user"></i><b> Add Account_Type</b></div>
+            <i class="fa fa-user"></i><b> Enroll Account</b></div>
             <div class="card-body">
               <div class="container">
                   <div class="row">
@@ -131,7 +131,7 @@
       <script>
         var btn = document.getElementById('issueBut2');
         btn.addEventListener('click', function() {
-        document.location.href = 'addacctypeview.php';
+        document.location.href = 'user/dashboard.php';
         });
       </script>
 
