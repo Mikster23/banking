@@ -19,13 +19,6 @@ class Account extends CI_Controller {
 
     $data = $this->crud_model->gethuman($id);
       $email = $data['email'];
-/*
-
-    $config['protocol'] = 'smtp';
-    $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-    $config['smtp_port'] = 465;
-    $config['smtp_user'] = 'devfeutechbanking@gmail.com';
-    $config['smtp_pass'] = '123Qwe1!';*/
 
     $config = Array(
     'protocol' => 'smtp',
@@ -61,6 +54,75 @@ echo $result;
     }
 
   }
+
+  public function acceptenroll(){
+    $id = (int) $this->uri->segment(3);
+  //  $idr = (int) $this->uri->segment(4);
+
+    $dataaccounts = $this->crud_model->getholderid($id);
+    if($dataaccounts){
+
+      echo 'success';
+    }
+    $holder = (int)  $dataaccounts['holder_id'];
+
+    $datauser = $this->crud_model->getemail($holder);
+
+    $recepient = $datauser['email'];
+
+    //echo 'email'.$recepient."-----";
+
+
+//echo $idr;
+
+    $status = 1;
+
+      //$data = $this->crud_model->gethuman($id);
+        //$email = $data['email'];
+
+      $config = Array(
+      'protocol' => 'smtp',
+      'smtp_host' => 'ssl://smtp.googlemail.com',
+      'smtp_port' => 465,
+      'smtp_user' => 'devfeutechbanking@gmail.com',
+      'smtp_pass' => '123Qwe1!',
+      'mailtype'  => 'html',
+      'charset'   => 'iso-8859-1'
+    );
+    $this->load->library('email', $config);
+    $this->email->set_newline("\r\n");
+
+    //$this->load->library('email',$config);
+    $this->email->from('devfeutechbanking@gmail.com', 'Admin');
+    $this->email->to($recepient);
+    $this->email->subject('Account Enrollment');
+    $this->email->message('Hello Enrollment For Additional  account has been  accepted you may now use your additional account  https://feutech-banking-system.herokuapp.com ');
+    $result = $this->email->send();
+    echo 'email'.$result;
+    //redirect('accept');
+
+    $accept=array(
+
+    'status' => $status
+      );
+
+
+      if(  $this->crud_model->acceptaccount($id)){
+        $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ACTIVATED.");
+     redirect("account/loadenroll");
+
+      }
+
+
+  }
+    function loadenroll(){
+         $data['user_name'] = $this->crud_model->getname();
+         $data['user_enroll'] = $this->crud_model->pendingenroll();
+         $data['user_acctname'] = $this->crud_model->getacctname();
+      $this->load->view('admin/pendingenrollview.php',$data);
+
+
+    }
     function loaddash(){
 
       $this->load->view('admin/dashboard.php');
@@ -127,11 +189,17 @@ $this->load->view('index.php');
             //$this->load->view('templates/footer');
 
 
-            $this->crud_model->set_acctype();
-
+            $this->crud_model->set_news();
+                $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ADDED.");
           $data['acctype'] = $this->crud_model->getacctype();
-           $this->load->view('admin/addacctypeview.php',$data);
+            $data['user'] = $this->crud_model->get_news();
+           $this->load->view('admin/members.php',$data);
 
+    }
+    public function add(){
+          $this->load->helper('form');
+              $data['account_type'] = $this->crud_model->getacctype();
+        $this->load->view('admin/newMember',$data);
     }
 
     public function edit()

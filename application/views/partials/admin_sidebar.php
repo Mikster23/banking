@@ -71,6 +71,9 @@
             <li>
                 <a href="<?php echo base_url('account'); ?> ">Pending Online Banking Account</a>
             </li>
+            <li>
+                <a href="<?php echo base_url('account/loadenroll'); ?> ">Pending Enroll Banking Account</a>
+            </li>
           </ul>
         </li>
 

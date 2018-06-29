@@ -1,8 +1,8 @@
-<?php  $this->view('partials/user_sidebar.php');
+<?php  $this->view('partials/admin_sidebar.php');
   $error_msg= $this->session->flashdata('error_msg');
   $success_msg= $this->session->flashdata('success_msg');
 ?>
-<?php echo form_open('user/enrollacct'); ?>
+<?php echo form_open('account/create'); ?>
 
     <div class="content-wrapper">
       <div class="container-fluid">

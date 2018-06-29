@@ -7,75 +7,94 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
     </nav>-->
     <div class="content-wrapper">
-
-          <?php
-          if($error_msg){
-            ?>
-            <div class="alert alert-danger">
-              <?php echo $error_msg; ?>
-            </div>
-            <?php
-          }?>
-
-          <?php
-          if($success_msg){
-            ?>
-            <div class="alert alert-success">
-              <?php echo $success_msg; ?>
-            </div>
-          <?php
-          }?>
       <div class="container-fluid">
+
+            <?php
+            if($error_msg){
+              ?>
+              <div class="alert alert-danger">
+                <?php echo $error_msg; ?>
+              </div>
+              <?php
+            }?>
+
+            <?php
+            if($success_msg){
+              ?>
+              <div class="alert alert-success">
+                <?php echo $success_msg; ?>
+              </div>
+            <?php
+            }?>
         <div class="card-header">
-          <i class="fa fa-group"></i> <b> MEMBERS</b></div>
-          <table style="width: 100%">
-            <tr>
-              <td>
+          <i class="fa fa-group"></i> <b> Pending Additional Account Enroll</b></div>
 
-                <button class="button button2" id="newCat3">New Member</button>
-              </td>
-
-            </tr>
-          </table>
         <!-- Example DataTables Card-->
         <div class="card mb-3" style="margin-top:0.5vw;">
           <div class="card-header">
-            <i class="fa fa-table"></i> All Members Record</div>
+            <i class="fa fa-table"></i> Pending Accounts</div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
-                  <th style="text-align:center;">ID</th>
-                  <th style="text-align:center;">First Name</th>
-                  <th style="text-align:center;">Last Name</th>
-                  <th style="text-align:center;">Email</th>
-                  <th style="text-align:center;">Account No.</th>
+
+
+                  <th style="text-align:center;">Account Number</th>
+                  <th style="text-align:center;">Account Type</th>
+                  <th style="text-align:center;">Applicant Name</th>
+                  <th style="text-align:center;">Application Date.</th>
+
                   <th style="text-align:center;">Actions</th>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th style="text-align:center;">ID</th>
-                    <th style="text-align:center;">First Name</th>
-                    <th style="text-align:center;">Last Name</th>
-                    <th style="text-align:center;">Email</th>
-                    <th style="text-align:center;">Account No.</th>
+                    <th style="text-align:center;">Account Number</th>
+                    <th style="text-align:center;">Account Type</th>
+                    <th style="text-align:center;">Applicant Name</th>
+                    <th style="text-align:center;">Application Date.</th>
+
                     <td></td>
                   </tr>
                 </tfoot>
                 <tbody>
-                  <?php foreach ($user as $person_item): ?>
+                  <?php foreach($user_enroll as $person_item) {?>
                     <tr>
-                      <td style="text-align:center;"><?php echo $person_item['id']; ?></td>
-                      <td style="text-align:center;"><?php echo $person_item['firstname']; ?></td>
-                      <td style="text-align:center;"><?php echo $person_item['lastname']; ?></td>
-                      <td style="text-align:center;"><?php echo $person_item['email']; ?></td>
+
                       <td style="text-align:center;"><?php echo $person_item['accountnum']; ?></td>
+                      <td style="text-align:center;"><?php
+
+                      foreach($user_acctname as $person_name){
+                        $tempacctid1 = (int) $person_name['id'];
+                        $tempacctid2 = (int) $person_item['id'];
+                        if($tempacctid1 == $tempacctid2){
+                             echo $person_name['name'];
+                           }
+                      }
+
+                   ?></td>
+                      <td style="text-align:center;"><?php foreach($user_name as $person)
+                        {
+                            $tempid2 = (int)$person_item['holder_id'];
+                          $tempid1 = (int)$person['id'];
+
+                          if($tempid1 == $tempid2){
+                            echo $person['lastname'].", ".$person['firstname'];
+
+                        }
+
+
+                        }
+
+                      ?></td>
+                      <td style="text-align:center;"><?php echo $person_item['created_at']; ?></td>
+
                       <td style="text-align:center; padding:1%;">
-                        <a name="editMem" href="<?php echo site_url('cruduser/edit/'.$person_item['id']); ?>"><i class="fa fa-pencil"></i></a> |
-                        <a href="<?php echo site_url('cruduser/delete/'.$person_item['id']); ?>" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash-o"></i></a>
+                        <a name="editMem" href="<?php echo site_url('account/acceptenroll/'.$person_item['id']); ?>"><i class="fa fa-pencil"></i></a> |
+                    <!--    <a href="<?php //echo site_url('cruduser/delete/'.$person_item['id']); ?>" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash-o"></i></a> !-->
+                  <?php }?>
                       </td>
                     </tr>
-                  <?php endforeach; ?>
+                  <?php ?>
                 </tbody>
               </table>
             </div>
@@ -102,9 +121,9 @@
         </div>
       </div>
       <script>
-        var btn = document.getElementById('newCat3');
+        var btn = document.getElementById('newCat');
         btn.addEventListener('click', function() {
-        document.location.href = '<?php echo base_url('account/add'); ?>';
+        document.location.href = '<?php echo site_url('cruduser/create'); ?>';
         });
       </script>
       <script>

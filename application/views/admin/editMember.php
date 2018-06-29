@@ -93,12 +93,7 @@
                       <input type="password" id="mpass" name="m_pass" style="background:white;" value="<?php echo $news_item['password']; ?>">
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="mpenaltys">Account Type: *</label>
-                    </div>
-
-                  </div>
+                
                   <div class="row">
                     <div class="col-25">
                       <label for="mpenaltys">User Type: *</label>
