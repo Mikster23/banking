@@ -40,7 +40,6 @@ return $query->result();
 
 	public function human_update($where, $data)
 	{
-
 		$this->db->update($this->table, $data, $where);
 		return $this->db->affected_rows();
 	}
