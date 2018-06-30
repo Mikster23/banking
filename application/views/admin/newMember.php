@@ -2,7 +2,7 @@
   $error_msg= $this->session->flashdata('error_msg');
   $success_msg= $this->session->flashdata('success_msg');
 ?>
-<?php echo form_open('cruduser/create'); ?>
+<?php echo form_open('account/create'); ?>
 
     <div class="content-wrapper">
       <div class="container-fluid">
@@ -68,22 +68,7 @@
                       <input type="number" id="memobile" name="m_mobile" style="background:white;" value="">
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="mdays">Account No.: </label>
-                    </div>
-                    <div class="col-75">
-                      <input type="number" id="meaccnt" name="m_accnt" style="background:white;" value="">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="mdays">Pin No.: </label>
-                    </div>
-                    <div class="col-75">
-                      <input type="password" id="mepin" name="m_pin" style="background:white;" value="">
-                    </div>
-                  </div>
+
                   <div class="row">
                     <div class="col-25">
                       <label for="mdays">Password: * </label>
@@ -97,22 +82,37 @@
                       <label for="mpenaltys">Account Type: *</label>
                     </div>
                     <div class="col-75">
-                      <select id="accnttype" name="m_accnttype">
-                        <option value="SAVINGS">Savings</option>
-                        <option value="ETC">Etc.</option>
-                      </select>
+                      <div class="form-group">
+                          <select name ="user_accttype" id='sel_acct' required >
+                            <option>-- Select Account Type --</option>
+                            <?php
+
+                            foreach($account_type as $acct){
+                               echo ' hi '.$acct;
+                              echo "<option value='".$acct['id']."'>".$acct['name']."</option>";
+                            }
+                            ?>
+                         </select>
+                    </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-25">
                       <label for="mpenaltys">User Type: *</label>
-                    </div>
-                    <div class="col-75">
-                      <select id="type" name="m_type">
-                        <option value="ADMIN">Administrator</option>
-                        <option value="USER">User</option>
+                      <select id="type" name="m_type" value="--Select user type">
+
+                           <option value="1" selected>User</option>
+                            <option value="2" >Teller</option>
+                            <option value="3">Administrator</option>
+
+
+
+
+
+
                       </select>
                     </div>
+
                   </div>
               </div>
             </div>
@@ -148,7 +148,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="logout.php">Logout</a>
+              <a class="btn btn-primary" href="<?php echo base_url('account/logout');?>">Logout</a>
             </div>
           </div>
         </div>

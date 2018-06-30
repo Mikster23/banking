@@ -81,7 +81,7 @@ $this->user_model->user_history($history);
     $id =  $this->session->userdata('user_id');
     $clause = "where id =";
       $deposit_check=$this->user_model->user_deposit($id,$user_deposit);
-$this->session->set_flashdata('success_msg', 'Deposit Successful!'.$tot);
+$this->session->set_flashdata('success_msg', 'Deposit Successful!');
 echo json_encode(array("status" => TRUE));
 redirect('/deposit');
 }

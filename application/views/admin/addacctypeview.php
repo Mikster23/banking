@@ -42,7 +42,7 @@
         <!-- Example DataTables Card-->
         <div class="card mb-3" style="margin-top:0.5vw;">
           <div class="card-header">
-            <i class="fa fa-table"></i> Pending Accounts</div>
+            <i class="fa fa-table"></i> ACCOUNT TYPE LIST</div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -109,7 +109,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="logout.php">Logout</a>
+              <a class="btn btn-primary" href="<?php echo base_url('account/logout')?>">Logout</a>
             </div>
           </div>
         </div>

@@ -18,9 +18,50 @@ class Crud_model extends CI_Model {
     }
 
 
+
     public function pending($id =0)
     {
             $query = $this->db->get_where('user', array('status' => $id));
+            return $query->result_array();
+    }
+
+    public function getname(){
+
+         $this->db->select('*');
+         $this->db->from('user');
+
+
+
+         if($query=$this->db->get())
+         {
+            return $query->result_array();
+         }
+         else{
+           return false;
+         }
+
+    }
+    public function getacctname(){
+
+         $this->db->select('*');
+         $this->db->from('account_type');
+
+
+
+         if($query=$this->db->get())
+         {
+            return $query->result_array();
+         }
+         else{
+           return false;
+         }
+
+    }
+
+
+    public function pendingenroll($id =0)
+    {
+            $query = $this->db->get_where('accounts', array('status' => $id));
             return $query->result_array();
     }
     public function accept($id = 0){
@@ -33,7 +74,7 @@ class Crud_model extends CI_Model {
     public function acceptaccount($id = 0){
       $status = 1;
       $this->db->set('status',$status);
-      $this->db->where('holder_id', $id);
+      $this->db->where('id', $id);
       return $this->db->update('accounts');
 
     }
@@ -62,6 +103,37 @@ class Crud_model extends CI_Model {
         $query = $this->db->get_where('account_type', array('id' => $id));
         return $query->row_array();
     }
+
+    public function getholderid($id =0){
+      $this->db->select('*');
+      $this->db->from('accounts');
+      $this->db->where('id',$id);
+
+
+      if($query=$this->db->get())
+      {
+          return $query->row_array();
+      }
+      else{
+        return false;
+      }
+
+    }
+    public function getemail($id =0){
+      $this->db->select('*');
+      $this->db->from('user');
+      $this->db->where('id',$id);
+
+
+      if($query=$this->db->get())
+      {
+          return $query->row_array();
+      }
+      else{
+        return false;
+      }
+    }
+
 
 
     public function set_acctype($id = 0)
@@ -95,8 +167,13 @@ class Crud_model extends CI_Model {
     public function set_news($id = 0)
     {
         $this->load->helper('url');
-
+$val = 0;
         //$slug = url_title($this->input->post('title'), 'dash', TRUE);
+
+
+        $pin = mt_rand(1000, 9999);
+        $acctnum = mt_rand(100000000, 999999999);
+
 
         $data = array(
             'firstname' => $this->input->post('m_fname'),
@@ -106,11 +183,10 @@ class Crud_model extends CI_Model {
             'birthday' => $this->input->post('m_bday'),
             'age' => $this->input->post('m_age'),
             'mobile' => $this->input->post('m_mobile'),
-            'accountnum' => $this->input->post('m_accnt'),
-            'pin' => $this->input->post('m_pin'),
-            'password' => $this->input->post('m_pass'),
-            'account_type' => $this->input->post('m_accnttype'),
-            'user_type' => $this->input->post('m_type')
+            'accountnum' => $acctnum,
+            'pin' => $pin,
+            'password' => md5($this->input->post('m_pass')),
+            'user_type' => (int)$this->input->post('m_type')
         );
 
         if ($id == 0) {

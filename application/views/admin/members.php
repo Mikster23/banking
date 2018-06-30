@@ -3,40 +3,38 @@
   $success_msg= $this->session->flashdata('success_msg');
 ?>
 
-    <?php
-    if($error_msg){
-      ?>
-      <div class="alert alert-danger">
-        <?php echo $error_msg; ?>
-      </div>
-      <?php
-    }?>
-
-    <?php
-    if($success_msg){
-      ?>
-      <div class="alert alert-success">
-        <?php echo $success_msg; ?>
-      </div>
-    <?php
-    }?>
     <!-- Navigation
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
     </nav>-->
     <div class="content-wrapper">
+
+          <?php
+          if($error_msg){
+            ?>
+            <div class="alert alert-danger">
+              <?php echo $error_msg; ?>
+            </div>
+            <?php
+          }?>
+
+          <?php
+          if($success_msg){
+            ?>
+            <div class="alert alert-success">
+              <?php echo $success_msg; ?>
+            </div>
+          <?php
+          }?>
       <div class="container-fluid">
         <div class="card-header">
           <i class="fa fa-group"></i> <b> MEMBERS</b></div>
           <table style="width: 100%">
             <tr>
               <td>
-                <button class="button button2" id="newCat">New Member</button>
+
+                <button class="button button2" id="newCat3">New Member</button>
               </td>
-              <td align="right">
-                <form method="POST" action="member_export.php">
-                  <button class="btn btn-primary" name="export">Export</button>
-                </form>
-              </td>
+
             </tr>
           </table>
         <!-- Example DataTables Card-->
@@ -98,15 +96,15 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="logout.php">Logout</a>
+              <a class="btn btn-primary" href="<?php echo base_url('account/logout');?>">Logout</a>
             </div>
           </div>
         </div>
       </div>
       <script>
-        var btn = document.getElementById('newCat');
+        var btn = document.getElementById('newCat3');
         btn.addEventListener('click', function() {
-        document.location.href = '<?php echo site_url('cruduser/create'); ?>';
+        document.location.href = '<?php echo base_url('account/add'); ?>';
         });
       </script>
       <script>

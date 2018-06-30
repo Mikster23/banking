@@ -49,10 +49,12 @@
             <li>
               <a href="<?php echo base_url('timedeposit');?>">Time Deposit</a>
             </li>
+
             <li>
 
               <a href="<?php echo base_url('user/loadtransaction');?>">Transaction History</a>
             </li>
+
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Transfer Fund">
@@ -69,6 +71,13 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
+          <a class="nav-link" href="<?php echo base_url('user/loadenroll')?>">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">Enroll Additional Account</span>
+          </a>
+        </li>
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
           <a class="nav-link" href="<?php echo base_url('paybill')?>">
             <i class="fa fa-fw fa-link"></i>
