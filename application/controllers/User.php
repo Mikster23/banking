@@ -337,6 +337,21 @@ public function enrollacct()
 
   }
   else{
+
+
+  $id =  (int)$this->session->userdata('user_id');
+  $acctid = (int)$this->input->post('user_accttype');
+
+  $checkexist = $this->user_model->checkhave_accttype($acctid);
+
+  if($checkexist){
+    $this->session->set_flashdata('error_msg', 'You already have that account type!');
+    redirect('user/loadenroll');
+
+
+  }
+  $check = (int) $checkexist['account_name'];
+    $checkexist =
     $acctnum = mt_rand(100000000, 999999999);
     $latestid = (int)$this->session->userdata('user_id');
     $addacct=array(

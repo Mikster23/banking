@@ -146,6 +146,22 @@ public function checkexist_acctnum($acctnum){
 
     $this->db->select('*');
     $this->db->from('accounts');
+  $this->db->where('accountnum',$acctnum);
+     $query = $this->db->get();
+     if ($query->num_rows() > 0){
+         return true;
+     }
+     else{
+         return false;
+     }
+
+
+}
+
+public function checkhave_accttype($acctnum){
+
+    $this->db->select('*');
+    $this->db->from('accounts');
   $this->db->where('account_name',$acctnum);
      $query = $this->db->get();
      if ($query->num_rows() > 0){

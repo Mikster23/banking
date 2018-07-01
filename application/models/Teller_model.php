@@ -7,7 +7,7 @@ class Teller_model extends CI_model{
 
 
     $this->db->select('*');
-    $this->db->from('user');
+    $this->db->from('accounts');
     $this->db->where('accountnum',$id);
 
 

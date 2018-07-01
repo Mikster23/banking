@@ -64,7 +64,7 @@
           <!--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
         </div>
         <button class="button button2" type="submit" name="addMem" id="catID">Enroll</button>
-        <button class="button button2" id="issueBut2">Cancel</button>
+
         <div class="card mb-3" style="margin-top:0.5vw;">
           <div class="card-header">
             <i class="fa fa-table"></i> INFORMATION FOR ACCOUNT TYPE</div>
