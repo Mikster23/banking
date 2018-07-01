@@ -78,7 +78,7 @@
                   <th style="text-align:center;">Opening Balance</th>
                   <th style="text-align:center;">ATM Charge Fee</th>
                   <th style="text-align:center;">Over The Counter Charge Fee.</th>
-                  <th style="text-align:center;">Transfer Balance  Fee.</th>
+
                   <th style="text-align:center;">Interest Rate Per Year</th>
 
                 </thead>
@@ -91,7 +91,7 @@
                                       <th style="text-align:center;">Opening Balance</th>
                                       <th style="text-align:center;">ATM Fee</th>
                                       <th style="text-align:center;">OTC Fee.</th>
-                                      <th style="text-align:center;">Transfer Fee.</th>
+
                                       <th style="text-align:center;">Interest Rate Per Year</th>
                     <td></td>
                   </tr>
@@ -105,7 +105,7 @@
                       <td style="text-align:center;"><?php echo $acc_item['opening_balance']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['atm_fee']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['otc_fee']; ?></td>
-                      <td style="text-align:center;"><?php echo $acc_item['inter_fee']; ?></td>
+
                       <td style="text-align:center;"><?php echo $acc_item['interest']; ?></td>
 
 
