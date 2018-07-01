@@ -127,7 +127,11 @@ function loadtransaction(){
   $this->load->view('user/transactionview.php',$data);
 }
 function loadmyaccount(){
-  $this->load->view('user/myaccountview.php');
+    $id =  (int)$this->session->userdata('user_id');
+  $data['user_acctname'] = $this->user_model->getacctname();
+  $data['myacct']= $this->user_model->getownedacct($id);
+  $data['user'] = $this->user_model->get_news($id);
+  $this->load->view('user/myaccountview.php',$data);
 }
 function loaddash(){
 

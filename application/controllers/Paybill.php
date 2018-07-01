@@ -25,24 +25,61 @@ function loadpayview(){
 
   $this->load->view('user/paybillview.php');
 }
-function pay(){
-$id = $this->session->userdata('user_id');
-$amount = $this->input->post('user_amount');
-$bal =   (int) $this->session->userdata('user_balance');
-$id =  $this->session->userdata('user_id');
-$pin = $this->input->post('user_pin');
-$pintrue =   $this->session->userdata('user_pin');
-$data3=$this->user_model->checkmindeposit($min['id']);
-$wb = (int) $this->session->userdata('user_withdrawablebalance');
-$min2 = (int) $data3['minbalance'];
 
-if(!empty($amount)){
-    if($amount > $wb){
-    $this->session->set_flashdata('error_msg', 'Insufficient Balance');
-    redirect('/paybill');
+
+function pay(){
+  $account = (int) $this->input->post('user_owned');
+  $databal=$this->user_model->getbalance_acctnum($account);
+
+
+  $dataacctidtype = $this->user_model->getownedacctid($account);
+
+
+  $accounttype = (int) $dataacctidtype['account_name'];
+
+  $datafee = $this->user_model->getatmfee($accounttype);
+
+  $penaltyfee = (int)$datafee['penalty'];
+  $transactionfee = (int) $datafee['atm_fee'];
+  $minwithdraw = (int) $datafee['minwith'];
+  $maintainbal = (int) $datafee['minbalance'];
+  $amount= (int)$this->input->post('user_amount') - $transactionfee;
+
+  $amountcheck = (int)$this->input->post('user_amount');
+  $amounthistory = (int)$this->input->post('user_amount');
+  $bal = (int) $databal['balance'];
+  //$balfinal = $bal - $amount;
+  $id =  (int)$this->session->userdata('user_id');
+  $pin = $this->input->post('user_pin');
+  $pintrue =   $this->session->userdata('user_pin');
+  $balbefore = $bal;
+
+  if($bal > $maintainbal){
+
+    $penaltyfee = 0;
 
   }
-  else{
+  $balafter = $bal - ($amountcheck + $transactionfee +$penaltyfee);
+
+  if($pin != $pintrue){
+    echo $pin . "fake == true" . $pintrue;
+    $this->session->set_flashdata('error_msg', 'Wrong Pin Number');
+    redirect('/paybill');
+  }
+
+
+  if(empty($amount)){
+    $this->session->set_flashdata('error_msg', 'Please Fill In Empty fields');
+    redirect('/paybill');
+
+
+  }
+
+
+
+
+
+
   $data = array(
       'referencenum' =>  $this->input->post('user_reference'),
       'payer_id' => $id,
@@ -50,7 +87,7 @@ if(!empty($amount)){
       'amount' =>(int) $amount
     );
   $insert = $this->user_model->paybill($data);
-  echo json_encode(array("status" => TRUE));
+
   $this->session->set_flashdata('success_msg', "Success Pay!");
 
 
@@ -59,7 +96,7 @@ if(!empty($amount)){
 
 
     $history=array(
-    'accountnum'=>(int)$this->session->userdata('user_acctnum'),
+    'user_id'=>$id,
     'action'=>'Bill Pay',
     'amount'=>$amount,
     'remarks'=>'Pay Bill'
@@ -74,42 +111,31 @@ if(!empty($amount)){
   //$wb = (int) $this->session->userdata('user_withdrawablebalance');
 
 
-    $user_withdraw=array(
+  $user_withdraw=array(
 
-  //  'pin'=>$this->input->post('user_pin'),
-    'balance' => $bal-$amount
-
-
-      );
-      $min=array(
-
-      'id'=>(int)$this->session->userdata('user_accttype')
+    //  'pin'=>$this->input->post('user_pin'),
+    'balance' => $balafter,
 
 
-        );
-          $data2=$this->user_model->checkmindeposit($min['id']);
-        $min = (int)$data2['minbalance'];
-        $tot = ($bal-$amount) - $min;
-        $tbal = $bal-$amount;
-
-      $tempbal =    $this->session->userdata('user_balance');
-      $this->session->set_userdata('user_balance',$bal-$amount);
-
-      $this->session->set_userdata('user_withdrawablebalance',$tot);
+  );
 
 
-      $id =  $this->session->userdata('user_id');
+  $id =  $this->session->userdata('user_id');
 
-  //$this->session->set_flashdata('success_msg', 'Withdraw Successful!'.$wb);
-     $withdraw_check=$this->user_model->user_withdraw($id,$user_withdraw);
-redirect('paybill');
-    }
+if($bal<$maintainbal){
+
+  $this->session->set_flashdata('success_msg', 'Withdraw Successful! <br> Penalty has been issued Account Below Maintaining Balance of : PHP '.$maintainbal.'<br> Penalty Fee : PHP '.$penaltyfee);
 }
 else{
-    $this->session->set_flashdata('error_msg', "Please fill Empty Fields!");
-  redirect('paybill');
 
+  $this->session->set_flashdata('success_msg', 'Withdraw Successful! Transaction Fee : PHP '.$transactionfee);
 }
+
+
+
+  $withdraw_check=$this->user_model->user_withdraw($id,$account,$user_withdraw);
+redirect('/paybill');
+
 
 
 }

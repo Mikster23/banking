@@ -161,8 +161,6 @@ else{
     $this->user_model->user_history($history);
 
 
-  echo $this->session->set_flashdata('success_msg', 'TRANSFER SUCCESSFUL');
-
 
 echo json_encode(array("status" => TRUE));
 redirect('/transfer');

@@ -76,7 +76,7 @@
                               </div>
 
                                   <div class="form-group">
-                                      <select name ="user_accttype" id='sel_acct'>
+                                      <select name ="user_accttype" id='sel_acct' required >
                                         <option>-- Select Account Type --</option>
                                         <?php
 

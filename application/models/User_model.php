@@ -68,8 +68,11 @@ public function get_history($id = 0){
               $order_column = array(null, "action", "amount", "created_at");
               $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
          }*/
-
-        $query = $this->db->get_where('transaction', array('user_id' => $id));
+         $this->db->select('*');
+         $this->db->from('transaction');
+         $this->db->where('user_id',$id);
+         $this->db->or_where('receiver_id',$id);
+         $query = $this->db->get();
          return $query->result_array();
 
 
@@ -258,12 +261,34 @@ function getacct(){
 
     return $response;
   }
+  public function getacctname(){
+
+    $this->db->select('*');
+    $this->db->from('account_type');
+
+
+
+    if($query=$this->db->get())
+    {
+      return $query->result_array();
+    }
+    else{
+      return false;
+    }
+
+  }
+  public function get_news($id = 0)
+  {
+    $query = $this->db->get_where('user', array('id' => $id));
+
+    return $query->result_array();
+  }
  function getownedacct($id = 0){
 
     $response = array();
 
     // Select record
-    $this->db->select('account_name');
+    $this->db->select('*');
    $this->db->from('accounts');
    $this->db->where('holder_id',$id);
    $this->db->where('status',1);

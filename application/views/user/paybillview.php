@@ -55,6 +55,111 @@ if(!$user_id){
         <input class="form-control" name="user_amount" type="number" placeholder="Enter Amount">
       </div>
       <div class="form-group">
+          <label for="exampleInputPin">From my Account :</label>
+        <select name ="user_owned" id='sel_acct' required >
+          <option>Select Account to Get Amount</option>
+          <?php
+
+          $id =  (int) $this->session->userdata('user_id');
+          //getyour owned accounts
+          $query = $this->db->query('SELECT * FROM accounts WHERE holder_id ='.$id);
+          $data  =   array();
+          $data2 = array();
+          $dataname = array();
+          foreach ($query->result_array() as $row):
+            $data[] = $row['holder_id'];
+            $data2[] = $row['account_name'];
+
+
+
+          endforeach;
+
+
+
+
+          $query2 = $this->db->query('SELECT * FROM account_type WHERE  timedep = 0 ');
+          $data3 = array();
+          $candepacctnum = array();
+          //get account_type with the accountid you owned
+          foreach ($query2->result_array() as $row):
+            $data3[] = $row['id'];
+
+            for($i = 0 ; $i<sizeof($data2) ; $i++){
+              if((int)$data2[$i] == (int)$row['id'])
+
+              {
+                //check if your owned account can deposit/withdraw through atm
+              //  if((int)$row['withatm'] ==1){
+
+                  $candepacctnum[] =$data2[$i];
+                  $dataname[] =  $row['name'];
+            //    }
+
+              }
+
+              echo $data2[$i];
+            }
+
+
+
+          endforeach;
+
+          //print_r($candepacctnum);
+
+
+          $query3 = $this->db->query('SELECT * FROM accounts where holder_id='.$id);
+          $data4 = array();
+
+          //get aaccountnumber
+          $datafinal= array();
+          $datafinal2 = array();
+          //print_r($candepacctnum);
+          foreach ($query3->result_array() as $row):
+            echo '<br>'.$row['account_name'];
+            $temp = (int)$row['account_name'];
+            for($i = 0 ; $i<sizeof($candepacctnum) ; $i++){
+
+              if($temp == $candepacctnum[$i]){
+
+                //get all account numbers of the account type that can deposit/withdraw
+                echo "true";
+                //       echo $row['account_name'] . "candep : " .$candepacctnum[$i];
+                //   $datafinal[$i]=  (int)$row['accountnum'];
+
+
+                /*     $options = array(
+
+                'accountnum' => (int)$row['accountnum'],
+              );
+              $datafinal['acctnumbers'] = $options;*/
+
+              $datafinal[$i] = $row['accountnum'];
+              $datafinal2[$i] = $row['balance'];
+            }
+
+          }
+
+
+
+        endforeach;
+
+        //      print_r($datafinal['acctnumbers'][0]);
+
+        for($i = 0 ; $i<sizeof($datafinal) ; $i++){
+          // echo ' hi '.$acct;
+          //  $temp = 0;
+          //  echo "HI".$acct["acctnumbers"];
+          echo "<option value='".$datafinal[$i]."'>".$dataname[$i]." | ".$datafinal[$i]." | Balance : ".$datafinal2[$i]."</option>";
+          $temp+=1;
+        }
+        ?>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPin">4 Digit Pin Number</label>
+      <input class="form-control" name="user_pin" type="number"  placeholder="Enter Pin">
+    </div>
+      <div class="form-group">
         <label for="exampleInputAmount">Merchant</label>
       <select name ="user_merchant" id='sel_merchant'>
         <option>-- Select Merchant --</option>
