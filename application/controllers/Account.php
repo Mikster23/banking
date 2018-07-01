@@ -20,6 +20,18 @@ class Account extends CI_Controller {
     $data = $this->crud_model->gethuman($id);
       $email = $data['email'];
 
+      $accept=array(
+
+      'status' => $status
+        );
+
+        if($this->crud_model->accept($id)){
+
+          $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ACTIVATED.");
+
+
+        }
+          $this->crud_model->acceptaccount($id);
     $config = Array(
     'protocol' => 'smtp',
     'smtp_host' => 'ssl://smtp.googlemail.com',
@@ -40,18 +52,8 @@ $this->email->message('Hello your account has been successfully activated you ma
 $result = $this->email->send();
 echo $result;
 //redirect('accept');
+    redirect("account");
 
-  $accept=array(
-
-  'status' => $status
-    );
-
-    if($this->crud_model->accept($id)){
-      $this->crud_model->acceptaccount($id);
-      $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ACTIVATED.");
-      redirect("account");
-
-    }
 
   }
 
@@ -109,6 +111,66 @@ echo $result;
 
       if(  $this->crud_model->acceptaccount($id)){
         $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ACTIVATED.");
+     redirect("account/loadenroll");
+
+      }
+
+
+  }
+  public function deactivate(){
+    $id = (int) $this->uri->segment(3);
+  //  $idr = (int) $this->uri->segment(4);
+
+    $dataaccounts = $this->crud_model->getholderid($id);
+    if($dataaccounts){
+
+      echo 'success';
+    }
+    $holder = (int)  $dataaccounts['holder_id'];
+
+    $datauser = $this->crud_model->getemail($holder);
+
+    $recepient = $datauser['email'];
+
+    //echo 'email'.$recepient."-----";
+
+
+//echo $idr;
+
+    $status = 1;
+
+      //$data = $this->crud_model->gethuman($id);
+        //$email = $data['email'];
+
+      $config = Array(
+      'protocol' => 'smtp',
+      'smtp_host' => 'ssl://smtp.googlemail.com',
+      'smtp_port' => 465,
+      'smtp_user' => 'devfeutechbanking@gmail.com',
+      'smtp_pass' => '123Qwe1!',
+      'mailtype'  => 'html',
+      'charset'   => 'iso-8859-1'
+    );
+    $this->load->library('email', $config);
+    $this->email->set_newline("\r\n");
+
+    //$this->load->library('email',$config);
+    $this->email->from('devfeutechbanking@gmail.com', 'Admin');
+    $this->email->to($recepient);
+    $this->email->subject('Account Enrollment');
+    $this->email->message('Your account has been  Deactivated in https://feutech-banking-system.herokuapp.com ');
+    $result = $this->email->send();
+    echo 'email'.$result;
+    //redirect('accept');
+
+    $accept=array(
+
+    'status' => $status
+      );
+
+
+      if(  $this->crud_model->deactivateaccount($id)){
+        $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY DEACTIVATED.");
      redirect("account/loadenroll");
 
       }

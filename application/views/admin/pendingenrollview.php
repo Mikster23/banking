@@ -1,38 +1,38 @@
 <?php  $this->view('partials/admin_sidebar.php');
-  $error_msg= $this->session->flashdata('error_msg');
-  $success_msg= $this->session->flashdata('success_msg');
+$error_msg= $this->session->flashdata('error_msg');
+$success_msg= $this->session->flashdata('success_msg');
 ?>
 
-    <!-- Navigation
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
-    </nav>-->
-    <div class="content-wrapper">
-      <div class="container-fluid">
+<!-- Navigation
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+</nav>-->
+<div class="content-wrapper">
+  <div class="container-fluid">
 
-            <?php
-            if($error_msg){
-              ?>
-              <div class="alert alert-danger">
-                <?php echo $error_msg; ?>
-              </div>
-              <?php
-            }?>
+    <?php
+    if($error_msg){
+      ?>
+      <div class="alert alert-danger">
+        <?php echo $error_msg; ?>
+      </div>
+      <?php
+    }?>
 
-            <?php
-            if($success_msg){
-              ?>
-              <div class="alert alert-success">
-                <?php echo $success_msg; ?>
-              </div>
-            <?php
-            }?>
+    <?php
+    if($success_msg){
+      ?>
+      <div class="alert alert-success">
+        <?php echo $success_msg; ?>
+      </div>
+      <?php
+    }?>
+    <div class="card-header">
+      <i class="fa fa-group"></i> <b> Pending Additional Account Enroll</b></div>
+
+      <!-- Example DataTables Card-->
+      <div class="card mb-3" style="margin-top:0.5vw;">
         <div class="card-header">
-          <i class="fa fa-group"></i> <b> Pending Additional Account Enroll</b></div>
-
-        <!-- Example DataTables Card-->
-        <div class="card mb-3" style="margin-top:0.5vw;">
-          <div class="card-header">
-            <i class="fa fa-table"></i> Pending Accounts</div>
+          <i class="fa fa-table"></i> Pending Accounts</div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -67,33 +67,34 @@
                         $tempacctid1 = (int) $person_name['id'];
                         $tempacctid2 = (int) $person_item['id'];
                         if($tempacctid1 == $tempacctid2){
-                             echo $person_name['name'];
-                           }
+                          echo $person_name['name'];
+                        }
                       }
 
-                   ?></td>
+                      ?></td>
                       <td style="text-align:center;"><?php foreach($user_name as $person)
-                        {
-                            $tempid2 = (int)$person_item['holder_id'];
-                          $tempid1 = (int)$person['id'];
+                      {
+                        $tempid2 = (int)$person_item['holder_id'];
+                        $tempid1 = (int)$person['id'];
 
-                          if($tempid1 == $tempid2){
-                            echo $person['lastname'].", ".$person['firstname'];
-
-                        }
-
+                        if($tempid1 == $tempid2){
+                          echo $person['lastname'].", ".$person['firstname'];
 
                         }
+
+
+                      }
 
                       ?></td>
                       <td style="text-align:center;"><?php echo $person_item['created_at']; ?></td>
 
                       <td style="text-align:center; padding:1%;">
-                        <a name="editMem" href="<?php echo site_url('account/acceptenroll/'.$person_item['id']); ?>"><i class="fa fa-pencil"></i></a> |
-                    <!--    <a href="<?php //echo site_url('cruduser/delete/'.$person_item['id']); ?>" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash-o"></i></a> !-->
-                  <?php }?>
-                      </td>
-                    </tr>
+                        <a name="editMem" href="<?php echo site_url('account/acceptenroll/'.$person_item['holder_id']); ?>"><i class="fa fa-pencil"></i></a> |
+                      <!--  <a name="editMem" href="<?php //echo site_url('account/deactivate/'.$person_item['id']); ?>"><i class="fa fa-pencil"></i></a> | !-->
+                        <!--    <a href="<?php //echo site_url('cruduser/delete/'.$person_item['id']); ?>" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash-o"></i></a> !-->
+                      <?php }?>
+                    </td>
+                  </tr>
                   <?php ?>
                 </tbody>
               </table>
@@ -121,42 +122,42 @@
         </div>
       </div>
       <script>
-        var btn = document.getElementById('newCat');
-        btn.addEventListener('click', function() {
+      var btn = document.getElementById('newCat');
+      btn.addEventListener('click', function() {
         document.location.href = '<?php echo site_url('cruduser/create'); ?>';
-        });
+      });
       </script>
       <script>
       $(document).ready(function() {
         // Setup - add a text input to each footer cell
         $('#theadd tfoot th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+          var title = $(this).text();
+          $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         } );
-          dataTable.destroy();
+        dataTable.destroy();
         // DataTable
         var table = $('#dataTable').DataTable({
-                "processing":true,
-                "serverSide":true,
-                "order":[],
-                "ajax":{
-                     url:"<?php echo base_url("index.php/cruduser/view"); ?>",
-                     type:"POST"
-                },
+          "processing":true,
+          "serverSide":true,
+          "order":[],
+          "ajax":{
+            url:"<?php echo base_url("index.php/cruduser/view"); ?>",
+            type:"POST"
+          },
 
-           });
+        });
 
         // Apply the search
         table.columns().every( function () {
-            var that = this;
+          var that = this;
 
-            $( 'input', this.footer() ).on( 'keyup change', function () {
-                if ( that.search() !== this.value ) {
-                    that
-                        .search( this.value )
-                        .draw();
-                }
-            } );
+          $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+              that
+              .search( this.value )
+              .draw();
+            }
+          } );
         } );
       } );
       </script>

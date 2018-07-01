@@ -101,6 +101,7 @@ $success_msg= $this->session->flashdata('success_msg');
                   <th style="text-align:center;">Account Type</th>
                   <th style="text-align:center;">Account Number</th>
                   <th style="text-align:center;">Remaining Balance</th>
+                      <th style="text-align:center;">Status</th>
 
                 </thead>
                 <tfoot>
@@ -110,7 +111,7 @@ $success_msg= $this->session->flashdata('success_msg');
                     <th style="text-align:center;">Account Type</th>
                     <th style="text-align:center;">Account Number</th>
                     <th style="text-align:center;">Remaining Balance</th>
-
+                          <th style="text-align:center;">Status</th>
 
 
                     <td></td>
@@ -133,6 +134,15 @@ $success_msg= $this->session->flashdata('success_msg');
                     //   echo $acc_item['account_name']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['accountnum']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['balance']; ?></td>
+                      <td style="text-align:center;"><?php $check = (int)$acc_item['status'];
+                      if($check ==1){
+
+                        echo "Activated";
+                      }
+                      else{
+                        echo "Deactivated";
+
+                      }?></td>
 
                     </tr>
                   <?php }?>

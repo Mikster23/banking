@@ -54,7 +54,7 @@ if(!$user_id){
 
               $id =  (int) $this->session->userdata('user_id');
             //getyour owned accounts
-            $query = $this->db->query('SELECT * FROM accounts WHERE holder_id ='.$id);
+            $query = $this->db->query('SELECT * FROM accounts WHERE status = 1 AND  holder_id ='.$id);
             $data  =   array();
             $data2 = array();
             $dataname = array();
@@ -99,7 +99,7 @@ if(!$user_id){
             //print_r($candepacctnum);
 
 
-            $query3 = $this->db->query('SELECT * FROM accounts where holder_id='.$id);
+            $query3 = $this->db->query('SELECT * FROM accounts where status =1 AND  holder_id='.$id);
             $data4 = array();
 
             //get aaccountnumber

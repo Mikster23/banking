@@ -291,7 +291,7 @@ function getacct(){
     $this->db->select('*');
    $this->db->from('accounts');
    $this->db->where('holder_id',$id);
-   $this->db->where('status',1);
+
     $q = $this->db->get();
     $response = $q->result_array();
 

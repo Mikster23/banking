@@ -74,10 +74,18 @@ class Crud_model extends CI_Model {
   public function acceptaccount($id = 0){
     $status = 1;
     $this->db->set('status',$status);
+    $this->db->where('holder_id', $id);
+    return $this->db->update('accounts');
+
+  }
+  public function deactivateaccount($id = 0){
+    $status = 0;
+    $this->db->set('status',$status);
     $this->db->where('id', $id);
     return $this->db->update('accounts');
 
   }
+
 
 
   public function get_news_by_id($id = 0)
@@ -148,7 +156,7 @@ class Crud_model extends CI_Model {
       'opening_balance' => $this->input->post('acc_opening'),
       'atm_fee' => $this->input->post('acc_atm'),
       'otc_fee' => $this->input->post('acc_otc'),
-      'inter_fee' => $this->input->post('acc_inter'),
+
       'depatm' => $this->input->post('dep_atm'),
       'withatm' => $this->input->post('with_atm'),
       'deptel' => $this->input->post('dep_tel'),
