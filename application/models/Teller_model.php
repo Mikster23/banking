@@ -20,7 +20,38 @@ class Teller_model extends CI_model{
     }
 
   }
+  public function getotcfee($id){
 
+    $this->db->select('*');
+    $this->db->from('account_type');
+    $this->db->where('id',$id);
+
+     if($query=$this->db->get())
+     {
+         return $query->row_array();
+     }
+     else{
+       return false;
+     }
+
+
+  }
+  public function getuseracctid($id){
+
+    $this->db->select('*');
+    $this->db->from('accounts');
+    $this->db->where('accountnum',$id);
+
+     if($query=$this->db->get())
+     {
+         return $query->row_array();
+     }
+     else{
+       return false;
+     }
+
+
+  }
 
   public function user_history($history){
 
@@ -31,8 +62,8 @@ class Teller_model extends CI_model{
   public function teller_deposit($id, $user_deposit){
 
 
-    $this->db->where('id', $id);
-    $this->db->update('user', $user_deposit);
+    $this->db->where('accountnum', $id);
+    $this->db->update('accounts', $user_deposit);
   		return $this->db->affected_rows();
   }
 
@@ -60,8 +91,8 @@ class Teller_model extends CI_model{
   public function user_withdraw($id, $user_withdraw){
 
 
-    $this->db->where('id', $id);
-    $this->db->update('user', $user_withdraw);
+    $this->db->where('accountnum', $id);
+    $this->db->update('accounts', $user_withdraw);
   		return $this->db->affected_rows();
   }
   public function get_all_human()
