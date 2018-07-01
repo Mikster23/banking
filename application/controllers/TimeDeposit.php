@@ -19,7 +19,7 @@ public function index()
 	//$data=array();
 	$id = (int)$this->session->userdata('user_id');
 	$data['view_table'] = $this->user_model->view_timeDeposit($id ); //change id
-	
+
 	foreach ($data['view_table'] as $value) {
 			$curr = date("Y-m-d");
 			if($value->widthDate==$curr &&$value->status==0){
@@ -41,8 +41,8 @@ public function maketimedep()
 	$curr= $this->input->post('curr');
 	$amtDept = $this->input->post('amtDept');
 	$id =  0; //(int)$this->session->userdata('user_id');
-	
-	
+
+
 	$interest=0;
 	$dateTdy = date("Y-m-d");
 	$widthTdy=0;
@@ -264,20 +264,20 @@ public function maketimedep()
 		  'remarks'=>$id.' '.$curr
 		);
 	$this->user_model->user_timeDepositTr($addT);
-	
-	
+
+
 	echo json_encode(array("status" => TRUE));
 	$data2['view_table'] = $this->user_model->view_timeDeposit($id );//change id
 	$data2['view_account'] = $this->user_model->get_acctnum($id ); //change id
 	$this->load->view('user/timedeposit.php',$data2);
-	
+
 
 
 }
 
 public function extendTD(){
 	//insert and update of deposit
-	
+
 	//$wDate1= $this->input->post('wDate1');
 	$id =  $this->session->userdata('user_id');
 	$currch = $this->input->post('currch');
@@ -287,23 +287,23 @@ public function extendTD(){
 	$chooseAcctN = $this->input->post('chooseAcctN1');
 	$hld_amt = $this->input->post('hld_amt');
 	$amtDep1 = $this->input->post('amtDep1');
-	
+
 	echo $acctnum;
 		echo $chooseAcctN;
 		echo ' '.$hld_amt;
 		echo ' '.$id_stored;
 			$data['view_user'] = $this->user_model->view_user($id ,$chooseAcctN); //change id
-		
+
 			foreach ($data['view_user'] as $valuee) {
 						$total=$valuee->balance+$amtDep1;
 						$this->user_model->update_user($id ,$total,$chooseAcctN); //change id
-						
+
 						if ($total<$hld_amt){
 							$total=$hld_amt-$amtDep1;
 							if ($total>0){
 								$this->user_model->update_user($id ,$total,$acctnum); //change id
 								$this->user_model->update_timeDeposit($id ,0,$id_stored); //change id
-								
+
 								$dateTdy = date("Y-m-d");
 									$widthTdy=0;
 												if($curr=='PHP'){
@@ -502,7 +502,7 @@ public function extendTD(){
 													  }
 													}
 												}
-												
+
 												$tDeposit=array(
 												  'acctID' => $acctnum,
 												  'placement'=>$tPlacement,
@@ -515,15 +515,15 @@ public function extendTD(){
 												  'status'=>0
 												);
 												$this->user_model->user_timeDeposit($tDeposit);
-												
+
 							}
-							
+
 						}
 			}
-			
-			
-			
-			
+
+
+
+
 			$addT=array(
 			  'accountnum'=> $acctnum,
 			  'action'=>'Time Deposit: Extend',
@@ -535,12 +535,12 @@ public function extendTD(){
 			$data1['view_account'] = $this->user_model->get_acctnum($id ); //change id
 			$this->load->view('user/timedeposit.php',$data1);
 
-	
+
 }
 
 public function addTransaction(){
 	//insert and update of deposit
-	
+
 	//$wDate1= $this->input->post('wDate1');
 	$id =  $this->session->userdata('user_id');
 	$curr = $this->input->post('currch');
@@ -550,30 +550,30 @@ public function addTransaction(){
 	$chooseAcctN = $this->input->post('chooseAcctN1');
 	$hld_amt = $this->input->post('hld_amt');
 	$amtDep1 = $this->input->post('amtDep1');
-	
+
 	$tPlacement= $this->input->post('placement');
-	
+
 		echo $acctnum;
 		echo $chooseAcctN;
 		echo ' '.$hld_amt;
 		echo ' '.$id_stored;
 			$data['view_user'] = $this->user_model->view_user($id ,$chooseAcctN); //change id
-		
+
 			foreach ($data['view_user'] as $valuee) {
 						$total=$valuee->balance+$amtDep1;
 						$this->user_model->update_user($id ,$total,$chooseAcctN); //change id
-						
+
 						if ($total<$hld_amt){
 							$total=$hld_amt-$amtDep1;
 							if ($total>0){
 								//$this->user_model->update_user(28,$total,$acctnum); //change id
 								$this->user_model->update_timeDeposit($id ,$total,$id_stored); //change id
-								
+
 							}
-							
+
 						}
 			}
-			
+
 			$addT=array(
 			  'accountnum'=> $acctnum,
 			  'action'=>'Time Deposit: Withdrawal',
@@ -582,7 +582,7 @@ public function addTransaction(){
 			  'remarks'=>$id  //change id
 			);
 			$this->user_model->user_timeDepositTr($addT);
-			
+
 			$data1['view_account'] = $this->user_model->get_acctnum($id ); //change id
 			$this->load->view('user/timedeposit.php',$data1);
 			$this->load->view('user/timedeposit.php');

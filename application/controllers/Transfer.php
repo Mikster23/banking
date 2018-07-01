@@ -23,16 +23,63 @@ public function loadfund()
 
 public function maketransfer()
 {
+
+
+  $account = (int) $this->input->post('user_owned');
+  $databal=$this->user_model->getbalance_acctnum($account);
+
+
+  $dataacctidtype = $this->user_model->getownedacctid($account);
+
+
+  $accounttype = (int) $dataacctidtype['account_name'];
+
+  $datafee = $this->user_model->getatmfee($accounttype);
+
+  $penaltyfee = (int)$datafee['penalty'];
+  $transactionfee = (int) $datafee['atm_fee'];
+  $minwithdraw = (int) $datafee['minwith'];
+  $maintainbal = (int) $datafee['minbalance'];
+  $amount= (int)$this->input->post('user_amount') - $transactionfee;
+
+  $amountcheck = (int)$this->input->post('user_amount');
+  $amounthistory = (int)$this->input->post('user_amount');
+  $bal = (int) $databal['balance'];
+  //$balfinal = $bal - $amount;
+  $id =  (int)$this->session->userdata('user_id');
+  $pin = $this->input->post('user_pin');
+  $pintrue =   $this->session->userdata('user_pin');
+  $balbefore = $bal;
+
+
+
   $amount= (int)$this->input->post('user_amount');
-  $camount= $this->input->post('user_amount');
-  $remarks = $this->input->post('user_remarks');
-  $bal =   $this->session->userdata('user_balance');
+
   $toacct = (int) $this->input->post('user_acctnum');
   $rembal = 0;
     $wb = (int) $this->session->userdata('user_withdrawablebalance');
-if( $amount <= $wb){
-if(!empty($camount) && !empty($toacct))
-{
+
+    if($bal > $maintainbal){
+
+      $penaltyfee = 0;
+
+    }
+    $balafter = $bal - ($amountcheck + $transactionfee +$penaltyfee);
+
+    if($pin != $pintrue){
+      echo $pin . "fake == true" . $pintrue;
+      $this->session->set_flashdata('error_msg', 'Wrong Pin Number');
+      redirect('/transfer');
+    }
+
+
+    if(empty($amount ) || empty($toacct)){
+      $this->session->set_flashdata('error_msg', 'Please Fill In Empty fields');
+      redirect('transfer');
+
+
+    }
+
   $acct=array(
 
   'accountnum'=>$toacct
@@ -41,10 +88,13 @@ if(!empty($camount) && !empty($toacct))
 
     $data=$this->user_model->checkexist_acctnum($acct['accountnum']);
     $data2 = $this->user_model->getbalance_acctnum($acct['accountnum']);
-if($data && $data2)
-{
+    $toid = (int) $data2['holder_id'];
+if(!$data2){
 
+  $this->session->set_flashdata('error_msg', 'Please Fill In Empty fields');
+  redirect('transfer');
 
+}
 
 
 
@@ -57,13 +107,12 @@ if($data && $data2)
 
 
 
-    $amount= (int)$this->input->post('user_amount');
+
     $baltransfer = $tobalance +  $amount;
     $toacct = (int)$this->input->post('user_acctnum');
-    $bal =   $this->session->userdata('user_balance');
-    $id =  $this->session->userdata('user_id');
-    $pin = $this->input->post('user_pin');
 
+    $pin = $this->input->post('user_pin');
+    $remarks = $this->input->post('user_remarks');
     $transfer=array(
 
   //  'pin'=>$this->input->post('user_pin'),
@@ -78,38 +127,34 @@ if($data && $data2)
 
     $user_withdraw=array(
 
-    //  'pin'=>$this->input->post('user_pin'),
-    'balance' => $bal-$amount
+      //  'pin'=>$this->input->post('user_pin'),
+      'balance' => $balafter,
 
 
-      );
-      $min=array(
-
-      'id'=>(int)$this->session->userdata('user_accttype')
+    );
 
 
-        );
-          $data2=$this->user_model->checkmindeposit($min['id']);
-        $min = (int)$data2['minbalance'];
-        $tot = ($bal-$amount) - $min;
-        $tbal = $bal-$amount;
+    $id =  $this->session->userdata('user_id');
 
-      $tempbal =    $this->session->userdata('user_balance');
-      $this->session->set_userdata('user_balance',$bal-$amount);
+if($bal<$maintainbal){
 
-      $this->session->set_userdata('user_withdrawablebalance',$tot);
+    $this->session->set_flashdata('success_msg', 'Transfer Successful! <br> Penalty has been issued Account Below Maintaining Balance of : PHP '.$maintainbal.'<br> Penalty Fee : PHP '.$penaltyfee);
+}
+else{
+
+    $this->session->set_flashdata('success_msg', 'Transfer Successful! Transaction Fee : PHP '.$transactionfee);
+}
 
 
-      $id =  $this->session->userdata('user_id');
 
-    //$this->session->set_flashdata('success_msg', 'Withdraw Successfuasdasdl!'.$wb);
-     $withdraw_check=$this->user_model->user_withdraw($id,$user_withdraw);
+    $withdraw_check=$this->user_model->user_withdraw($id,$account,$user_withdraw);
 
 
     $history=array(
-    'accountnum'=>(int)$this->session->userdata('user_acctnum'),
-    'action'=>'Transfer Funds',
+    'user_id'=>(int) $id,
+    'action'=>'Transfer Fund',
     'to_accountnum' => $toacct,
+    'receiver_id' => $toid,
     'amount'=>$amount,
     'remarks'=>$remarks
       );
@@ -121,27 +166,9 @@ if($data && $data2)
 
 echo json_encode(array("status" => TRUE));
 redirect('/transfer');
-}
-else{
-
-    $this->session->set_flashdata('error_msg', 'Account Does not Exist');
-    redirect('/transfer');
-}
-
-}
-else{
-  $this->session->set_flashdata('error_msg', 'Please Fill account number and amount');
-  redirect('/transfer');
-
-}
-}
-else{
 
 
-      $this->session->set_flashdata('error_msg', 'Insufficient Withdrawable Balance');
-      redirect('/transfer');
 
-}
 }
 }
 ?>

@@ -142,8 +142,8 @@ public function login_user($email,$pass){
 public function checkexist_acctnum($acctnum){
 
     $this->db->select('*');
-    $this->db->from('user');
-  $this->db->where('accountnum',$acctnum);
+    $this->db->from('accounts');
+  $this->db->where('account_name',$acctnum);
      $query = $this->db->get();
      if ($query->num_rows() > 0){
          return true;
@@ -155,8 +155,8 @@ public function checkexist_acctnum($acctnum){
 
 }
 public function getbalance_acctnum($acctnum){
-  echo $acctnum . "hi s";
-  $this->db->select('balance');
+
+  $this->db->select('*');
   $this->db->from('accounts');
   $this->db->where('accountnum',$acctnum);
 
@@ -211,7 +211,7 @@ public function getownedacctid($id){
 public function transfer($acctnum,$amount){
 
     $this->db->where('accountnum', $acctnum);
-    $this->db->update('user', $amount);
+    $this->db->update('accounts', $amount);
   		return $this->db->affected_rows();
 
 
@@ -318,8 +318,8 @@ function getacct(){
   $this->db->insert('payhistory', $data);
 
   }
-  
-  
+
+
 
 //-->
 public function user_timeDeposit($tDeposit){
@@ -495,8 +495,8 @@ public function get_acctnum($id){
      }
 }
 //->
-  
-  
+
+
 }
 
 

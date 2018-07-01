@@ -48,12 +48,14 @@ class Withdraw extends CI_Controller {
     $pin = $this->input->post('user_pin');
     $pintrue =   $this->session->userdata('user_pin');
     $balbefore = $bal;
-    $balafter = $bal - ($amountcheck + $transactionfee);
-    if($amountcheck < $minwithdraw){
-      $this->session->set_flashdata('error_msg', 'Transaction Failed! <br> Minimum Withdrawable Balance for your Account type : PHP '.$minwithdraw);
-      redirect('/withdraw');
-    }
 
+
+    if($bal > $maintainbal){
+
+      $penaltyfee = 0;
+
+    }
+    $balafter = $bal - ($amountcheck + $transactionfee +$penaltyfee);
 
     if($pin != $pintrue){
       echo $pin . "fake == true" . $pintrue;
@@ -95,7 +97,7 @@ class Withdraw extends CI_Controller {
     $user_withdraw=array(
 
       //  'pin'=>$this->input->post('user_pin'),
-      'balance' => $balafter-$penaltyfee,
+      'balance' => $balafter,
 
 
     );
@@ -103,7 +105,17 @@ class Withdraw extends CI_Controller {
 
     $id =  $this->session->userdata('user_id');
 
-    $this->session->set_flashdata('success_msg', 'Withdraw Successful!');
+if($bal<$maintainbal){
+
+    $this->session->set_flashdata('success_msg', 'Withdraw Successful! <br> Penalty has been issued Account Below Maintaining Balance of : PHP '.$maintainbal.'<br> Penalty Fee : PHP '.$penaltyfee);
+}
+else{
+
+    $this->session->set_flashdata('success_msg', 'Withdraw Successful! Transaction Fee : PHP '.$transactionfee);
+}
+
+
+
     $withdraw_check=$this->user_model->user_withdraw($id,$account,$user_withdraw);
     //  echo json_encode(array("status" => TRUE));
     redirect('/withdraw');

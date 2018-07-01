@@ -69,7 +69,7 @@ if(!$user_id){
 
 
 
-            $query2 = $this->db->query('SELECT * FROM account_type');
+            $query2 = $this->db->query('SELECT * FROM account_type WHERE  timedep = 0');
             $data3 = array();
             $candepacctnum = array();
             //get account_type with the accountid you owned

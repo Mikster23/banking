@@ -47,6 +47,10 @@
               <a href="<?php echo base_url('withdraw');?>">Withdraw</a>
             </li>
             <li>
+              <a href="<?php echo base_url('transfer'); ?> ">Transfer Fund</a>
+            </li>
+
+            <li>
               <a href="<?php echo base_url('timedeposit');?>">Time Deposit</a>
             </li>
 
@@ -57,20 +61,7 @@
 
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Transfer Fund">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Transfer Fund</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-            <li>
-              <a href="<?php echo base_url('transfer'); ?> ">Send Money</a>
-            </li>
-            <li>
-              <a href="<?php echo base_url('transfer/loadfund'); ?> ">Transfer History</a>
-            </li>
-          </ul>
-        </li>
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
           <a class="nav-link" href="<?php echo base_url('user/loadenroll')?>">
             <i class="fa fa-fw fa-link"></i>

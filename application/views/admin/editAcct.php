@@ -56,19 +56,8 @@ $success_msg= $this->session->flashdata('success_msg');
 
 
 
-            <div class="row">
-              <div class="col-25">
-                <label for="mdays">Inter Fee: </label>
-              </div>
-              <div class="col-75">
-                <input  id="accinter" name="acc_inter" style="background:white;" value="<?php echo $news_item['inter_fee']?>" type = "number">
-              </div>
-            </div>
 
-            <div class="col-75">
-              <input  id="accinter" name="acc_inter" style="background:white;" value="" type = "number">
-            </div>
-          </div>
+
           <div class="row">
             <div class="col-25">
               <label for="mdays">Can Deposit through ATM: </label>
