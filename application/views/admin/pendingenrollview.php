@@ -65,7 +65,7 @@ $success_msg= $this->session->flashdata('success_msg');
 
                       foreach($user_acctname as $person_name){
                         $tempacctid1 = (int) $person_name['id'];
-                        $tempacctid2 = (int) $person_item['id'];
+                        $tempacctid2 = (int) $person_item['account_name'];
                         if($tempacctid1 == $tempacctid2){
                           echo $person_name['name'];
                         }
