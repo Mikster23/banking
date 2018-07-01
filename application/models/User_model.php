@@ -31,11 +31,12 @@ $this->db->insert('accounts', $accounts);
 
 }
 
-public function user_deposit($id, $user_deposit){
+public function user_deposit($id,$acctnum, $user_deposit){
 
+  $this->db->where('holder_id',$id);
+  $this->db->where('accountnum', $acctnum);
 
-  $this->db->where('id', $id);
-  $this->db->update('user', $user_deposit);
+  $this->db->update('accounts', $user_deposit);
 		return $this->db->affected_rows();
 }
 public function user_history($history){
@@ -61,43 +62,15 @@ public function make_query()
                $this->db->order_by('id', 'DESC');
           }
      }*/
-public function get_history($id){
+public function get_history($id = 0){
 /*  if(isset($_POST["order"]))
          {
               $order_column = array(null, "action", "amount", "created_at");
               $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
          }*/
-  if(isset($_POST["search"]["value"]))  {
 
-    $this->db->select('accountnum,action,amount,created_at');
-    $this->db->from('transaction');
-    $this->db->limit($_POST['length'], $_POST['start']);
-    $this->db->or_like("action", $_POST["search"]["value"]);
-    $this->db->or_like("amount", $_POST["search"]["value"]);
-    $this->db->or_like("created_at", $_POST["search"]["value"]);
-    $this->db->where('accountnum',$id);
-    if($query=$this->db->get())
-    {
-       $result =  $query->result();
-        //return $query->row_array();
-        return $result;
-    }
-    else{
-      return false;
-    }
-  }
-
-  $this->db->from('transaction');
-  $this->db->where('accountnum',$id);
-  if($query=$this->db->get())
-  {
-     $result =  $query->result();
-      //return $query->row_array();
-      return $result;
-  }
-  else{
-    return false;
-  }
+        $query = $this->db->get_where('transaction', array('user_id' => $id));
+         return $query->result_array();
 
 
 
@@ -138,11 +111,12 @@ public function get_transferhistory($id){
 
 
 }
-public function user_withdraw($id, $user_deposit){
+public function user_withdraw($id,$acctnum, $user_withdraw){
 
 
-  $this->db->where('id', $id);
-  $this->db->update('user', $user_deposit);
+  $this->db->where('holder_id', $id);
+    $this->db->where('accountnum', $acctnum);
+  $this->db->update('accounts', $user_withdraw);
 		return $this->db->affected_rows();
 }
 
@@ -183,7 +157,7 @@ public function checkexist_acctnum($acctnum){
 public function getbalance_acctnum($acctnum){
   echo $acctnum . "hi s";
   $this->db->select('balance');
-  $this->db->from('user');
+  $this->db->from('accounts');
   $this->db->where('accountnum',$acctnum);
 
    if($query=$this->db->get())
@@ -196,6 +170,44 @@ public function getbalance_acctnum($acctnum){
 
 
 }
+
+public function getatmfee($id){
+
+  $this->db->select('*');
+  $this->db->from('account_type');
+  $this->db->where('id',$id);
+
+   if($query=$this->db->get())
+   {
+       return $query->row_array();
+   }
+   else{
+     return false;
+   }
+
+
+}
+//fetching single row;
+public function getownedacctid($id){
+
+  $this->db->select('*');
+  $this->db->from('accounts');
+  $this->db->where('accountnum',$id);
+
+   if($query=$this->db->get())
+   {
+       return $query->row_array();
+   }
+   else{
+     return false;
+   }
+
+
+}
+
+
+
+
 public function transfer($acctnum,$amount){
 
     $this->db->where('accountnum', $acctnum);
@@ -233,6 +245,33 @@ function getacct(){
 
    return $response;
  }
+ function getacctid($id = 0){
+
+    $response = array();
+
+    // Select record
+    $this->db->select('id');
+   $this->db->from('account_type');
+   $this->db->where('id',$id);
+    $q = $this->db->get();
+    $response = $q->result_array();
+
+    return $response;
+  }
+ function getownedacct($id = 0){
+
+    $response = array();
+
+    // Select record
+    $this->db->select('account_name');
+   $this->db->from('accounts');
+   $this->db->where('holder_id',$id);
+   $this->db->where('status',1);
+    $q = $this->db->get();
+    $response = $q->result_array();
+
+    return $response;
+  }
  public function get_all_human()
  {
  $this->db->from('user');
@@ -240,7 +279,7 @@ function getacct(){
  return $query->result();
  }
 
- function checkmindeposit($id){
+ function checkmaintaining($id){
 
 
    $this->db->select('*');
@@ -258,48 +297,6 @@ function getacct(){
 
  }
 
- public function user_timeDeposit($tDeposit){
-
-   $this->db->insert('timedeposit', $tDeposit);
- }
- public function update_timeDeposit($id,$data){
-
- $this->db->where('id', $id);
-  $this->db->update('timedeposit', $data);
- return $this->db->affected_rows();
- }
-
- public function user_timeDepositTr($addT){
-
-   $this->db->insert('transaction', $addT);
- }
- public function view_timeDeposit(){
-
- 	$this->db->select('*');
-     $this->db->from('timedeposit');
-     $query = $this->db->get();
-      if ($query->num_rows() > 0){
- 			 $result =  $query->result();
- 			 return $result;
- 		}
-      else{
-          return false;
-      }
- }
- public function get_timeDeposit($id){
-
- 	$this->db->select('*');
-     $this->db->from('timedeposit');
- 	$this->db->where('tDeptID',$id);
-     $query = $this->db->get();
-      if ($query->num_rows() > 0){
- 			 $result =  $query->result();
- 			 return $result;
- 		}
-      else{
-          return false;
-      }
- }
 
 
  public function getmerch(){
@@ -321,7 +318,185 @@ function getacct(){
   $this->db->insert('payhistory', $data);
 
   }
+  
+  
 
+//-->
+public function user_timeDeposit($tDeposit){
+
+  $this->db->insert('timedeposit', $tDeposit);
+}
+public function update_timeDeposit($id,$data,$tdeptID){
+
+$this->db->set('amount', $data);
+$this->db->set('status', 1);
+$this->db->where('userID', $id);
+$this->db->where('tdeptID', $tdeptID);
+$this->db->update('timedeposit');
+return $this->db->affected_rows();
+}
+public function update_timeDepositA($data,$tdeptID){
+
+$this->db->set('amount', $data);
+$this->db->set('status', 1);
+//$this->db->where('userID', $id);
+$this->db->where('tdeptID', $tdeptID);
+$this->db->update('timedeposit');
+return $this->db->affected_rows();
+}
+
+public function update_timeDepositE($id,$data,$tdeptID,$plc){
+
+$this->db->set('amount', $data);
+$this->db->set('status', 0);
+$this->db->set('intDate', $plc);
+$this->db->set('intDate', $plc);
+$this->db->set('placement', $plc);
+$this->db->where('userID', $id);
+$this->db->where('tdeptID', $tdeptID);
+
+$this->db->update('timedeposit');
+return $this->db->affected_rows();
+}
+public function update_user($id,$totalbal,$accountnum){
+
+$this->db->set('balance', $totalbal);
+$this->db->where('id', $id);
+$this->db->where('accountnum', $accountnum);
+$this->db->update('user');
+return $this->db->affected_rows();
+}
+public function update_userA($totalbal,$accountnum){
+
+$this->db->set('balance', $totalbal);
+//$this->db->where('id', $id);
+$this->db->where('accountnum', $accountnum);
+$this->db->update('user');
+return $this->db->affected_rows();
+}
+
+public function useer_sameAcc($datasame){
+
+ $this->db->set('amount', $data);
+ $this->db->set('status', 1);
+ $this->db->where('userID', $id);
+ $this->db->where('tdeptID', $tdeptID);
+ $this->db->update('user');
+return $this->db->affected_rows();
+}
+
+public function user_timeDepositTr($addT){
+
+  $this->db->insert('transaction', $addT);
+}
+public function view_user($addT,$acctID){
+
+	$this->db->select('*');
+    $this->db->from('user');
+	$this->db->where('id',$addT);
+	//$this->db->where('accountnum',$acctID);
+    $query = $this->db->get();
+     if ($query->num_rows() > 0){
+			 $result =  $query->result();
+			 return $result;
+		}
+     else{
+         return false;
+     }
+}
+public function view_userA($acctID){
+
+	$this->db->select('*');
+    $this->db->from('user');
+	//$this->db->where('id',$addT);
+	$this->db->where('accountnum',$acctID);
+    $query = $this->db->get();
+     if ($query->num_rows() > 0){
+			 $result =  $query->result();
+			 return $result;
+		}
+     else{
+         return false;
+     }
+}
+public function check_userA($acctID){
+
+	$this->db->select('*');
+    $this->db->from('user');
+	//$this->db->where('id',$addT);
+	$this->db->where('accountnum',$acctID);
+    $query = $this->db->get();
+     if ($query->num_rows() > 0){
+			 $result =  $query->result();
+			 return true;
+		}
+     else{
+         return false;
+     }
+}
+
+
+public function view_timeDeposit($id){
+
+	$this->db->select('*');
+    $this->db->from('timedeposit');
+	$this->db->where('userID',$id);
+    $query = $this->db->get();
+     if ($query->num_rows() > 0){
+			 $result =  $query->result();
+			 return $result;
+		}
+     else{
+         return false;
+     }
+}
+public function view_timeDepositA($id){
+
+	$this->db->select('*');
+    $this->db->from('timedeposit');
+	//$this->db->where('acctID',$id);
+    $query = $this->db->get();
+     if ($query->num_rows() > 0){
+			 $result =  $query->result();
+			 return $result;
+		}
+     else{
+         return false;
+     }
+}
+public function get_timeDeposit($id){
+
+	$this->db->select('*');
+    $this->db->from('timedeposit');
+	$this->db->where('tDeptID',$id);
+    $query = $this->db->get();
+     if ($query->num_rows() > 0){
+			 $result =  $query->result();
+			 return $result;
+		}
+     else{
+         return false;
+     }
+}
+
+public function get_acctnum($id){
+	$this->db->distinct();
+	$this->db->select('*');
+    $this->db->from('timedeposit');
+	$this->db->where('userID',$id);
+	$this->db->group_by('acctID');
+    $query = $this->db->get();
+     if ($query->num_rows() > 0){
+			 $result =  $query->result();
+			 return $result;
+		}
+     else{
+         return false;
+     }
+}
+//->
+  
+  
 }
 
 

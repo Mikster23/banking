@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+//defined('BASEPATH') OR exit('No direct script access allowed');
 
 //This is the Controller for codeigniter crud using ajax application.
 class Manage extends CI_Controller {
@@ -71,29 +71,12 @@ class Manage extends CI_Controller {
 		public function ajax_edit($id)
 		{
 			$data = $this->manage_model->get_by_id($id);
-
-
-
+			//echo $id;
 			echo json_encode($data);
 		}
 
 		public function manage_update()
 	{
-
-	/*	$('[name="user_accountnum"]').val(data.accountnum);
-		$('[name="user_firstname"]').val(data.firstname);
-		$('[name="user_lastname"]').val(data.lastname);
-		$('[name="user_address"]').val(data.address);
-		$('[name="user_email"]').val(data.email);
-		$('[name="user_password"]').val(data.password);
-		$('[name="user_birthday"]').val(data.birthday);
-		$('[name="user_age"]').val(data.age);
-		$('[name="user_mobile"]').val(data.mobile);
-		$('[name="user_balance"]').val(data.balance);
-		$('[name="user_accounttype"]').val(data.accttype);*/
-		//$data = $this->manage_model->get_by_id($id);
-
-
 		$data = array(
 				'firstname' => $this->input->post('user_firstname'),
 				'lastname' => $this->input->post('user_lastname'),
@@ -104,9 +87,9 @@ class Manage extends CI_Controller {
 				'age' => $this->input->post('user_age'),
 				'mobile' => $this->input->post('user_mobile'),
 				'account_type' => $this->input->post('user_accttype')
-
 			);
-		$this->manage_model->human_update(array('accountnum' => $this->input->post('user_accountnum')), $data);
+			$user_accountnum=$this->input->post('user_accountnum');
+		$this->manage_model->human_update($user_accountnum, $data);
 		echo json_encode(array("status" => TRUE));
 	}
 

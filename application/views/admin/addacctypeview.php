@@ -1,48 +1,49 @@
 <?php  $this->view('partials/admin_sidebar.php');
-  $error_msg= $this->session->flashdata('error_msg');
-  $success_msg= $this->session->flashdata('success_msg');
+$error_msg= $this->session->flashdata('error_msg');
+$success_msg= $this->session->flashdata('success_msg');
 ?>
 
-    <?php
-    if($error_msg){
-      ?>
-      <div class="alert alert-danger">
-        <?php echo $error_msg; ?>
-      </div>
-      <?php
-    }?>
 
+<!-- Navigation
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+</nav>-->
+<div class="content-wrapper">
+  <?php
+  if($error_msg){
+    ?>
+    <div class="alert alert-danger">
+      <?php echo $error_msg; ?>
+    </div>
     <?php
-    if($success_msg){
-      ?>
-      <div class="alert alert-success">
-        <?php echo $success_msg; ?>
-      </div>
+  }?>
+
+  <?php
+  if($success_msg){
+    ?>
+    <div class="alert alert-success">
+      <?php echo $success_msg; ?>
+    </div>
     <?php
-    }?>
-    <!-- Navigation
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
-    </nav>-->
-    <div class="content-wrapper">
-      <div class="container-fluid">
+  }?>
+  <div class="container-fluid">
+    <div class="card-header">
+      <i class="fa fa-group"></i> <b> ACCOUNT TYPE</b></div>
+      <table style="width: 100%">
+        <tr>
+          <td>
+            <button class="button button2" id="newCat">NEW ACCOUNT TYPE</button>
+          </td>
+          <td align="right">
+            <form method="POST" action="member_export.php">
+              <button class="btn btn-primary" name="export">Export</button>
+            </form>
+          </td>
+        </tr>
+      </table>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3" style="margin-top:0.5vw;">
         <div class="card-header">
-          <i class="fa fa-group"></i> <b> ACCOUNT TYPE</b></div>
-          <table style="width: 100%">
-            <tr>
-              <td>
-                <button class="button button2" id="newCat">NEW ACCOUNT TYPE</button>
-              </td>
-              <td align="right">
-                <form method="POST" action="member_export.php">
-                  <button class="btn btn-primary" name="export">Export</button>
-                </form>
-              </td>
-            </tr>
-          </table>
-        <!-- Example DataTables Card-->
-        <div class="card mb-3" style="margin-top:0.5vw;">
-          <div class="card-header">
-            <i class="fa fa-table"></i> ACCOUNT TYPE LIST</div>
+          <i class="fa fa-table"></i> ACCOUNT TYPE LIST</div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -54,6 +55,11 @@
                   <th style="text-align:center;">ATM Fee</th>
                   <th style="text-align:center;">OTC Fee.</th>
                   <th style="text-align:center;">Transfer Fee.</th>
+                  <th style="text-align:center;">Deposit through ATM.</th>
+                  <th style="text-align:center;">Withdraw through ATM.</th>
+                  <th style="text-align:center;">Deposit through Teller.</th>
+                  <th style="text-align:center;">Withdraw through Teller.</th>
+
                   <th style="text-align:center;">Interest Rate Per Year</th>
                   <th style="text-align:center;">Actions</th>
                 </thead>
@@ -61,13 +67,19 @@
                   <tr>
 
 
-                                      <th style="text-align:center;">Account Name</th>
-                                      <th style="text-align:center;">Maintaining Balance</th>
-                                      <th style="text-align:center;">Opening Balance</th>
-                                      <th style="text-align:center;">ATM Fee</th>
-                                      <th style="text-align:center;">OTC Fee.</th>
-                                      <th style="text-align:center;">Transfer Fee.</th>
-                                      <th style="text-align:center;">Interest Rate Per Year</th>
+                    <th style="text-align:center;">Account Name</th>
+                    <th style="text-align:center;">Maintaining Balance</th>
+                    <th style="text-align:center;">Opening Balance</th>
+                    <th style="text-align:center;">ATM Fee</th>
+                    <th style="text-align:center;">OTC Fee.</th>
+                    <th style="text-align:center;">Transfer Fee.</th>
+                    <th style="text-align:center;">Deposit through ATM.</th>
+                    <th style="text-align:center;">Withdraw through ATM.</th>
+                    <th style="text-align:center;">Deposit through Teller.</th>
+                    <th style="text-align:center;">Withdraw through Teller.</th>
+
+
+                    <th style="text-align:center;">Interest Rate Per Year</th>
                     <td></td>
                   </tr>
                 </tfoot>
@@ -81,11 +93,31 @@
                       <td style="text-align:center;"><?php echo $acc_item['atm_fee']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['otc_fee']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['inter_fee']; ?></td>
-                      <td style="text-align:center;"><?php echo $acc_item['interest']; ?></td>
 
+                      <td style="text-align:center;"><?php  if( (int)$acc_item['depatm'] == 1){
+                        echo "True";
+                      }else{
+                        echo "False";
+                      }; ?></td>
+                      <td style="text-align:center;"><?php  if( (int)$acc_item['withatm'] == 1){
+                        echo "True";
+                      }else{
+                        echo "False";
+                      }; ?></td>
+                      <td style="text-align:center;"><?php  if( (int)$acc_item['deptel'] == 1){
+                        echo "True";
+                      }else{
+                        echo "False";
+                      }; ?></td>
+                      <td style="text-align:center;"><?php if( (int)$acc_item['withtel'] == 1){
+                        echo "True";
+                      }else{
+                        echo "False";
+                      }; ?></td>
+                      <td style="text-align:center;"><?php  echo $acc_item['interest']; ?></td>
                       <td style="text-align:center; padding:1%;">
                         <a name="editMem" href="<?php echo site_url('account/edit/'.$acc_item['id']); ?>"><i class="fa fa-pencil"></i></a> |
-                      <!--  <a href="<?php //echo site_url('cruduser/delete/'.$acc_item['id']); ?>" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash-o"></i></a> !-->
+                        <!--  <a href="<?php //echo site_url('cruduser/delete/'.$acc_item['id']); ?>" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash-o"></i></a> !-->
                       </td>
                     </tr>
                   <?php endforeach; ?>
@@ -115,42 +147,42 @@
         </div>
       </div>
       <script>
-        var btn = document.getElementById('newCat');
-        btn.addEventListener('click', function() {
+      var btn = document.getElementById('newCat');
+      btn.addEventListener('click', function() {
         document.location.href = '<?php echo site_url('account/loadnew'); ?>';
-        });
+      });
       </script>
       <script>
       $(document).ready(function() {
         // Setup - add a text input to each footer cell
         $('#theadd tfoot th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+          var title = $(this).text();
+          $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         } );
-          dataTable.destroy();
+        dataTable.destroy();
         // DataTable
         var table = $('#dataTable').DataTable({
-                "processing":true,
-                "serverSide":true,
-                "order":[],
-                "ajax":{
-                     url:"<?php echo base_url("index.php/cruduser/view"); ?>",
-                     type:"POST"
-                },
+          "processing":true,
+          "serverSide":true,
+          "order":[],
+          "ajax":{
+            url:"<?php echo base_url("index.php/cruduser/view"); ?>",
+            type:"POST"
+          },
 
-           });
+        });
 
         // Apply the search
         table.columns().every( function () {
-            var that = this;
+          var that = this;
 
-            $( 'input', this.footer() ).on( 'keyup change', function () {
-                if ( that.search() !== this.value ) {
-                    that
-                        .search( this.value )
-                        .draw();
-                }
-            } );
+          $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+              that
+              .search( this.value )
+              .draw();
+            }
+          } );
         } );
       } );
       </script>

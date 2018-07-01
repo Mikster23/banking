@@ -2,7 +2,7 @@
   $error_msg= $this->session->flashdata('error_msg');
   $success_msg= $this->session->flashdata('success_msg');
 ?>
-<?php echo form_open('account/create'); ?>
+<?php echo form_open('account/acctinsert'); ?>
 
     <div class="content-wrapper">
       <div class="container-fluid">
@@ -63,7 +63,74 @@
                       <input  id="accinter" name="acc_inter" style="background:white;" value="" type = "number">
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-25">
+                        <label for="mdays">Can Deposit through ATM: </label>
+                  <select id="type" name="dep_atm" value="--Select Privilege">
 
+                    <option value="0" selected>False</option>
+                    <option value="1" >True</option>
+
+
+
+
+
+
+
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                    <label for="mdays">Can Withdraw through ATM: </label>
+              <select id="type" name="with_atm" value="--Select Privilege">
+
+                <option value="0" selected>False</option>
+                <option value="1" >True</option>
+
+
+
+
+
+
+
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+                <label for="mdays">Can Deposit through Teller: </label>
+          <select id="type" name="dep_tel" value="--Select Privilege">
+
+            <option value="0" selected>False</option>
+            <option value="1" >True</option>
+
+
+
+
+
+
+
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+            <label for="mdays">Can Withdraw through Teller: </label>
+      <select id="type" name="with_tel" value="--Select Privilege">
+
+        <option value="0" selected>False</option>
+        <option value="1" >True</option>
+
+
+
+
+
+
+
+      </select>
+    </div>
+  </div>
                   <div class="row">
                     <div class="col-25">
                       <label for="mdays">Interest: </label>

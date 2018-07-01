@@ -3,10 +3,20 @@ $user_id=$this->session->userdata('user_id');
 $user_balance=$this->session->userdata('user_balance');
 $user_pin=$this->session->userdata('user_pin');
 $user_acctnum=$this->session->userdata('user_acctnum');
+$error_msg= $this->session->flashdata('error_msg');
+  $success_msg= $this->session->flashdata('success_msg');
 if(!$user_id){
  redirect('/user/loadlogin');
 }
 ?>
+<?php
+if($error_msg){
+  ?>
+  <div class="alert alert-danger">
+    <?php echo $error_msg; ?>
+  </div>
+<?php
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +38,7 @@ if(!$user_id){
 </head>
 
 <body>
-    <?php  $this->view('partials/user_sidebar.php');
+    <?php  $this->view('partials/admin_sidebar.php');
     $error_msg= $this->session->flashdata('error_msg');
     $success_msg= $this->session->flashdata('success_msg');
 ?>
@@ -38,7 +48,7 @@ if(!$user_id){
             <br>
             <h3>Deposit Money</h3>
             <!-- FORM CHOOSE TIME DEPOSIT // INPUT AMOUNT //TERMS OF PLACEMENT//WHEN TO RELEASE DATE-->
-            <form class="needs-validation" role="form" method="post" action="<?php echo base_url('timedeposit/maketimedep');?>   ">
+            <form class="needs-validation" role="form" method="post" action="<?php echo base_url('admintimedeposit/maketimedep');?>   ">
                 <div class="form-row">
                     <div class="col-md-8 mb-2 float-md-left" style="background-color: #f1f1f1;border-radius: 10px;">
                         <br>
@@ -48,22 +58,7 @@ if(!$user_id){
                     </div>
                     <div class="col-md-6 mb-4 float-md-left">
                         <label for="inlineFormCustomSelectPref">Account Number</label>
-                        <select class="custom-select my-1 mr-sm-2" required id="inlineFormCustomSelectPref" name="inptAcct">
-                            <option selected>Choose...</option>
-                            <?php if(isset($view_account)){
-                            if ($view_account==NULL){
-                                echo 'engk';
-                            }
-                            else{
-                                foreach ($view_account as $acctnumber) {
-                                    echo '<option value="'.$acctnumber->acctID.'">'.$acctnumber->acctID.'</option>';
-                                }
-                            }
-                        }?>
-                        </select>
-                        <div class="invalid-tooltip">
-                            Please choose an account number.
-                        </div>
+                        <input type="number" class="form-control" name="inptAcct" required id="inptAcct" aria-describedby="number" placeholder="Account Number">
                     </div>
 
                     <div class="col-md-6 mb-4">
@@ -199,29 +194,13 @@ if(!$user_id){
                                                                     
                                                                 <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
 
-                                                                <form class="needs-validation" role="form" method="post" action="<?php echo base_url('timedeposit/addTransaction');?>   ">
+                                                                <form class="needs-validation" role="form" method="post" action="<?php echo base_url('admintimedeposit/addTransaction');?>   ">
                                                                 <input type="hidden" name="id_stored" value="<?php echo $value->tdeptID; ?>"/>
                                                                     <input type="hidden" name="acctnum" value="<?php echo $value->acctID; ?>"/>
                                                                     <input type="hidden" name="hld_curr" value="<?php echo $value->currency; ?>"/>
                                                                     <input type="hidden" name="hld_amt" value="<?php echo $value->amount; ?>"/>
-                                                                    <label for="id">Choose Account Number to Transfer</label>
-                                                                    <select class="custom-select my-1 mr-sm-2" required id="chooseAcctN1" name="chooseAcctN">
-                                                                        <?php if(isset($view_account)){
-                                                                        if ($view_account==NULL){
-                                                                            echo 'engk';
-                                                                        }
-                                                                        else{
-                                                                            foreach ($view_account as $acctnumber) {
-                                                                                if ($value->acctID==$acctnumber->acctID){
-                                                                                    echo '<option value="'.$acctnumber->acctID.'">'.$acctnumber->acctID.' (remain to the same account) </option>';
-                                                                                }
-                                                                                else{
-                                                                                echo '<option value="'.$acctnumber->acctID.'">'.$acctnumber->acctID.'</option>';
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }?>
-                                                                    </select>
+                                                                    <label for="id">Account Number to Transfer</label>
+                                                                    <input type="number" class="form-control" name="chooseAcctN1" required id="chooseAcctN1" aria-describedby="number" placeholder="Account Number">
                                                                     <label for="id">Amount of Money to Deposit</label>
                                                                     <input type="number" class="form-control" id="amtDep1" name="amtDep1" max="500000" placeholder="Insert Amount">
                                                                     <!--<label for="id">Choose Currency</label> 
@@ -275,26 +254,11 @@ if(!$user_id){
                                                     </p>
                                                     <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
 
-                                                    <form class="needs-validation" role="form" method="post" action="<?php echo base_url('timedeposit/extendTD');?>   ">
+                                                    <form class="needs-validation" role="form" method="post" action="<?php echo base_url('admintimedeposit/extendTD');?>   ">
 
-                                                        <label for="id">Choose Account Number to Transfer</label>
-                                                        <select class="custom-select my-1 mr-sm-2" required id="chooseAcctN1" name="chooseAcctN">
-                                                            <?php if(isset($view_account)){
-                                                if ($view_account==NULL){
-                                                    echo 'engk';
-                                                }
-                                                else{
-                                                    foreach ($view_account as $acctnumber) {
-                                                        if ($value->acctID==$acctnumber->acctID){
-                                                            echo '<option value="'.$acctnumber->acctID.'">'.$acctnumber->acctID.' (remain to the same account) </option>';
-                                                        }
-                                                        else{
-                                                        echo '<option value="'.$acctnumber->acctID.'">'.$acctnumber->acctID.'</option>';
-                                                        }
-                                                    }
-                                                }
-                                            }?>
-                                                        </select>
+                                                        <label for="id">Account Number to Transfer</label>
+                                                        <input type="number" class="form-control" name="chooseAcctN1" required id="chooseAcctN1" aria-describedby="number" placeholder="Account Number">
+                                                                    <label for="id">Amount of Money to Deposit</label>
                                                         <label for="id">Amount of Money to Deposit</label>
                                                         <input type="number" class="form-control" id="amtDep1" name="amtDep1" max="500000" placeholder="Insert Amount">
                                                         <!--<label for="id">Choose Currency</label> 

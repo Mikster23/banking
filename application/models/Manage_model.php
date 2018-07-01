@@ -17,7 +17,8 @@ class Manage_model extends CI_Model
 
 public function get_all_books()
 {
-$this->db->from('user');
+$this->db->select('*');
+ $this->db->from('user');
 $query=$this->db->get();
 return $query->result();
 }
@@ -39,9 +40,8 @@ return $query->result();
 	}
 
 	public function human_update($where, $data)
-	{
-
-		$this->db->update($this->table, $data, $where);
+	{	$this->db->where('accountnum', (int)$where);
+		$this->db->update($this->table, $data);
 		return $this->db->affected_rows();
 	}
 

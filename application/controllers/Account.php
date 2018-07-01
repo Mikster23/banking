@@ -221,6 +221,7 @@ $this->load->view('index.php');
 
       if ($this->form_validation->run() === FALSE)
       {
+        $data['acctype'] = $this->crud_model->getacctype();
           $this->load->view('partials/admin_sidebar', $data);
           $this->load->view('admin/editAcct', $data);
 
@@ -230,8 +231,17 @@ $this->load->view('index.php');
           $this->crud_model->set_acctype($id);
           //$this->load->view('news/success');
           $data['acctype'] = $this->crud_model->getacctype();
+            $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY EDITED.");
           $this->load->view('admin/addacctypeview', $data);
       }
+    }
+
+    public function acctinsert(){
+
+        $this->crud_model->set_acctype();
+        $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ADDED.");
+          $data['acctype'] = $this->crud_model->getacctype();
+        $this->load->view('admin/addacctypeview',$data);
     }
 
     public function delete()

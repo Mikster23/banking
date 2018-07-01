@@ -24,7 +24,9 @@
     <?php // $this->view('partials/teller_sidebar.php');?>
   <body>
 
-
+<?php  $this->view('partials/teller_sidebar.php');?>
+<div class="content-wrapper">
+        <div class="container-fluid">
   <div class="container">
     <h1>Manage User Accounts</h1>
 </center>
@@ -36,13 +38,13 @@
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <th>Accountnumber</th>
-					<th>Firstnam</th>
-					<th>Lastname</th>
+          <th>Account Number</th>
+					<th>First Name</th>
+					<th>Last Name</th>
 					<th>Email</th>
           <th>Address</th>
-					<th>User_type</th>
-        	<th>Account_type</th>
+					<th>User Type</th>
+        	<th>Account Type</th>
 					<th>Balance</th>
 
           <th style="width:125px;">Action
@@ -180,6 +182,7 @@
             $('[name="user_mobile"]').val(data.mobile);
             $('[name="user_balance"]').val(data.balance);
             $('[name="user_accounttype"]').val(data.accttype);
+            $('[name="user_human_id"]').val(data.human_id);
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Human'); // Set title to Bootstrap modal title
@@ -261,8 +264,14 @@
       </div>
       <div class="modal-body form">
         <form action="#" id="form" class="form-vertical">
-          <input type="hidden" value="" name="human_id"/>
+          <input type="hidden" value="" name="user_accountnum"/>
           <div class="form-body">
+          <div class="form-group">
+              <label class="control-label col-md-3">Account Num</label>
+              <div class="col-md-9">
+                <input name="user_accountnum" disabled placeholder="" class="form-control" type="text">
+              </div>
+            </div>
             <div class="form-group">
               <label class="control-label col-md-3">First Name</label>
               <div class="col-md-9">
@@ -373,6 +382,7 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
   <!-- End Bootstrap modal -->
-
+                </div>
+                </div>
   </body>
 </html>
