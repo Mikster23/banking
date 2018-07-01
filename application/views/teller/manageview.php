@@ -36,13 +36,13 @@
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <th>Accountnumber</th>
-					<th>Firstnam</th>
-					<th>Lastname</th>
+          <th>Account Number</th>
+					<th>First Name</th>
+					<th>Last Name</th>
 					<th>Email</th>
           <th>Address</th>
-					<th>User_type</th>
-        	<th>Account_type</th>
+					<th>User Type</th>
+        	<th>Account Type</th>
 					<th>Balance</th>
 
           <th style="width:125px;">Action
@@ -261,7 +261,7 @@
       </div>
       <div class="modal-body form">
         <form action="#" id="form" class="form-vertical">
-          <input type="hidden" value="" name="human_id"/>
+          <input type="hidden" value="" name="user_accountnum"/>
           <div class="form-body">
             <div class="form-group">
               <label class="control-label col-md-3">First Name</label>

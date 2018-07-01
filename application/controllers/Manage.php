@@ -77,7 +77,7 @@ class Manage extends CI_Controller {
 			echo json_encode($data);
 		}
 
-		public function manage_update()
+	public function manage_update()
 	{
 
 	/*	$('[name="user_accountnum"]').val(data.accountnum);
@@ -93,21 +93,20 @@ class Manage extends CI_Controller {
 		$('[name="user_accounttype"]').val(data.accttype);*/
 		//$data = $this->manage_model->get_by_id($id);
 
-
 		$data = array(
-				'firstname' => $this->input->post('user_firstname'),
-				'lastname' => $this->input->post('user_lastname'),
-				'address' => $this->input->post('user_address'),
-				'email' => $this->input->post('user_email'),
-				'password' => $this->input->post('user_password'),
-				'birthday' => $this->input->post('user_birthday'),
-				'age' => $this->input->post('user_age'),
-				'mobile' => $this->input->post('user_mobile'),
-				'account_type' => $this->input->post('user_accttype')
+			'firstname' => $this->input->post('user_firstname'),
+			'lastname' => $this->input->post('user_lastname'),
+			'address' => $this->input->post('user_address'),
+			'email' => $this->input->post('user_email'),
+			'password' => $this->input->post('user_password'),
+			'birthday' => $this->input->post('user_birthday'),
+			'age' => $this->input->post('user_age'),
+			'mobile' => $this->input->post('user_mobile'),
+			'account_type' => $this->input->post('user_accttype')
+		);
 
-			);
 		$this->manage_model->human_update(array('accountnum' => $this->input->post('user_accountnum')), $data);
-		echo json_encode(array("status" => TRUE));
+		echo json_encode(array("status" => true));
 	}
 
 	public function manage_delete($id)
