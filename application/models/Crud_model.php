@@ -183,7 +183,7 @@ class Crud_model extends CI_Model {
     $val = 0;
     //$slug = url_title($this->input->post('title'), 'dash', TRUE);
 
-
+    $id = $this->input->post('m_id');
     $pin = mt_rand(1000, 9999);
     $acctnum = mt_rand(100000000, 999999999);
 
@@ -203,10 +203,10 @@ class Crud_model extends CI_Model {
     );
 
     if ($id == 0) {
-      return $this->db->insert('user', $data);
+      return $this->db->insert('userrr', $data);
     } else {
       $this->db->where('id', $id);
-      return $this->db->update('user', $data);
+      return $this->db->update('userrr', $data);
     }
   }
 
