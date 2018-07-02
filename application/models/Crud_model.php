@@ -197,7 +197,7 @@ class Crud_model extends CI_Model {
       'age' => $this->input->post('m_age'),
       'mobile' => $this->input->post('m_mobile'),
       'accountnum' => $acctnum,
-      'pin' => $pin,
+      'pin' => $this->input->post('m_pin'),
       'password' => md5($this->input->post('m_pass')),
       'user_type' => (int)$this->input->post('m_type')
     );
