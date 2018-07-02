@@ -185,7 +185,8 @@ class Crud_model extends CI_Model {
 
     $id = $this->input->post('m_id');
     $pin = mt_rand(1000, 9999);
-    $acctnum = mt_rand(100000000, 999999999);
+  //  $acctnum = mt_rand(100000000, 999999999);
+
 
 
     $data = array(
@@ -196,17 +197,16 @@ class Crud_model extends CI_Model {
       'birthday' => $this->input->post('m_bday'),
       'age' => $this->input->post('m_age'),
       'mobile' => $this->input->post('m_mobile'),
-      'accountnum' => $acctnum,
       'pin' => $this->input->post('m_pin'),
-      'password' => md5($this->input->post('m_pass')),
+      'password' => $this->input->post('m_pass'),
       'user_type' => (int)$this->input->post('m_type')
     );
 
     if ($id == 0) {
-      return $this->db->insert('userrr', $data);
+      return $this->db->insert('user', $data);
     } else {
       $this->db->where('id', $id);
-      return $this->db->update('userrr', $data);
+      return $this->db->update('user', $data);
     }
   }
 

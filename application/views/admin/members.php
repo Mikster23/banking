@@ -1,46 +1,46 @@
 <?php  $this->view('partials/admin_sidebar.php');
-  $error_msg= $this->session->flashdata('error_msg');
-  $success_msg= $this->session->flashdata('success_msg');
+$error_msg= $this->session->flashdata('error_msg');
+$success_msg= $this->session->flashdata('success_msg');
 ?>
 
-    <!-- Navigation
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
-    </nav>-->
-    <div class="content-wrapper">
+<!-- Navigation
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+</nav>-->
+<div class="content-wrapper">
 
-          <?php
-          if($error_msg){
-            ?>
-            <div class="alert alert-danger">
-              <?php echo $error_msg; ?>
-            </div>
-            <?php
-          }?>
+  <?php
+  if($error_msg){
+    ?>
+    <div class="alert alert-danger">
+      <?php echo $error_msg; ?>
+    </div>
+    <?php
+  }?>
 
-          <?php
-          if($success_msg){
-            ?>
-            <div class="alert alert-success">
-              <?php echo $success_msg; ?>
-            </div>
-          <?php
-          }?>
-      <div class="container-fluid">
+  <?php
+  if($success_msg){
+    ?>
+    <div class="alert alert-success">
+      <?php echo $success_msg; ?>
+    </div>
+    <?php
+  }?>
+  <div class="container-fluid">
+    <div class="card-header">
+      <i class="fa fa-group"></i> <b> MEMBERS</b></div>
+      <table style="width: 100%">
+        <tr>
+          <td>
+
+            <button class="button button2" id="newCat3">New Member</button>
+          </td>
+
+        </tr>
+      </table>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3" style="margin-top:0.5vw;">
         <div class="card-header">
-          <i class="fa fa-group"></i> <b> MEMBERS</b></div>
-          <table style="width: 100%">
-            <tr>
-              <td>
-
-                <button class="button button2" id="newCat3">New Member</button>
-              </td>
-
-            </tr>
-          </table>
-        <!-- Example DataTables Card-->
-        <div class="card mb-3" style="margin-top:0.5vw;">
-          <div class="card-header">
-            <i class="fa fa-table"></i> All Members Record</div>
+          <i class="fa fa-table"></i> All Members Record</div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -102,42 +102,42 @@
         </div>
       </div>
       <script>
-        var btn = document.getElementById('newCat3');
-        btn.addEventListener('click', function() {
+      var btn = document.getElementById('newCat3');
+      btn.addEventListener('click', function() {
         document.location.href = '<?php echo base_url('account/add'); ?>';
-        });
+      });
       </script>
       <script>
       $(document).ready(function() {
         // Setup - add a text input to each footer cell
         $('#theadd tfoot th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+          var title = $(this).text();
+          $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         } );
-          dataTable.destroy();
+        dataTable.destroy();
         // DataTable
         var table = $('#dataTable').DataTable({
-                "processing":true,
-                "serverSide":true,
-                "order":[],
-                "ajax":{
-                     url:"<?php echo base_url("index.php/cruduser/view"); ?>",
-                     type:"POST"
-                },
+          "processing":true,
+          "serverSide":true,
+          "order":[],
+          "ajax":{
+            url:"<?php echo base_url("index.php/cruduser/view"); ?>",
+            type:"POST"
+          },
 
-           });
+        });
 
         // Apply the search
         table.columns().every( function () {
-            var that = this;
+          var that = this;
 
-            $( 'input', this.footer() ).on( 'keyup change', function () {
-                if ( that.search() !== this.value ) {
-                    that
-                        .search( this.value )
-                        .draw();
-                }
-            } );
+          $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+              that
+              .search( this.value )
+              .draw();
+            }
+          } );
         } );
       } );
       </script>

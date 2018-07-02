@@ -97,7 +97,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">Password: * </label>
               </div>
               <div class="col-75">
-                <input type="password" id="mpass" name="m_pass" style="background:white;" value="<?php echo $news_item['password']; ?>">
+                <input type="password" id="mpass" name="m_pass" style="background:white;" value="<?php echo  $news_item['password']; ?>">
               </div>
             </div>
 

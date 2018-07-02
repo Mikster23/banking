@@ -21,7 +21,7 @@ class User extends CI_Controller {
     $user_login=array(
 
       'email'=>$this->input->post('user_email'),
-      'password'=>md5($this->input->post('user_password'))
+      'password'=> $this->input->post('user_password')
 
     );
     $min=array(
@@ -281,7 +281,7 @@ public function register_user(){
     'lastname'=>$this->input->post('user_lastname'),
     'address'=>$this->input->post('user_address'),
     'email'=>$this->input->post('user_email'),
-    'password'=>md5($this->input->post('user_password')),
+    'password'=>$this->input->post('user_password'),
     'birthday'=>$this->input->post('user_birthday'),
     'age'=>$this->input->post('user_age'),
     'mobile'=>$this->input->post('user_mobile'),
