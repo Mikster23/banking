@@ -63,6 +63,13 @@ class Withdraw extends CI_Controller {
       redirect('/withdraw');
     }
 
+    if($balafter <0){
+
+
+      $this->session->set_flashdata('error_msg', 'Insufficient Balance');
+      redirect('/withdraw');
+    }
+
 
     if(empty($amount)){
       $this->session->set_flashdata('error_msg', 'Please Fill In Empty fields');

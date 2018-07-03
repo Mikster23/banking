@@ -21,8 +21,10 @@ $this->load->view('teller/manageview.php');
 
 }
 function loadtransaction(){
-  $arr['person'] = $this->teller_model->get_all_human();
-$this->load->view('teller/tellertransactionview.php',$arr);
+  $id =  (int)$this->session->userdata('user_id');
+
+  $data['usertrans'] = $this->teller_model->get_history($id);
+  $this->load->view('teller/tellertransactionview.php',$data);
 
 }
 

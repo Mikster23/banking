@@ -52,6 +52,23 @@ class Teller_model extends CI_model{
 
 
   }
+  public function get_history($id = 0){
+  /*  if(isset($_POST["order"]))
+           {
+                $order_column = array(null, "action", "amount", "created_at");
+                $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+           }*/
+           $this->db->select('*');
+           $this->db->from('transaction');
+           $this->db->where('user_id',$id);
+           $query = $this->db->get();
+           return $query->result_array();
+
+
+
+
+  }
+
 
   public function user_history($history){
 
@@ -136,6 +153,19 @@ class Teller_model extends CI_model{
 
   }
 
+   public function getmerch(){
+
+      $response = array();
+
+      // Select record
+      $this->db->select('*');
+     $this->db->from('merchant');
+      $q = $this->db->get();
+      $response = $q->result_array();
+
+      return $response;
+    }
+
   public function transfer($acctnum,$amount){
 
       $this->db->where('accountnum', $acctnum);
@@ -152,6 +182,13 @@ class Teller_model extends CI_model{
 
 
   }
+  public function paybill($data){
+
+
+  $this->db->insert('payhistory', $data);
+
+  }
+
 
 }
 

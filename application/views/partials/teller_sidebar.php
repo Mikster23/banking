@@ -70,7 +70,7 @@
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="<?php echo base_url('tellerpaybill'); ?>">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Pay Bills</span>
           </a>

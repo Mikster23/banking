@@ -55,9 +55,18 @@ public function tellermakewithdraw()
     redirect('/tellerwithdraw');
 
   }
+
   $datafee = $this->teller_model->getotcfee($accounttype);
   $checkcandep = (int) $datafee['withtel'];
+    $penaltyfee = (int)$datafee['penalty'];
+$maintainbal = (int) $datafee['minbalance'];
+if($bal > $maintainbal){
 
+  $penaltyfee = 0;
+
+}
+
+if($amount )
   if($checkcandep == 0){
 
     $this->session->set_flashdata('error_msg', 'Sorry But this account cant Withdraw through teller');
@@ -72,7 +81,7 @@ public function tellermakewithdraw()
 
 
   $transactionfee = (int) $datafee['otc_fee'];
-  $balafter = ($bal-$transactionfee) - $amount;
+  $balafter = ($bal-$transactionfee-$penaltyfee) - $amount;
 
   //$bal =   $this->session->userdata('user_balance');
 
@@ -88,6 +97,9 @@ if(empty($amount)){
   $this->session->set_flashdata('error_msg', 'Fill in Empty Fields');
   redirect('/tellerwithdraw');
 
+}
+if($balafter<0){
+    $this->session->set_flashdata('error_msg', 'Account has insufficient Balance');
 }
   $tellerid=  (int)$this->session->userdata('user_id');
 $history=array(
@@ -115,7 +127,7 @@ $id =  $this->session->userdata('user_id');
 
 
 $withdraw_check=$this->teller_model->user_withdraw($account,$user_withdraw);
-$this->session->set_flashdata('success_msg', 'Withdraw Successful <br> Transaction Fee : PHP'.$transactionfee );
+$this->session->set_flashdata('success_msg', 'Withdraw Successful <br> Transaction Fee : PHP'.$transactionfee.'Penalty Fee : PHP '.$penaltyfee );
 //  echo json_encode(array("status" => TRUE));
 redirect('/tellerwithdraw');
 
