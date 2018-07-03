@@ -41,7 +41,7 @@ public function tellermakedeposit()
   $bal = (int) $dataacctidtype['balance'];
 
   $checkactivated = (int) $dataacctidtype['status'];
-
+  $atype = (int) $dataacctidtype['account_name'];
   if($checkactivated == 0 ) {
 
     $this->session->set_flashdata('error_msg', 'Account is not Activated you cannot deposit to this account');
@@ -49,6 +49,9 @@ public function tellermakedeposit()
 
   }
   $datafee = $this->teller_model->getotcfee($accounttype);
+
+
+
 
   $transactionfee = (int) $datafee['otc_fee'];
   $checkcandep = (int) $datafee['deptel'];
@@ -80,11 +83,13 @@ if(empty($amount)){
 
 }
 
-
- $history=array(
+$tellerid=  (int)$this->session->userdata('user_id');
+$history=array(
+'user_id' =>  $tellerid,
   'to_accountnum'=>$account,
   'action'=>'Deposit made by Teller:',
   'amount'=>$amount,
+  'transaction_fee' =>(int)$transactionfee,
   'remarks'=>'Teller Deposit'
     );
 $this->teller_model->user_history($history);
@@ -94,7 +99,7 @@ $this->teller_model->user_history($history);
 $user_deposit=array(
 
   //  'pin'=>$this->input->post('user_pin'),
-  'balance' => $bal + $amount,
+  'balance' => ($bal-$transactionfee) + $amount,
 
 
 );
@@ -119,7 +124,7 @@ $clause = "where id ="; */
 
 $this->teller_model->teller_deposit($account,$user_deposit);
 $amount= (int)$this->input->post('user_amount');
-$this->session->set_flashdata('success_msg', 'PHP '.$amount.' Successfully Deposited to: '.$data2['lastname']."Account Number : " . + $idtrue);
+$this->session->set_flashdata('success_msg', 'PHP '.$amount.' Successfully Deposited to: '.$data2['lastname']."Account Number : " .  $idtrue . "Transaction fee : PHP ".$transactionfee);
 
 echo json_encode(array("status" => TRUE));
 redirect('/tellerdeposit');

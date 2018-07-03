@@ -101,6 +101,7 @@ $success_msg= $this->session->flashdata('success_msg');
                   <th style="text-align:center;">Account Type</th>
                   <th style="text-align:center;">Account Number</th>
                   <th style="text-align:center;">Remaining Balance</th>
+                    <th style="text-align:center;">Maintaining Balance</th>
                       <th style="text-align:center;">Status</th>
 
                 </thead>
@@ -111,6 +112,7 @@ $success_msg= $this->session->flashdata('success_msg');
                     <th style="text-align:center;">Account Type</th>
                     <th style="text-align:center;">Account Number</th>
                     <th style="text-align:center;">Remaining Balance</th>
+                          <th style="text-align:center;">Maintaining Balance</th>
                           <th style="text-align:center;">Status</th>
 
 
@@ -134,6 +136,22 @@ $success_msg= $this->session->flashdata('success_msg');
                     //   echo $acc_item['account_name']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['accountnum']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['balance']; ?></td>
+
+                      <td style="text-align:center;">
+
+                                    <?php
+
+
+                                                          foreach($user_acctname as $person_name){
+                                                            $tempacctid1 = (int) $acc_item['account_name'];
+                                                            $tempacctid2 = (int) $person_name['id'];
+                                                            if($tempacctid1 == $tempacctid2){
+                                                              echo $person_name['minbalance'];
+                                                            }
+                                                          }
+
+
+                                     ?></td>
                       <td style="text-align:center;"><?php $check = (int)$acc_item['status'];
                       if($check ==1){
 

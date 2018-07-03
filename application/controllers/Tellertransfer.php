@@ -55,10 +55,27 @@ public function maketransfer()
 
       $checkdestbal=$this->teller_model->getuseracctid($destinationacct);
       $checksourcebal=$this->teller_model->getuseracctid($sourceacct);
-      $checkbal = $checksourcebal['balance'];
-      $checkbaldest = $checkdestbal['balance'];
+
+      if(!$checksourcebal){
+        $this->session->set_flashdata('error_msg', 'The source account number does not exist ' );
+      redirect('/tellertransfer');
+
+      }
+      if(!$checkdestbal){
+        $this->session->set_flashdata('error_msg', 'The destination account number does not exist ' );
+      redirect('/tellertransfer');
+
+    }
 
 
+$checkbal = $checksourcebal['balance'];
+$checkbaldest = $checkdestbal['balance'];
+
+    if($amount<0){
+      $this->session->set_flashdata('error_msg', 'No negative amount' );
+    redirect('/tellertransfer');
+
+    }
       if($amount > $checkbal){
         $this->session->set_flashdata('error_msg', 'The source has insufficient balance ' );
       redirect('/tellertransfer');
@@ -107,6 +124,22 @@ public function maketransfer()
 
 
             );
+
+
+$transactionfee = 0;
+$tellerid=  (int)$this->session->userdata('user_id');
+$history=array(
+              'user_id' =>  $tellerid,
+              'from_accountnum'=>$sourceacct,
+              'action'=>'Transfer Fund by Teller',
+              'amount'=>$amount,
+              'to_accountnum' =>$destinationacct,
+              'transaction_fee'=>$transactionfee,
+
+              'remarks'=>$remarks
+            );
+            $this->teller_model->user_history($history);
+
 
     $trans_check2=$this->teller_model->transfer2($destinationacct,$transfer2);
     $trans_check=$this->teller_model->transfer($sourceacct,$transfer);

@@ -109,6 +109,7 @@ class Withdraw extends CI_Controller {
 
 
     $withdraw_check=$this->user_model->user_withdraw($id,$account,$user_withdraw);
+        $this->session->set_flashdata('success_msg', 'Withdraw Successful! <br></br> <br> Transaction Fee : PHP '.$transactionfee." <br> Penalty Fee : ". $penaltyfee.'<br>Account Number : '. $account);
     //  echo json_encode(array("status" => TRUE));
     redirect('/withdraw');
 

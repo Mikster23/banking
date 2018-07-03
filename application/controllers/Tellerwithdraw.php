@@ -30,7 +30,7 @@ public function tellermakewithdraw()
   $accounttype = (int) $dataacctidtype['account_name'];
   $id = (int)$dataacctidtype['holder_id'];
   $bal = (int) $dataacctidtype['balance'];
-  $balafter = $bal - $amount;
+
   $checkactivated = (int) $dataacctidtype['status'];
   if(empty($amount) || empty($account)){
 
@@ -56,8 +56,6 @@ public function tellermakewithdraw()
 
   }
   $datafee = $this->teller_model->getotcfee($accounttype);
-
-  $transactionfee = (int) $datafee['otc_fee'];
   $checkcandep = (int) $datafee['withtel'];
 
   if($checkcandep == 0){
@@ -70,6 +68,11 @@ public function tellermakewithdraw()
   $userbalance = $data2['balance'] +$amount;
 
   $idtrue = (int) $data2['accountnum'];
+
+
+
+  $transactionfee = (int) $datafee['otc_fee'];
+  $balafter = ($bal-$transactionfee) - $amount;
 
   //$bal =   $this->session->userdata('user_balance');
 
@@ -86,11 +89,13 @@ if(empty($amount)){
   redirect('/tellerwithdraw');
 
 }
-
+  $tellerid=  (int)$this->session->userdata('user_id');
 $history=array(
+'user_id' =>  $tellerid,
  'to_accountnum'=>$account,
- 'action'=>'History made by Teller:',
+ 'action'=>'Withdraw made by Teller:',
  'amount'=>$amount,
+ 'transaction_fee' => $transactionfee,
  'remarks'=>'Teller Withdraw'
    );
 $this->teller_model->user_history($history);
@@ -110,7 +115,7 @@ $id =  $this->session->userdata('user_id');
 
 
 $withdraw_check=$this->teller_model->user_withdraw($account,$user_withdraw);
-$this->session->set_flashdata('success_msg', 'Withdraw Successful');
+$this->session->set_flashdata('success_msg', 'Withdraw Successful <br> Transaction Fee : PHP'.$transactionfee );
 //  echo json_encode(array("status" => TRUE));
 redirect('/tellerwithdraw');
 
