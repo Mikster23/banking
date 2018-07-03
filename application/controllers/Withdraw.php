@@ -105,14 +105,6 @@ class Withdraw extends CI_Controller {
 
     $id =  $this->session->userdata('user_id');
 
-if($bal<$maintainbal){
-
-    $this->session->set_flashdata('success_msg', 'Withdraw Successful! <br> Penalty has been issued Account Below Maintaining Balance of : PHP '.$maintainbal.'<br> Penalty Fee : PHP '.$penaltyfee);
-}
-else{
-
-    $this->session->set_flashdata('success_msg', 'Withdraw Successful! Transaction Fee : PHP '.$transactionfee);
-}
 
 
 

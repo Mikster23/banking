@@ -11,43 +11,42 @@
   <body>
 
 <span style="background-color:red;">
-  <div class="container"><!-- container class is used to centered  the body of the browser with some decent width-->
+  <div class="container" style="margin-top:5vw;"><!-- container class is used to centered  the body of the browser with some decent width-->
       <div class="row"><!-- row class is used for grid system in Bootstrap-->
           <div class="col-md-4 col-md-offset-4"><!--col-md-4 is used to create the no of colums in the grid also use for medimum and large devices-->
               <div class="login-panel panel panel-success">
-                  <div class="panel-heading">
-                      <h3 class="panel-title">Registration</h3>
+                  <div class="panel-heading" style="background:GRAY; color: White">
+                      <h3 class="panel-title" style="text-align:center; font-size:2vw;">Create an Account</h3>
                   </div>
                   <div class="panel-body">
-                    <?php
-                      $error_msg= $this->session->flashdata('error_msg');
-                      $success_msg= $this->session->flashdata('success_msg');
-                    ?>
-
 
                     <?php
-                    if($error_msg){
-                      ?>
-                      <div class="alert alert-danger">
-                        <?php echo $error_msg; ?>
-                      </div>
+                                        $error_msg= $this->session->flashdata('error_msg');
+                                        $success_msg= $this->session->flashdata('success_msg');
+                                      ?>
+                        <?php
+                        if($error_msg){
+                          ?>
+                          <div class="alert alert-danger">
+                            <?php echo $error_msg; ?>
+                          </div>
+                          <?php
+                        }?>
+
+                        <?php
+                        if($success_msg){
+                          ?>
+                          <div class="alert alert-success">
+                            <?php echo $success_msg; ?>
+                          </div>
+                        <?php
+                        }?>
                       <?php
-                    }?>
-
-                    <?php
-                    if($success_msg){
-                      ?>
-                      <div class="alert alert-success">
-                        <?php echo $success_msg; ?>
-                      </div>
-                    <?php
-                    }?>
-                  <?php
-                /*  $error_msg=$this->session->flashdata('error_msg');
-                  if($error_msg){
-                    echo $error_msg;
-                  }*/
-                   ?>
+                    /*  $error_msg=$this->session->flashdata('error_msg');
+                      if($error_msg){
+                        echo $error_msg;
+                      }*/
+                       ?>
 
                       <form role="form" method="post" action="<?php echo base_url('user/register_user'); ?>">
                           <fieldset>
@@ -74,28 +73,27 @@
                               <div class="form-group">
                                   <input class="form-control" placeholder="Age" name="user_age" type="number" value="">
                               </div>
+                              <div class="form-group">
+                                                                   <select name ="user_accttype" id='sel_acct' required >
+                                                                     <option>-- Select Account Type --</option>
+                                                                     <?php
 
-                                  <div class="form-group">
-                                      <select name ="user_accttype" id='sel_acct' required >
-                                        <option>-- Select Account Type --</option>
-                                        <?php
-
-                                        foreach($account_type as $acct){
-                                           echo ' hi '.$acct;
-                                          echo "<option value='".$acct['id']."'>".$acct['name']."</option>";
-                                        }
-                                        ?>
-                                     </select>
-                                </div>
+                                                                     foreach($account_type as $acct){
+                                                                        echo ' hi '.$acct;
+                                                                       echo "<option value='".$acct['id']."'>".$acct['name']."</option>";
+                                                                     }
+                                                                     ?>
+                                                                  </select>
+                                                             </div>
                               <div class="form-group">
                                   <input class="form-control" placeholder="Mobile No" name="user_mobile" type="number" value="">
                               </div>
 
-                              <input class="btn btn-lg btn-success btn-block" type="submit" value="Register" name="register" >
+                              <input class="btn btn-lg btn-success btn-block" type="submit" style="background:LightGray; color: black" value="Register" name="register" >
 
                           </fieldset>
                       </form>
-                      <center><b>Already registered ?</b> <br></b><a href="<?php echo base_url('user/loadlogin'); ?>">Login here</a></center><!--for centered text-->
+                      <center><br><b>Already have an account?</b></b><a href="<?php echo base_url('user/loadlogin'); ?>"> Login here</a></center><!--for centered text-->
                   </div>
               </div>
           </div>
@@ -103,37 +101,38 @@
   </div>
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script type='text/javascript'>
-    // baseURL variable
-    var baseURL= "<?php echo base_url();?>";
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    $(document).ready(function(){
+      <script type='text/javascript'>
+      // baseURL variable
+      var baseURL= "<?php echo base_url();?>";
 
-      // City change
-      $('#sel_acct').change(function(){
-        var acct = $(this).val();
+      $(document).ready(function(){
 
-        // AJAX request
-        $.ajax({
+        // City change
+        $('#sel_acct').change(function(){
+          var acct = $(this).val();
 
-          url:   "<?php echo base_url("index.php/user/register_user"); ?>",
-          method: 'post',
-          data: {acct: acct},
-          dataType: 'json',
-          success: function(response){
+          // AJAX request
+          $.ajax({
 
-            // Remove options
+            url:   "<?php echo base_url("index.php/user/register_user"); ?>",
+            method: 'post',
+            data: {acct: acct},
+            dataType: 'json',
+            success: function(response){
+
+              // Remove options
 
 
-            // Add options
-            $.each(response,function(index,data){
-               $('#sel_depart').append('<option value="'+data['id']+'">'+data['depart_name']+'</option>');
-            });
-          }
+              // Add options
+              $.each(response,function(index,data){
+                 $('#sel_depart').append('<option value="'+data['id']+'">'+data['depart_name']+'</option>');
+              });
+            }
+         });
        });
-     });
 
 
 </span>

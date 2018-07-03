@@ -107,7 +107,7 @@ class Teller_model extends CI_model{
   public function checkexist_acctnum($acctnum){
 
       $this->db->select('*');
-      $this->db->from('user');
+      $this->db->from('accounts');
     $this->db->where('accountnum',$acctnum);
        $query = $this->db->get();
        if ($query->num_rows() > 0){
@@ -139,7 +139,15 @@ class Teller_model extends CI_model{
   public function transfer($acctnum,$amount){
 
       $this->db->where('accountnum', $acctnum);
-      $this->db->update('user', $amount);
+      $this->db->update('accounts', $amount);
+    		return $this->db->affected_rows();
+
+
+  }
+  public function transfer2($acctnum,$amount){
+
+      $this->db->where('accountnum', $acctnum);
+      $this->db->update('accounts', $amount);
     		return $this->db->affected_rows();
 
 

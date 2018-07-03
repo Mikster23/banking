@@ -312,7 +312,7 @@ public function register_user(){
       'accountnum' => $acctnum
     );
     $this->user_model->register_acct($addacct);
-    $this->session->set_flashdata('success_msg', 'Registered successfully.Now login to your account.');
+    $this->session->set_flashdata('success_msg', 'Registered successfully. Please Wait for The Confirmation of an Administrator.');
     redirect('/user/loadlogin');
 
   }
