@@ -123,6 +123,7 @@ class User extends CI_Controller {
 }
 function loadtransaction(){
   $id =  (int)$this->session->userdata('user_id');
+
   $data['usertrans'] = $this->user_model->get_history($id);
   $this->load->view('user/transactionview.php',$data);
 }
