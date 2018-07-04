@@ -31,6 +31,14 @@ $success_msg= $this->session->flashdata('success_msg');
             </div>
             <div class="row">
               <div class="col-25">
+                <label for="mdays">Minimum Withdraw: </label>
+              </div>
+              <div class="col-75">
+                <input  id="accmaintain" name="acc_minwith" style="background:white;" value="<?php echo $news_item['minwith']?>" type = "number">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
                 <label for="mdays">Opening Balance: </label>
               </div>
               <div class="col-75">
@@ -43,6 +51,14 @@ $success_msg= $this->session->flashdata('success_msg');
               </div>
               <div class="col-75">
                 <input  id="accatm" name="acc_otc" style="background:white;" value="<?php echo $news_item['atm_fee']?>" type = "number">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="mdays">Penlty Fee: </label>
+              </div>
+              <div class="col-75">
+                <input  id="accatm" name="acc_penalty" style="background:white;" value="<?php echo $news_item['penalty']?>" type = "number">
               </div>
             </div>
             <div class="row">

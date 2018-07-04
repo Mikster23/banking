@@ -47,10 +47,11 @@ $success_msg= $this->session->flashdata('success_msg');
 
                   <th style="text-align:center;">Account Name</th>
                   <th style="text-align:center;">Maintaining Balance</th>
+                  <th style="text-align:center;">Minimum Withdrawe.</th>
                   <th style="text-align:center;">Opening Balance</th>
                   <th style="text-align:center;">ATM Fee</th>
                   <th style="text-align:center;">OTC Fee.</th>
-
+                  <th style="text-align:center;">Penalty Fee.</th>
                   <th style="text-align:center;">Deposit through ATM.</th>
                   <th style="text-align:center;">Withdraw through ATM.</th>
                   <th style="text-align:center;">Deposit through Teller.</th>
@@ -64,10 +65,11 @@ $success_msg= $this->session->flashdata('success_msg');
 
                     <th style="text-align:center;">Account Name</th>
                     <th style="text-align:center;">Maintaining Balance</th>
+                    <th style="text-align:center;">Minimum Withdraw</th>
                     <th style="text-align:center;">Opening Balance</th>
                     <th style="text-align:center;">ATM Fee</th>
                     <th style="text-align:center;">OTC Fee.</th>
-
+                        <th style="text-align:center;">Penalty Fee.</th>
                     <th style="text-align:center;">Deposit through ATM.</th>
                     <th style="text-align:center;">Withdraw through ATM.</th>
                     <th style="text-align:center;">Deposit through Teller.</th>
@@ -84,9 +86,11 @@ $success_msg= $this->session->flashdata('success_msg');
 
                       <td style="text-align:center;"><?php echo $acc_item['name']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['minbalance']; ?></td>
+                        <td style="text-align:center;"><?php echo $acc_item['minwith']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['opening_balance']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['atm_fee']; ?></td>
                       <td style="text-align:center;"><?php echo $acc_item['otc_fee']; ?></td>
+                      <td style="text-align:center;"><?php echo $acc_item['penalty']; ?></td>
 
                       <td style="text-align:center;"><?php  if( (int)$acc_item['depatm'] == 1){
                         echo "True";

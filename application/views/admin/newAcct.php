@@ -30,6 +30,14 @@
                   </div>
                   <div class="row">
                     <div class="col-25">
+                      <label for="mdays">Minimum Withdraw: </label>
+                    </div>
+                    <div class="col-75">
+                      <input  id="accmaintain" name="acc_minwith" style="background:white;" value="" type = "number">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
                       <label for="mdays">Opening Balance: </label>
                     </div>
                     <div class="col-75">
@@ -42,6 +50,14 @@
                     </div>
                     <div class="col-75">
                       <input  id="accatm" name="acc_otc" style="background:white;" value="" type = "number">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="mdays">Penalty Fee: </label>
+                    </div>
+                    <div class="col-75">
+                      <input  id="accatm" name="acc_penalty" style="background:white;" value="" type = "number">
                     </div>
                   </div>
                   <div class="row">
