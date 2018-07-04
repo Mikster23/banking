@@ -32,6 +32,23 @@ public function tellermakewithdraw()
   $bal = (int) $dataacctidtype['balance'];
 
   $checkactivated = (int) $dataacctidtype['status'];
+
+
+    $pin = $this->input->post('user_pin');
+    $pintrue =   $this->session->userdata('user_pin');
+  if($pin != $pintrue){
+
+    $this->session->set_flashdata('error_msg', 'WRONG PIN NUMBER FOR TELLER ACCOUNT');
+    redirect('/tellerwithdraw');
+
+
+  }
+  if($amount <0 ){
+    $this->session->set_flashdata('error_msg', 'No Negative Input!');
+    redirect('/tellerwithdraw');
+
+
+  }
   if(empty($amount) || empty($account)){
 
     $this->session->set_flashdata('error_msg', 'Please Fill up Empty field/s');
@@ -127,7 +144,7 @@ $id =  $this->session->userdata('user_id');
 
 
 $withdraw_check=$this->teller_model->user_withdraw($account,$user_withdraw);
-$this->session->set_flashdata('success_msg', 'Withdraw Successful <br> Transaction Fee : PHP'.$transactionfee.'Penalty Fee : PHP '.$penaltyfee );
+$this->session->set_flashdata('success_msg', 'Withdraw Successful <br> Transaction Fee : PHP'.$transactionfee.'<br> Penalty Fee : PHP '.$penaltyfee );
 //  echo json_encode(array("status" => TRUE));
 redirect('/tellerwithdraw');
 

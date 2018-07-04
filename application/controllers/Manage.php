@@ -36,7 +36,7 @@ class Manage extends CI_Controller {
     $destinationdata2 = $this->teller_model->getbalance_acctnum($dacct['accountnum']);
     $sourcebalance = (int) $sourcedata2['balance'];
     $destinationbalance = (int) $destinationdata2['balance']; */
-
+ $arr['user_acctname'] = $this->manage_model->getacctname();
 		$data['person']=$this->manage_model->get_all_books();
     //$data2['account_type'] = $this->manage_model->getacct();
    //$this->load->view('teller/manageview.php',$data2);
@@ -73,6 +73,21 @@ class Manage extends CI_Controller {
 			$data = $this->manage_model->get_by_id($id);
 			//echo $id;
 			echo json_encode($data);
+		}
+		public function view_user(){
+
+			$id = $this->uri->segment(3);
+
+			if (empty($id))
+			{
+				show_404();
+			}
+
+			$data['user_acctname'] = $this->manage_model->getacctnamemanage();
+			$data['myacct']= $this->manage_model->getownedacct($id);
+			$data['user'] = $this->manage_model->get_news($id);
+			$this->load->view('teller/userview.php',$data);
+
 		}
 
 		public function manage_update()

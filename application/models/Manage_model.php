@@ -63,12 +63,50 @@ return $query->result();
 
      return $response;
    }
+	 public function getacctnamemanage(){
+
+     $this->db->select('*');
+     $this->db->from('account_type');
+
+
+
+     if($query=$this->db->get())
+     {
+       return $query->result_array();
+     }
+     else{
+       return false;
+     }
+
+   }
+	 public function get_news($id = 0)
+	 {
+		 $query = $this->db->get_where('user', array('id' => $id));
+
+		 return $query->result_array();
+	 }
+
+	 function getownedacct($id = 0){
+
+	    $response = array();
+
+	    // Select record
+	    $this->db->select('*');
+	   $this->db->from('accounts');
+	   $this->db->where('holder_id',$id);
+
+	    $q = $this->db->get();
+	    $response = $q->result_array();
+
+	    return $response;
+	  }
+
    function getacctname(){
 
       $response = array();
 
       // Select record
-      $this->db->select('name');
+      $this->db->select('*');
      $this->db->from('account_type');
       $q = $this->db->get();
       $response = $q->result_array();

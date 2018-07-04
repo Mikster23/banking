@@ -38,13 +38,13 @@
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <th>Account Number</th>
+
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
           <th>Address</th>
 					<th>User Type</th>
-        	<th>Account Type</th>
+
 					<th>Balance</th>
 
           <th style="width:125px;">Action
@@ -58,7 +58,7 @@
           ?>
 
              <tr>
-                 <td><?php echo $human->accountnum;?></td>
+
 				         <td><?php echo $human->firstname;?></td>
 				         <td><?php echo $human->lastname;?></td>
                  <td><?php echo $human->email;?></td>
@@ -78,22 +78,12 @@
                 ?>
 
                 </td>
-                	<td><?php
-                  /*
-                    $tempacct = (int)$human->account_type;
-                    $tempacctname = "";
-                    for($i = 0 ; $i<sizeof($account_type) ; $i++){
 
-                      if($temptacct == $)
-                    }*/
-
-                 echo $human->account_type;
-                 ?></td>
                 	<td><?php echo $human->balance;?></td>
 								<td>
 									<button class="btn btn-warning" onclick="edit_human(<?php echo $human->id;?>)"><i class="glyphicon glyphicon-pencil"></i></button>
 									<button class="btn btn-danger" onclick="delete_human(<?php echo $human->id;?>)"><i class="glyphicon glyphicon-remove"></i></button>
-
+                  <a name="editMem" href="<?php echo site_url('manage/view_user/'.$human->id); ?>"><i class="glyphicon glyphicon-eye-open"></i></a> |
 
 								</td>
 				      </tr>
@@ -111,13 +101,13 @@
 
       <tfoot>
         <tr>
-          <th>Accountnumber</th>
+
           <th>Firstnam</th>
           <th>Lastname</th>
           <th>Email</th>
           <th>Address</th>
           <th>User_type</th>
-          <th>Account_type</th>
+
           <th>Balance</th>
 
           <th>Action</th>

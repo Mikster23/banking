@@ -180,24 +180,8 @@ $bal = (int) $databal['balance'];
 
 
       );
-/*
-      $min=array(
-
-        'id'=>(int)$this->session->userdata('user_accttype')
 
 
-      );
-      $data2=$this->user_model->checkmindeposit($min['id']);
-      $min = (int)$data2['minbalance']; */
-    /*  $this->session->set_userdata('user_balance',$bal+$amount);
-      $tot = ($bal+$amount)-$min;
-
-
-      $tempbal =    $this->session->userdata('user_balance');
-      $tempwith    = $this->session->userdata('user_withdrawablebalance');
-      $this->session->set_userdata('user_withdrawablebalance',$tot);
-      $id =  $this->session->userdata('user_id');
-      $clause = "where id ="; */
       $this->user_model->user_deposit($id,$account,$user_deposit);
 
 

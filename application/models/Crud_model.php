@@ -184,7 +184,7 @@ class Crud_model extends CI_Model {
     //$slug = url_title($this->input->post('title'), 'dash', TRUE);
 
     $id = $this->input->post('m_id');
-    $pin = mt_rand(1000, 9999);
+  //  $pin = mt_rand(1000, 9999);
   //  $acctnum = mt_rand(100000000, 999999999);
 
 

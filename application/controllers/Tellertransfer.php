@@ -36,7 +36,12 @@ public function maketransfer()
          redirect('/tellertransfer');
  }
 
+ if($amount <0 ){
+   $this->session->set_flashdata('error_msg', 'No Negative Input!');
+   redirect('/tellertransfer');
 
+
+ }
 
     /*$sourcedata= $this->teller_model->checkexist_acctnum($sourceacct);
    $destinationdata= $this->teller_model->checkexist_acctnum($destinationacct);

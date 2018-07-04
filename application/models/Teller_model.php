@@ -69,7 +69,22 @@ class Teller_model extends CI_model{
 
   }
 
+  public function getacctname(){
 
+    $this->db->select('*');
+    $this->db->from('account_type');
+
+
+
+    if($query=$this->db->get())
+    {
+      return $query->result_array();
+    }
+    else{
+      return false;
+    }
+
+  }
   public function user_history($history){
 
     $this->db->insert('transaction', $history);

@@ -53,7 +53,7 @@ public function tellermakedeposit()
 
 
 
-  $transactionfee = (int) $datafee['otc_fee'];
+  $transactionfee = 0;
   $checkcandep = (int) $datafee['deptel'];
 
   if($checkcandep == 0){
@@ -71,6 +71,20 @@ public function tellermakedeposit()
 
   $pin = $this->input->post('user_pin');
   $pintrue =   $this->session->userdata('user_pin');
+if($pin != $pintrue){
+
+  $this->session->set_flashdata('error_msg', 'WRONG PIN NUMBER FOR TELLER ACCOUNT');
+  redirect('/tellerdeposit');
+
+
+}
+if($amount <0 ){
+  $this->session->set_flashdata('error_msg', 'No Negative Input!');
+  redirect('/tellerdeposit');
+
+
+}
+
   $userid = (int) $data2['id'];
 if(!$data2){
       echo $id . "fake == true" . $idtrue;

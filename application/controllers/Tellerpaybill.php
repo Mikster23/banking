@@ -53,6 +53,13 @@ function pay(){
   $pintrue =   $this->session->userdata('user_pin');
   $balbefore = $bal;
 
+  if($amount <0 ){
+    $this->session->set_flashdata('error_msg', 'No Negative Input!');
+    redirect('/tellerpaybil');
+
+
+  }
+
   if($bal > $maintainbal){
 
     $penaltyfee = 0;
