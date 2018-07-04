@@ -92,15 +92,13 @@ $lastupdated =  $dataacctidtype['created_at'];
 
   $monthsdelayed = floor($diffdate/30);
 
-
+ $penaltyfee = (int)$datafee['penalty'];
 $maintainbal = (int) $datafee['minbalance'];
+/*
 if($bal < $maintainbal && $monthsdelayed >= 1){
  $penaltyfee = (int)$datafee['penalty']*$monthsdelayed;
-}else{
+}*/
 
-$penaltyfee = 0 ;
-
-}
 
 
 

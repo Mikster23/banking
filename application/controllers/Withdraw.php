@@ -68,11 +68,12 @@ $monthsdelayed = floor($diffdate/30);
     $pin = $this->input->post('user_pin');
     $pintrue =   $this->session->userdata('user_pin');
     $balbefore = $bal;
+    $penaltyfee = (int)$datafee['penalty'];
 
-$penaltyfee = 0;
+/*$penaltyfee = 0;
    if($bal < $maintainbal && $monthsdelayed >= 1){
     $penaltyfee = (int)$datafee['penalty']*$monthsdelayed;
-}
+}*/
 
     if($bal > $maintainbal){
 
