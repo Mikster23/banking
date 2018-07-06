@@ -244,6 +244,44 @@ class Crud_model extends CI_Model {
       return $this->db->update('user', $data);
     }
   }
+  public function getmaxid(){
+    $this->db->select_max('id');
+    $this->db->from('user');
+    //$query = $this->db->get();
+
+    if($query=$this->db->get())
+    {
+        return $query->row_array();
+    }
+    else{
+      return false;
+    }
+  }
+  public function set_newsaccount($id = 0)
+  {
+    $this->load->helper('url');
+    $val = 0;
+    //$slug = url_title($this->input->post('title'), 'dash', TRUE);
+
+
+  //  $pin = mt_rand(1000, 9999);
+  //  $acctnum = mt_rand(100000000, 999999999);
+
+$acctnum = mt_rand(100000000, 999999999);
+
+
+    $data2 = array(
+      'holder_id' => $id,
+      'accountnum' => $acctnum,
+      'account_name' => (int)$this->input->post('user_accttype'),
+      'status' => 1
+    );
+
+
+      return $this->db->insert('accounts', $data2);
+
+  }
+
 
   public function delete_news($id)
   {

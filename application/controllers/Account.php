@@ -249,9 +249,12 @@ $this->load->view('index.php');
             //$this->load->view('templates/header', $data);
 
             //$this->load->view('templates/footer');
+      $this->crud_model->set_news();
+            $datadata = $this->crud_model->getmaxid();
+            $id = $datadata['id'];
+            $this->crud_model->set_newsaccount($id);
 
 
-            $this->crud_model->set_news();
                 $this->session->set_flashdata('success_msg', "ACCOUNT SUCCESSFULLY ADDED.");
           $data['acctype'] = $this->crud_model->getacctype();
             $data['user'] = $this->crud_model->get_news();

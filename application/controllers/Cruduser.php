@@ -49,21 +49,14 @@ class Cruduser extends CI_Controller {
     $this->form_validation->set_rules();
     $this->form_validation->set_rules();
 
-    if ($this->form_validation->run() === FALSE)
-    {
-      //$this->load->view('templates/header', $data);
-      $this->load->view('admin/newMember');
-      //$this->load->view('templates/footer');
 
-    }
 
-    else
-    {
-      $this->crud_model->set_news();
+
+    
 
       $data['user'] = $this->crud_model->get_news();
       $this->load->view('admin/members', $data);
-    }
+
   }
 
   public function view_user(){
