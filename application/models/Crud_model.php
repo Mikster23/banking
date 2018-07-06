@@ -41,6 +41,21 @@ class Crud_model extends CI_Model {
     }
 
   }
+  function getownedacct($id = 0){
+
+     $response = array();
+
+     // Select record
+     $this->db->select('*');
+    $this->db->from('accounts');
+    $this->db->where('holder_id',$id);
+
+     $q = $this->db->get();
+     $response = $q->result_array();
+
+     return $response;
+   }
+
   public function getacctname(){
 
     $this->db->select('*');
@@ -111,7 +126,12 @@ class Crud_model extends CI_Model {
     $query = $this->db->get_where('account_type', array('id' => $id));
     return $query->row_array();
   }
+  public function getnewsbyid($id = 0)
+  {
+    $query = $this->db->get_where('user', array('id' => $id));
 
+    return $query->result_array();
+  }
   public function getholderid($id =0){
     $this->db->select('*');
     $this->db->from('accounts');

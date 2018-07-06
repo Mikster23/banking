@@ -76,14 +76,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <input type="number" id="memobile" name="m_mobile" style="background:white;" value="<?php echo $news_item['mobile']; ?>">
               </div>
             </div>
-            <div class="row">
-              <div class="col-25">
-                <label for="mdays">Account No.: </label>
-              </div>
-              <div class="col-75">
-                <input type="number" id="meaccnt" name="m_accnt" style="background:white;" value="<?php echo $news_item['accountnum']; ?>">
-              </div>
-            </div>
+
             <div class="row">
               <div class="col-25">
                 <label for="mdays">Pin No.: </label>

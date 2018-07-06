@@ -49,7 +49,7 @@ $success_msg= $this->session->flashdata('success_msg');
                   <th style="text-align:center;">First Name</th>
                   <th style="text-align:center;">Last Name</th>
                   <th style="text-align:center;">Email</th>
-                  <th style="text-align:center;">Account No.</th>
+
                   <th style="text-align:center;">Actions</th>
                 </thead>
                 <tfoot>
@@ -58,7 +58,7 @@ $success_msg= $this->session->flashdata('success_msg');
                     <th style="text-align:center;">First Name</th>
                     <th style="text-align:center;">Last Name</th>
                     <th style="text-align:center;">Email</th>
-                    <th style="text-align:center;">Account No.</th>
+
                     <td></td>
                   </tr>
                 </tfoot>
@@ -69,10 +69,11 @@ $success_msg= $this->session->flashdata('success_msg');
                       <td style="text-align:center;"><?php echo $person_item['firstname']; ?></td>
                       <td style="text-align:center;"><?php echo $person_item['lastname']; ?></td>
                       <td style="text-align:center;"><?php echo $person_item['email']; ?></td>
-                      <td style="text-align:center;"><?php echo $person_item['accountnum']; ?></td>
+
                       <td style="text-align:center; padding:1%;">
                         <a name="editMem" href="<?php echo site_url('cruduser/edit/'.$person_item['id']); ?>"><i class="fa fa-pencil"></i></a> |
-                        <a href="<?php echo site_url('cruduser/delete/'.$person_item['id']); ?>" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash-o"></i></a>
+                        <a href="<?php echo site_url('cruduser/delete/'.$person_item['id']); ?>" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash-o"></i></a> |
+                        <a name="viewmem" href="<?php echo site_url('cruduser/view_user/'.$person_item['id']); ?>"><i class="fa fa-eye"></i></a> |
                       </td>
                     </tr>
                   <?php endforeach; ?>
@@ -97,6 +98,7 @@ $success_msg= $this->session->flashdata('success_msg');
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
               <a class="btn btn-primary" href="<?php echo base_url('account/logout');?>">Logout</a>
+
             </div>
           </div>
         </div>

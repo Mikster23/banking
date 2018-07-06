@@ -140,7 +140,7 @@ $success_msg= $this->session->flashdata('success_msg');
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © The Digital Library 2018</small>
+          <small>Copyright © FEU TECH BANKING SYSTEM</small>
         </div>
       </div>
     </footer>
