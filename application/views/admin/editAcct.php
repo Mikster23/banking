@@ -167,6 +167,31 @@ $success_msg= $this->session->flashdata('success_msg');
             </div>
           </div>
 
+
+          <div class="row">
+            <div class="col-25">
+              <label for="mdays">Can Make Time Deposit  </label>
+              <select id="type" name="timedep" value="<?php echo $news_item['timedep']?>">
+
+                <?php if((int)$news_item['timedep']==1){
+
+                  ?>
+                <option value="0" >False</option>
+                <option value="1" selected >True</option>
+
+              <?php }
+              else{
+                ?>
+                <option value="0" selected>False</option>
+                <option value="1"  >True</option>
+
+
+            <?php  }?>
+
+              </select>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-25">
               <label for="mdays">Interest: </label>

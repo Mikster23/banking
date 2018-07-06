@@ -56,6 +56,7 @@ $success_msg= $this->session->flashdata('success_msg');
                   <th style="text-align:center;">Withdraw through ATM.</th>
                   <th style="text-align:center;">Deposit through Teller.</th>
                   <th style="text-align:center;">Withdraw through Teller.</th>
+                      <th style="text-align:center;">Can Make Time Deposit.</th>
                   <th style="text-align:center;">Interest Rate Per Year</th>
                   <th style="text-align:center;">Actions</th>
                 </thead>
@@ -74,6 +75,7 @@ $success_msg= $this->session->flashdata('success_msg');
                     <th style="text-align:center;">Withdraw through ATM.</th>
                     <th style="text-align:center;">Deposit through Teller.</th>
                     <th style="text-align:center;">Withdraw through Teller.</th>
+                    <th style="text-align:center;">Can Make Time Deposit.</th>
 
 
                     <th style="text-align:center;">Interest Rate Per Year</th>
@@ -108,6 +110,12 @@ $success_msg= $this->session->flashdata('success_msg');
                         echo "False";
                       }; ?></td>
                       <td style="text-align:center;"><?php if( (int)$acc_item['withtel'] == 1){
+                        echo "True";
+                      }else{
+                        echo "False";
+                      }; ?></td>
+
+                      <td style="text-align:center;"><?php if( (int)$acc_item['timedep'] == 1){
                         echo "True";
                       }else{
                         echo "False";

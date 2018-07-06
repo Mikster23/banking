@@ -18,8 +18,8 @@ public function index()
 {
 	//$data=array();
 	$id = (int)$this->session->userdata('user_id');
-	$data['view_table'] = $this->user_model->view_timeDeposit($id ); //change id
-if(!$data){
+	$data['view_table'] = $this->user_model->view_timeDepositA($id ); //change id
+	if ($data['view_table'] ){
 	foreach ($data['view_table'] as $value) {
 			$curr = date("Y-m-d");
 			if($value->widthDate==$curr &&$value->status==0){
@@ -27,6 +27,9 @@ if(!$data){
 				$this->user_model->update_timeDeposit($id ,$total,$value->tdeptID); //change id
 			}
 	}
+}
+else{
+	echo "";
 }
 	$data1['view_account'] = $this->user_model->get_acctnum($id ); //change id
 	$this->load->view('user/timedeposit.php',$data1);
@@ -41,10 +44,10 @@ public function maketimedep()
 	$inptAcct= $this->input->post('inptAcct');
 	$curr= $this->input->post('curr');
 	$amtDept = $this->input->post('amtDept');
-	$id = $this->session->userdata('user_id');
+	$id = (int)$this->session->userdata('user_id');
 
 
-	$id =  0; //(int)$this->session->userdata('user_id');
+	//$id =  0; //(int)$this->session->userdata('user_id');
 
 
 	$interest=0;
@@ -252,7 +255,8 @@ public function maketimedep()
 							}
 						}
 
-
+						$datad['datax'] = $this->user_model->getTax();
+						$amtDept = $amtDept-($amtDept*$datad['datax']);
 
 
 	  $tDeposit=array(
@@ -517,6 +521,9 @@ public function extendTD(){
 							}
 						}
 
+						$datad['datax'] = $this->user_model->getTax();
+						$amtDept = $amtDept-($amtDept*$datad['datax']);
+
 												$tDeposit=array(
 												  'acctID' => $acctnum,
 												  'placement'=>$tPlacement,
@@ -539,7 +546,8 @@ public function extendTD(){
 			}
 
 
-
+			$datad['datax'] = $this->user_model->getTax();
+				$amtDept = $amtDept-($amtDept*$datad['datax']);
 
 			$addT=array(
 			  'user_id'=> $acctnum,
@@ -593,7 +601,8 @@ public function addTransaction(){
 
 							}
 				}
-
+				$datad['datax'] = $this->user_model->getTax();
+				$amtDep1 = $amtDep1-($amtDep1*$datad['datax']);
 				$addT=array(
 				  'user_id'=> $acctnum,
 				  'action'=>'Time Deposit: Withdrawal',
@@ -615,3 +624,5 @@ public function addTransaction(){
 
 	}
 }
+
+?>

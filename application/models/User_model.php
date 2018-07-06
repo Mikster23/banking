@@ -364,177 +364,212 @@ function getacct(){
 
 //-->
 public function user_timeDeposit($tDeposit){
+    $this->db->insert('timedeposit', $tDeposit);
+      }
+      public function update_timeDeposit($id,$data,$tdeptID){
 
-  $this->db->insert('timedeposit', $tDeposit);
-}
-public function update_timeDeposit($id,$data,$tdeptID){
+      $this->db->set('amount', $data);
+      $this->db->set('status', 1);
+      $this->db->where('userID', $id);
+      $this->db->where('tdeptID', $tdeptID);
+      $this->db->update('timedeposit');
+      return $this->db->affected_rows();
+      }
+      public function update_timeDepositA($data,$tdeptID){
 
-$this->db->set('amount', $data);
-$this->db->set('status', 1);
-$this->db->where('userID', $id);
-$this->db->where('tdeptID', $tdeptID);
-$this->db->update('timedeposit');
-return $this->db->affected_rows();
-}
-public function update_timeDepositA($data,$tdeptID){
+      $this->db->set('amount', $data);
+      $this->db->set('status', 1);
+      //$this->db->where('userID', $id);
+      $this->db->where('tdeptID', $tdeptID);
+      $this->db->update('timedeposit');
+      return $this->db->affected_rows();
+      }
 
-$this->db->set('amount', $data);
-$this->db->set('status', 1);
-//$this->db->where('userID', $id);
-$this->db->where('tdeptID', $tdeptID);
-$this->db->update('timedeposit');
-return $this->db->affected_rows();
-}
+      public function update_timeDepositE($id,$data,$tdeptID,$plc){
 
-public function update_timeDepositE($id,$data,$tdeptID,$plc){
+      $this->db->set('amount', $data);
+      $this->db->set('status', 0);
+      $this->db->set('intDate', $plc);
+      $this->db->set('intDate', $plc);
+      $this->db->set('placement', $plc);
+      $this->db->where('userID', $id);
+      $this->db->where('tdeptID', $tdeptID);
 
-$this->db->set('amount', $data);
-$this->db->set('status', 0);
-$this->db->set('intDate', $plc);
-$this->db->set('intDate', $plc);
-$this->db->set('placement', $plc);
-$this->db->where('userID', $id);
-$this->db->where('tdeptID', $tdeptID);
+      $this->db->update('timedeposit');
+      return $this->db->affected_rows();
+      }
+      public function update_user($id,$totalbal,$accountnum){
 
-$this->db->update('timedeposit');
-return $this->db->affected_rows();
-}
-public function update_user($id,$totalbal,$accountnum){
+      $this->db->set('balance', $totalbal);
+      $this->db->where('account_name', $id);
+      $this->db->where('accountnum', $accountnum);
+      $this->db->update('accounts');
+      return $this->db->affected_rows();
+      }
+      public function update_userA($totalbal,$accountnum){
 
-$this->db->set('balance', $totalbal);
-$this->db->where('id', $id);
-$this->db->where('accountnum', $accountnum);
-$this->db->update('user');
-return $this->db->affected_rows();
-}
-public function update_userA($totalbal,$accountnum){
+      $this->db->set('balance', $totalbal);
+      //$this->db->where('id', $id);
+      $this->db->where('accountnum', $accountnum);
+      $this->db->update('accounts');
+      return $this->db->affected_rows();
+      }
 
-$this->db->set('balance', $totalbal);
-//$this->db->where('id', $id);
-$this->db->where('accountnum', $accountnum);
-$this->db->update('user');
-return $this->db->affected_rows();
-}
+      public function useer_sameAcc($datasame){
 
-public function useer_sameAcc($datasame){
+       $this->db->set('amount', $data);
+       $this->db->set('status', 1);
+       $this->db->where('userID', $id);
+       $this->db->where('tdeptID', $tdeptID);
+       $this->db->update('user');
+      return $this->db->affected_rows();
+      }
 
- $this->db->set('amount', $data);
- $this->db->set('status', 1);
- $this->db->where('userID', $id);
- $this->db->where('tdeptID', $tdeptID);
- $this->db->update('user');
-return $this->db->affected_rows();
-}
+      public function user_timeDepositTr($addT){
 
-public function user_timeDepositTr($addT){
+        $this->db->insert('transaction', $addT);
+      }
+      public function view_user($addT,$acctID){
 
-  $this->db->insert('transaction', $addT);
-}
-public function view_user($addT,$acctID){
+          $this->db->select('*');
+          $this->db->from('accounts');
+          $this->db->where('account_name',$addT);
+          $this->db->where('accountnum',$acctID);
+          $query = $this->db->get();
+           if ($query->num_rows() > 0){
+                   $result =  $query->result();
+                   return $result;
+              }
+           else{
+               return false;
+           }
+      }
+      public function view_userA($acctID){
 
-	$this->db->select('*');
-    $this->db->from('user');
-	$this->db->where('id',$addT);
-	//$this->db->where('accountnum',$acctID);
-    $query = $this->db->get();
-     if ($query->num_rows() > 0){
-			 $result =  $query->result();
-			 return $result;
-		}
-     else{
-         return false;
-     }
-}
-public function view_userA($acctID){
+          $this->db->select('*');
+          $this->db->from('accounts');
+          //$this->db->where('id',$addT);
+          $this->db->where('accountnum',$acctID);
+          $query = $this->db->get();
+           if ($query->num_rows() > 0){
+                   $result =  $query->result();
+                   return $result;
+              }
+           else{
+               return false;
+           }//
+      }
+      public function check_userA($acctID){
 
-	$this->db->select('*');
-    $this->db->from('user');
-	//$this->db->where('id',$addT);
-	$this->db->where('accountnum',$acctID);
-    $query = $this->db->get();
-     if ($query->num_rows() > 0){
-			 $result =  $query->result();
-			 return $result;
-		}
-     else{
-         return false;
-     }
-}
-public function check_userA($acctID){
-
-	$this->db->select('*');
-    $this->db->from('user');
-	//$this->db->where('id',$addT);
-	$this->db->where('accountnum',$acctID);
-    $query = $this->db->get();
-     if ($query->num_rows() > 0){
-			 $result =  $query->result();
-			 return true;
-		}
-     else{
-         return false;
-     }
-}
+        //$this->db->distinct();
+        $this->db->select('*');
+        $this->db->from('accounts');
+        $this->db->join('account_type', 'account_type.id = accounts.account_name');
+        $this->db->where(array('account_type.timedep' => 1));
+        $this->db->where(array('accounts.account_name' => $acctID));
+        $this->db->group_by('accounts.accountnum');
+          $query = $this->db->get();
+           if ($query->num_rows() > 0){
+                   $result =  $query->result();
+                   return true;
+              }
+           else{
+               return false;
+           }
+      }
 
 
-public function view_timeDeposit($id){
+      public function view_timeDeposit($id){
 
-	$this->db->select('*');
-    $this->db->from('timedeposit');
-	$this->db->where('userID',$id);
-    $query = $this->db->get();
-     if ($query->num_rows() > 0){
-			 $result =  $query->result();
-			 return $result;
-		}
-     else{
-         return false;
-     }
-}
-public function view_timeDepositA($id){
+          $this->db->select('*');
+          $this->db->from('timedeposit');
+          $this->db->where('userID',$id);
+          $query = $this->db->get();
+           if ($query->num_rows() > 0){
+                   $result =  $query->result();
+                   return $result;
+              }
+           else{
+               return false;
+           }
+      }
+      public function view_timeDepositA($id){
 
-	$this->db->select('*');
-    $this->db->from('timedeposit');
-	//$this->db->where('acctID',$id);
-    $query = $this->db->get();
-     if ($query->num_rows() > 0){
-			 $result =  $query->result();
-			 return $result;
-		}
-     else{
-         return false;
-     }
-}
-public function get_timeDeposit($id){
+          $this->db->select('*');
+          $this->db->from('timedeposit');
+          //$this->db->where('acctID',$id);
+          $query = $this->db->get();
+           if ($query->num_rows() > 0){
+                   $result =  $query->result();
+                   return $result;
+              }
+           else{
+               return false;
+           }
+      }
+      public function get_timeDeposit($id){
 
-	$this->db->select('*');
-    $this->db->from('timedeposit');
-	$this->db->where('tDeptID',$id);
-    $query = $this->db->get();
-     if ($query->num_rows() > 0){
-			 $result =  $query->result();
-			 return $result;
-		}
-     else{
-         return false;
-     }
-}
+          $this->db->select('*');
+          $this->db->from('timedeposit');
+          $this->db->where('tDeptID',$id);
+          $query = $this->db->get();
+           if ($query->num_rows() > 0){
+                   $result =  $query->result();
+                   return $result;
+              }
+           else{
+               return false;
+           }
+      }
 
-public function get_acctnum($id){
-	$this->db->distinct();
-	$this->db->select('*');
-    $this->db->from('timedeposit');
-	$this->db->where('userID',$id);
-	$this->db->group_by('acctID');
-    $query = $this->db->get();
-     if ($query->num_rows() > 0){
-			 $result =  $query->result();
-			 return $result;
-		}
-     else{
-         return false;
-     }
-}
+      public function get_acctnum($id){
+          $this->db->distinct();
+          $this->db->select('*');
+          $this->db->from('accounts');
+          $this->db->join('account_type', 'account_type.id = accounts.account_name');
+          $this->db->where(array('account_type.timedep' => 1));
+          $this->db->where(array('accounts.holder_id' => $id));
+          $this->db->group_by('accounts.accountnum');
+          $query = $this->db->get();
+           if ($query->num_rows() > 0){
+                   $result =  $query->result();
+                   return $result;
+              }
+           else{
+               return false;
+           }
+      }
+
+      public function getRate(){
+        $this->db->select('*');
+        $this->db->from('rates');
+        $this->db->order_by('id');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0){
+            $result =  $query->result();
+            return $result;
+       }
+      }
+
+      public function update_rates($datasame,$id){
+
+        $this->db->set('rates', $datasame);
+        $this->db->where('id', $id);
+        $this->db->update('rates');
+       return $this->db->affected_rows();
+       }
+
+       public function getTax(){
+        $this->db->select('*');
+        $this->db->from('rates');
+        $this->db->where('id',71);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0){
+            $result =  $query->row("rates");
+            return $result;
+       }
+      }
+
 //->
 
 

@@ -157,12 +157,12 @@ class Crud_model extends CI_Model {
       'atm_fee' => $this->input->post('acc_atm'),
       'otc_fee' => $this->input->post('acc_otc'),
       'penalty'=> $this->input->post('acc_penalty'),
-    'minwith'=> $this->input->post('acc_minwith'),
+      'minwith'=> $this->input->post('acc_minwith'),
       'depatm' => $this->input->post('dep_atm'),
       'withatm' => $this->input->post('with_atm'),
       'deptel' => $this->input->post('dep_tel'),
       'withtel' => $this->input->post('with_tel'),
-
+      'timedep' => $this->input->post('time_dep'),
       'interest' => $this->input->post('acc_interest')
 
     );

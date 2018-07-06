@@ -140,6 +140,23 @@
       </select>
     </div>
   </div>
+  <div class="row">
+    <div class="col-25">
+        <label for="mdays">Can Make Time Deposit: </label>
+  <select id="type" name="time_dep" value="--Select Privilege">
+
+    <option value="0" selected>False</option>
+    <option value="1" >True</option>
+
+
+
+
+
+
+
+  </select>
+</div>
+</div>
                   <div class="row">
                     <div class="col-25">
                       <label for="mdays">Interest: </label>
