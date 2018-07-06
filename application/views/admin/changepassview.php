@@ -16,7 +16,7 @@ if(!$user_id){
 
 </head>
 <body>
-  <?php  $this->view('partials/user_sidebar.php');
+  <?php  $this->view('partials/admin_sidebar.php');
     $error_msg= $this->session->flashdata('error_msg');
     $success_msg= $this->session->flashdata('success_msg');
   ?>
@@ -42,10 +42,10 @@ if(!$user_id){
   }?>
 
     <div class="container box">
-             <h3 align="center"><?php echo "Change Password"; ?></h3><br />
+             <h3 align="center"><?php echo "Admin Change Password"; ?></h3><br />
 
 
-    <form role="form" method="post" action="<?php echo base_url('user/changepass'); ?>">
+    <form role="form" method="post" action="<?php echo base_url('user/changepassadmin'); ?>">
 
 
     <div class="form-group">

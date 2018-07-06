@@ -47,7 +47,7 @@
               <a href="<?php echo base_url('tellerwithdraw');?>">Withdraw</a>
             </li>
             <li>
-              <a href="cards.html">Time Deposit</a>
+              <a href="<?php echo base_url('tellertimedeposit');?>">Time Deposit</a>
             </li>
             <li>
 
@@ -64,9 +64,7 @@
             <li>
               <a href="<?php echo base_url('/tellertransfer'); ?> ">Send Money</a>
             </li>
-            <li>
-              <a href="<?php //echo base_url('transfer/loadfund'); ?> ">Transfer History</a>
-            </li>
+
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
@@ -75,16 +73,19 @@
             <span class="nav-link-text">Pay Bills</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Account">
-          <a class="nav-link" href="<?php //echo base_url('user/loadmyaccount'); ?>">
-            <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">My Account</span>
-          </a>
-        </li>
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Client">
           <a class="nav-link" href="<?php echo base_url('manage'); ?>">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Manage Client Account</span>
+          </a>
+        </li>
+
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Change pass">
+          <a class="nav-link" href="<?php echo base_url('user/loadtellerchangepass'); ?>">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">Change Password</span>
           </a>
         </li>
       </ul>

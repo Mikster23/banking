@@ -14,7 +14,21 @@ class User extends CI_Controller {
 
 
 
+  function loadtellerchangepass(){
 
+    $this->load->view('teller/changepassview.php');
+  }
+
+
+    function loadadminchangepass(){
+
+      $this->load->view('admin/changepassview.php');
+    }
+
+function loadchangepass(){
+
+  $this->load->view('user/changepassview.php');
+}
   function login_user(){
 
 
@@ -52,6 +66,7 @@ class User extends CI_Controller {
       $this->session->set_userdata('user_acctnum',$data['accountnum']);
       $this->session->set_userdata('user_pin',$data['pin']);
       $this->session->set_userdata('user_balance',$data['balance']);
+          $this->session->set_userdata('user_password',$data['password']);
 //      $this->session->set_userdata('user_withdrawablebalance',$data['balance']  - $data2['minbalance']);
 
       $this->session->set_userdata('user_accttype',$data['account_type']);
@@ -259,9 +274,84 @@ echo json_encode($output);
 
 //  $this->load->view('user/transactionview.php', $data);
 }
+public function changepass(){
+$id =  (int)$this->session->userdata('user_id');
+$data = $this->user_model->getoldpass($id);
 
+//$oldpass = $this->input->post('user_oldpass');
+$oldpass = $data['password'];
+  $oldpass2 = $this->input->post('user_oldpass');
+  echo $oldpass;
+  echo $oldpass2;
+  if($oldpass != $oldpass2){
+
+
+    $this->session->set_flashdata('error_msg', 'Old Password Did not match');
+    redirect('user/loadchangepass');
+
+  }
+  else{
+  $newpass = $this->input->post('user_newpass');
+    $this->session->set_userdata('user_id',$data['id']);
+  $this->user_model->changepassword($id,$newpass);
+      $this->session->set_flashdata('success_msg', 'Password change successfully');
+redirect('user/loadchangepass');
+}
+}
+
+public function changepassteller(){
+$id =  (int)$this->session->userdata('user_id');
+$data = $this->user_model->getoldpass($id);
+
+//$oldpass = $this->input->post('user_oldpass');
+$oldpass = $data['password'];
+  $oldpass2 = $this->input->post('user_oldpass');
+  echo $oldpass;
+  echo $oldpass2;
+  if($oldpass != $oldpass2){
+
+
+    $this->session->set_flashdata('error_msg', 'Old Password Did not match');
+    redirect('user/loadtellerchangepass');
+
+  }
+  else{
+  $newpass = $this->input->post('user_newpass');
+    $this->session->set_userdata('user_id',$data['id']);
+  $this->user_model->changepassword($id,$newpass);
+      $this->session->set_flashdata('success_msg', 'Password change successfully');
+redirect('user/loadtellerchangepass');
+}
+}
+
+
+public function changepassadmin(){
+$id =  (int)$this->session->userdata('user_id');
+$data = $this->user_model->getoldpass($id);
+
+//$oldpass = $this->input->post('user_oldpass');
+$oldpass = $data['password'];
+  $oldpass2 = $this->input->post('user_oldpass');
+  echo $oldpass;
+  echo $oldpass2;
+  if($oldpass != $oldpass2){
+
+
+    $this->session->set_flashdata('error_msg', 'Old Password Did not match');
+    redirect('user/loadadminchangepass');
+
+  }
+  else{
+  $newpass = $this->input->post('user_newpass');
+    $this->session->set_userdata('user_id',$data['id']);
+  $this->user_model->changepassword($id,$newpass);
+      $this->session->set_flashdata('success_msg', 'Password change successfully');
+redirect('user/loadadminchangepass');
+}
+}
 public function getmindep(){
   // POST data
+
   $postData = $this->input->post();
 
   // load model

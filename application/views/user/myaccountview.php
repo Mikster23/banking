@@ -30,8 +30,8 @@ $success_msg= $this->session->flashdata('success_msg');
       <i class="fa fa-group"></i> <b> ACCOUNT TYPE</b></div>
       <table style="width: 100%">
         <tr>
-          <td>
-            <button class="button button2" id="newCat">Change Password</button>
+          <td
+            <button class="button button2" href = "<?php echo base_url('user/loadchangepass')?>"id="newCat">Change Password</button>
           </td>
 
         </tr>
@@ -192,7 +192,7 @@ $success_msg= $this->session->flashdata('success_msg');
       <script>
       var btn = document.getElementById('newCat');
       btn.addEventListener('click', function() {
-        document.location.href = '<?php echo site_url('account/loadnew'); ?>';
+        document.location.href = '<?php echo site_url('user/loadchangepass'); ?>';
       });
       </script>
       <script>

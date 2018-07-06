@@ -189,6 +189,22 @@ public function getbalance_acctnum($acctnum){
 
 
 }
+public function getoldpass($id = 0){
+
+  $this->db->select('*');
+  $this->db->from('user');
+  $this->db->where('id',$id);
+
+   if($query=$this->db->get())
+   {
+       return $query->row_array();
+   }
+   else{
+     return false;
+   }
+
+
+}
 
 public function getatmfee($id){
 
@@ -204,6 +220,17 @@ public function getatmfee($id){
      return false;
    }
 
+
+}
+public function changepassword($id , $data )
+{
+
+
+  $this->db->set('password', $data);
+  $this->db->where('id', $id);
+$this->db->update('user');
+
+  return $this->db->affected_rows();
 
 }
 //fetching single row;
