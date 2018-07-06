@@ -17,7 +17,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">First Name: </label>
               </div>
               <div class="col-75">
-                <input type="text" id="mfname" name="m_fname" style="background:white;" value="">
+                <input type="text" id="mfname" name="m_fname"  required style="background:white;" value="">
               </div>
             </div>
             <div class="row">
@@ -25,7 +25,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">Last Name: </label>
               </div>
               <div class="col-75">
-                <input type="text" id="mlname" name="m_lname" style="background:white;" value="">
+                <input type="text" id="mlname" name="m_lname" required style="background:white;" value="">
               </div>
             </div>
             <div class="row">
@@ -33,7 +33,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">Address: </label>
               </div>
               <div class="col-75">
-                <input type="text" id="meadd" name="m_address" style="background:white;" value="">
+                <input type="text" id="meadd" name="m_address" required style="background:white;" value="">
               </div>
             </div>
             <div class="row">
@@ -41,7 +41,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">Email: </label>
               </div>
               <div class="col-75">
-                <input type="text" id="meemail" name="m_email" style="background:white;" value="">
+                <input type="text" id="meemail" name="m_email" required style="background:white;" value="">
               </div>
             </div>
             <div class="row">
@@ -49,7 +49,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">Birthday: </label>
               </div>
               <div class="col-75">
-                <input type="date" id="mebday" name="m_bday" style="background:white;" value="">
+                <input type="date" id="mebday" name="m_bday" required style="background:white;" value="">
               </div>
             </div>
             <div class="row">
@@ -57,7 +57,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">Age: </label>
               </div>
               <div class="col-75">
-                <input type="number" id="meage" name="m_age" style="background:white;" value="">
+                <input type="number" id="meage" name="m_age" required style="background:white;" value="">
               </div>
             </div>
             <div class="row">
@@ -65,7 +65,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">Mobile No.: </label>
               </div>
               <div class="col-75">
-                <input type="number" id="memobile" name="m_mobile" style="background:white;" value="">
+                <input type="number" id="memobile" name="m_mobile" required style="background:white;" value="">
               </div>
             </div>
 
@@ -74,7 +74,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">Password: * </label>
               </div>
               <div class="col-75">
-                <input type="password" id="mpass" name="m_pass" style="background:white;" value="">
+                <input type="password" id="mpass" name="m_pass" required style="background:white;" value="">
               </div>
             </div>
             <div class="row">
@@ -82,7 +82,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">4 Digit PIN* </label>
               </div>
               <div class="col-75">
-                <input type="password" id="mpin" name="m_pin" style="background:white;" value="">
+                <input type="password" id="mpin" name="m_pin" required style="background:white;" value="">
               </div>
             </div>
             <div class="row">
@@ -107,6 +107,9 @@ $success_msg= $this->session->flashdata('success_msg');
             <div class="row">
               <div class="col-25">
                 <label for="mpenaltys">User Type: *</label>
+              </div>
+                  <div class="col-75">
+                        <div class="form-group">
                 <select id="type" name="m_type" value="--Select user type">
 
                   <option value="1" selected>User</option>
@@ -120,6 +123,8 @@ $success_msg= $this->session->flashdata('success_msg');
 
                 </select>
               </div>
+            </div>
+
 
             </div>
           </div>

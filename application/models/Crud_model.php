@@ -218,7 +218,7 @@ class Crud_model extends CI_Model {
     );
 
     if ($id == 0) {
-      return $this->db->insert('user', $data);
+      return $this->db->insert('user', $data2);
     } else {
       $this->db->where('id', $id);
       return $this->db->update('user', $data);
