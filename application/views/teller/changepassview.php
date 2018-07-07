@@ -50,12 +50,12 @@ if(!$user_id){
 
     <div class="form-group">
       <label for="exampleInputPin">Enter old Password</label>
-      <input class="form-control" name="user_oldpass" type="password"  placeholder="Enter Pin">
+      <input class="form-control" name="user_oldpass" type="password"  placeholder="Enter Old Password">
     </div>
 
     <div class="form-group">
       <label for="exampleInputPin">Enter New Password</label>
-      <input class="form-control" name="user_newpass" type="password"  placeholder="Enter Pin">
+      <input class="form-control" name="user_newpass" type="password"  placeholder="Enter New Password">
     </div>
 
       <input class="btn btn-primary btn-block" type="submit" required value="CHANGE" name="deposit" >

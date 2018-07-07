@@ -45,8 +45,8 @@ public function maketimedep()
 	$curr= $this->input->post('curr');
 	$amtDept = $this->input->post('amtDept');
 	$id = (int)$this->session->userdata('user_id');
-
-
+	
+	
 	//$id =  0; //(int)$this->session->userdata('user_id');
 
 
@@ -254,7 +254,7 @@ public function maketimedep()
 							  }
 							}
 						}
-
+	
 						$datad['datax'] = $this->user_model->getTax();
 						$amtDept = $amtDept-($amtDept*$datad['datax']);
 
@@ -301,7 +301,7 @@ public function extendTD(){
 	$chooseAcctN = $this->input->post('chooseAcctN');
 	$hld_amt = $this->input->post('hld_amt');
 	$amtDept = $this->input->post('amtDep1');
-
+	
 	echo $acctnum;
 		echo $chooseAcctN;
 		echo ' '.$hld_amt; //
@@ -311,13 +311,13 @@ public function extendTD(){
 			foreach ($data['view_user'] as $valuee) {
 						$total=$valuee->balance+$amtDept;
 						$this->user_model->update_user($id ,$total,$chooseAcctN); //change id
-
+						
 						if ($amtDept<$hld_amt){
 							$total=$hld_amt-$amtDept;
 							if ($total>0){
 								//$this->user_model->update_user($id ,$total,$acctnum); //change id
 								$this->user_model->update_timeDeposit($id ,$total,$id_stored); //change id
-
+								
 								$dateTdy = date("Y-m-d");
 									$widthTdy=0;
 									$data['getRate'] = $this->user_model->getRate();
@@ -587,18 +587,18 @@ public function addTransaction(){
 				foreach ($data['view_user'] as $valuee) {
 							$total=$valuee->balance+$amtDep1;
 							$this->user_model->update_user($id ,$total,$chooseAcctN); //change id
-
+							
 							if ($amtDep1<$hld_amt){
 								$total=$hld_amt-$amtDep1;
 								if ($total>0){
 									$this->user_model->update_user($total,$chooseAcctN); //change id
 									$this->user_model->update_timeDeposit(0,$id_stored); //change id
-
+									
 								}
 							else{
 								$this->session->set_flashdata('error_msg', 'Amount is greater than the value');
 							}
-
+								
 							}
 				}
 				$datad['datax'] = $this->user_model->getTax();
@@ -611,9 +611,9 @@ public function addTransaction(){
 				  'remarks'=>$id  //change id
 				);
 				$this->user_model->user_timeDepositTr($addT);
-
+				
 				$data1['view_account'] = $this->user_model->get_acctnum($id ); //change id
-
+				
 			}
 			else{
 				$this->session->set_flashdata('error_msg', 'Cannot enter');

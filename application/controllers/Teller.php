@@ -12,8 +12,10 @@ public function __construct(){
 
 }
 function loaddash(){
+  $id =  (int)$this->session->userdata('user_id');
 
-  $this->load->view('teller/dashboard.php');
+  $data['usertrans'] = $this->teller_model->get_history($id);
+  $this->load->view('teller/dashboard.php',$data);
 
 }
 function loadmanage(){

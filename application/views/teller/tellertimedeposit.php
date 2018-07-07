@@ -93,7 +93,7 @@ if($error_msg){
                         </select>
                     </div>
                     <div class="col-md-12 mb-4">
-                    <small id="amt1" class="form-text text-muted"> Money can only be withdrawed after the
+                    <small id="amt1" class="form-text text-muted"> Money can only be withdrawed after the 
                     lock-in period. </small>
                     </div>
                     <div class="col-md-1 mb-4">
@@ -135,7 +135,7 @@ if($error_msg){
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <?php
+                                    <?php 
                                 $curDate = date("Y-m-d");
                         if(isset($view_table)){
                             if ($view_table==NULL){
@@ -195,7 +195,7 @@ if($error_msg){
                                                                 <p class="item-intro text-muted">Amount:
                                                                     <?php echo $value->amount; ?>
                                                                 </p>
-
+                                                                    
                                                                 <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
 
                                                                 <form class="needs-validation" role="form" method="post" action="<?php echo base_url('tellertimedeposit/addTransaction');?>   ">
@@ -207,18 +207,18 @@ if($error_msg){
                                                                     <input type="number" class="form-control" name="chooseAcctN1" required id="chooseAcctN1" aria-describedby="number" placeholder="Account Number">
                                                                     <label for="id">Amount of Money to Deposit</label>
                                                                     <input type="number" class="form-control" id="amtDep1" name="amtDep1" max="500000" placeholder="Insert Amount">
-                                                                    <!--<label for="id">Choose Currency</label>
+                                                                    <!--<label for="id">Choose Currency</label> 
                                             <select class="custom-select my-1 mr-sm-2" required id="inlineFormCustomSelectPref" name="currch">
                                             <option selected>Choose...</option>
                                             <option value="PHP">PHP</option>
                                             <option value="USD">USD</option>
                                         </select>-->
                                                                     <!-- <label for="id">Date to be released</label>
-                                        <input type="date" class="form-control" id="wDate1"
+                                        <input type="date" class="form-control" id="wDate1" 
                                         name="wDate1" placeholder="Insert Date" min="<?php echo $value->widthDate; ?>"> -->
                                                                     <br>
                                                                     <br>
-
+                                                                    
                                                                     <input type="submit" name="wSubmit" class="btn btn-primary" value="Submit" />
                                                                     <button class="btn btn-primary" data-dismiss="modal" type="button">
                                                                         <i class="fa fa-times"></i>
@@ -264,7 +264,7 @@ if($error_msg){
                                                         <input type="number" class="form-control" name="chooseAcctN1" required id="chooseAcctN1" aria-describedby="number" placeholder="Account Number">
                                                                     <label for="id">Amount of Money to Deposit</label>
                                                         <input type="number" class="form-control" id="amtDep1" name="amtDep1" max="500000" placeholder="Insert Amount">
-                                                        <label for="id">Choose Currency</label>
+                                                        <label for="id">Choose Currency</label> 
                                         <select class="custom-select my-1 mr-sm-2" required id="inlineFormCustomSelectPref" name="currch">
                                             <option selected>Choose...</option>
                                             <option value="PHP">PHP</option>
@@ -281,7 +281,7 @@ if($error_msg){
                                                             <option value="360">360 days</option>
                                                         </select>
                                                         <!-- <label for="id">Date to be released</label>
-                                        <input type="date" class="form-control" id="wDate1"
+                                        <input type="date" class="form-control" id="wDate1" 
                                         name="wDate1" placehol//der="Insert Date" min="<?php echo $value->widthDate; ?>"> -->
                                                         <br>
                                                         <br>
@@ -302,7 +302,7 @@ if($error_msg){
                             </div>
                         </div>
                     </div>
-
+                                            
 
                                                 <?php // end of upper loop
                                                  echo '</tr>';}}}} else{echo 'Input Transaction First';}?>

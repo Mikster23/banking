@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tellertimedeposit extends CI_Controller {
+class Admintimedeposit extends CI_Controller {
 
 public function __construct(){
 
@@ -18,6 +18,7 @@ public function index()
 {
 	//$data=array();
 	//$id = (int)$this->session->userdata('user_id');
+
 	$id = (int)$this->session->userdata('user_id');
 	$data['view_table'] = $this->user_model->view_timeDepositA($id ); //change id
 	if ($data['view_table'] ){
@@ -33,7 +34,8 @@ else{
 	echo "";
 }
 
-	$this->load->view('teller/tellertimedeposit.php');
+	$data2['getRate'] = $this->user_model->getRate();//change id
+	$this->load->view('admin/admintimedeposit.php',$data2);
 
 }
 
@@ -55,12 +57,14 @@ public function maketimedep()
 	$inptAcct= $this->input->post('inptAcct');
 	$curr= $this->input->post('curr');
 	$amtDept = $this->input->post('amtDept');
-	$id =  0; //(int)$this->session->userdata('user_id');
+	$id = $this->session->userdata('user_id');
 	
 	$data['view_user'] = $this->user_model->check_userA($inptAcct);
+	$data['getRate'] = $this->user_model->getRate();
 	if ($data['view_user']){
 			$interest=0;
-			$data['getRate'] = $this->user_model->getRate();
+			$dateTdy = date("Y-m-d");
+			$widthTdy=0;
 			$arry = array ();
 			foreach($data['getRate']  as $grate){
 				$arry[] = $grate->rates;
@@ -261,10 +265,10 @@ public function maketimedep()
 							  }
 							}
 						}
-
-						$datad['datax'] = $this->user_model->getTax();
+					
+				$datad['datax'] = $this->user_model->getTax();
 				$amtDept = $amtDept-($amtDept*$datad['datax']);
-
+				
 			  $tDeposit=array(
 			  'acctID' => $inptAcct,
 			  'placement'=>$tPlacement,
@@ -279,7 +283,7 @@ public function maketimedep()
 			$this->user_model->user_timeDeposit($tDeposit);
 			$addT=array(
 				  'user_id'=>$inptAcct,
-				  'action'=>'Teller Time Deposit: Deposit',
+				  'action'=>'Admin Time Deposit: Deposit',
 				  'amount'=>$amtDept,
 				  'remarks'=>$id.' '.$curr
 				);
@@ -287,17 +291,16 @@ public function maketimedep()
 			
 			
 			echo json_encode(array("status" => TRUE));
-			//$data1['view_account'] = $this->user_model->get_acctnum(28); //change id
-			
 			$data2['view_table'] = $this->user_model->view_timeDepositA($inptAcct);//change id
 			//$data2['view_account'] = $this->user_model->get_acctnum(28); //change id
-			$this->load->view('teller/tellertimedeposit.php',$data2);
+			$data2['getRate'] = $this->user_model->getRate();//change id
+			$this->load->view('admin/admintimedeposit.php',$data2);
 	}
 	else{
 		$this->session->set_flashdata('error_msg', 'No Account Number');
-		$data2['view_table'] = $this->user_model->view_timeDepositA($inptAcct);//change id
+		//$data2['view_table'] = $this->user_model->view_timeDepositA($inptAcct);//change id
 			//$data2['view_account'] = $this->user_model->get_acctnum(28); //change id
-			$this->load->view('teller/tellertimedeposit.php',$data2);
+			//$this->load->view('admin/admintimedeposit.php',$data2);
 	}
 
 
@@ -317,16 +320,17 @@ public function extendTD(){
 	$hld_amt = $this->input->post('hld_amt');
 	$amtDept = $this->input->post('amtDep1');
 	$tPlacement = $this->input->post('placement');
-	
-	$data['view_user'] = $this->user_model->check_userA($chooseAcctN);
-	if ($data['view_user']){
+	$data1['view_user'] = $this->user_model->check_userA($chooseAcctN);
+	$data1['view_user'] = $this->user_model->check_userA($chooseAcctN);
+	if ($data1['view_user']){
 	
 	echo $acctnum;
 		echo $chooseAcctN;
 		echo ' '.$hld_amt;
 		echo ' '.$id_stored;
 			$data['view_user'] = $this->user_model->view_userA($chooseAcctN); //change id
-		
+			$data['getRate'] = $this->user_model->getRate();
+			
 			foreach ($data['view_user'] as $valuee) {
 						$total=$valuee->balance+$amtDept;
 						$this->user_model->update_userA($total,$chooseAcctN); //change id
@@ -539,15 +543,13 @@ public function extendTD(){
 						}
 						$datad['datax'] = $this->user_model->getTax();
 				$amtDept = $amtDept-($amtDept*$datad['datax']);
-												
 												$tDeposit=array(
-												  'acctID' => $chooseAcctN,
+												  'acctID' => $acctnum,
 												  'placement'=>$tPlacement,
 												  'amount'=>$total,
 												  'interest'=>$interest,
 												  'intDate'=>$dateTdy,
 												  'widthDate'=>$widthTdy,
-												  'userID'=>$id, //change id
 												  'currency'=>$curr,
 												  'status'=>0
 												);
@@ -566,23 +568,21 @@ public function extendTD(){
 			
 			$addT=array(
 			  'user_id'=> $acctnum,
-			  'action'=>'Time Deposit: Extend',
+			  'action'=>'Admin Time Deposit: Extend',
 			  'amount'=>$amtDept,
 			  'to_accountnum'=>$chooseAcctN,
 			  'remarks'=>28 //change id
 			);
 			$this->user_model->user_timeDepositTr($addT);
-			//$data1['view_account'] = $this->user_model->get_acctnum(28); //change id
-			
 			$data2['view_table'] = $this->user_model->view_timeDepositA($chooseAcctN);//change id
 			//$data2['view_account'] = $this->user_model->get_acctnum(28); //change id
-			$this->load->view('teller/tellertimedeposit.php',$data2);
+			$this->load->view('admin/admintimedeposit.php',$data2);
 	}
 	else{
 		$this->session->set_flashdata('error_msg', 'No Account Number');
 		$data2['view_table'] = $this->user_model->view_timeDepositA($chooseAcctN);//change id
 			//$data2['view_account'] = $this->user_model->get_acctnum(28); //change id
-			$this->load->view('teller/tellertimedeposit.php',$data2);
+			$this->load->view('admin/admintimedeposit.php',$data2);
 	}
 
 
@@ -630,15 +630,15 @@ public function addTransaction(){
 				$amtDep1 = $amtDep1-($amtDep1*$datad['datax']);
 			$addT=array(
 			  'user_id'=> $acctnum,
-			  'action'=>'Time Deposit: Withdrawal',
+			  'action'=>'Admin Time Deposit: Withdrawal',
 			  'amount'=>$amtDep1,
 			  'to_accountnum'=>$chooseAcctN,
-			  'remarks'=>28 //change id
+			  'remarks'=>$id //change id
 			);
 			$this->user_model->user_timeDepositTr($addT);
 			$data2['view_table'] = $this->user_model->view_timeDepositA($chooseAcctN);//change id
 			//$data2['view_account'] = $this->user_model->get_acctnum(28); //change id
-			$this->load->view('teller/tellertimedeposit.php',$data2);
+			$this->load->view('admin/admintimedeposit.php',$data2);
 
 	}
 
@@ -646,8 +646,17 @@ else{
 		$this->session->set_flashdata('error_msg', 'No Account Number');
 		$data2['view_table'] = $this->user_model->view_timeDepositA($chooseAcctN);//change id
 			//$data2['view_account'] = $this->user_model->get_acctnum(28); //change id
-			$this->load->view('teller/tellertimedeposit.php',$data2);
+			$this->load->view('admin/admintimedeposit.php',$data2);
 	}
+}
+public function  updateRate(){
+	
+	$id_stored = $this->input->post('id_stored');
+	$ratePlc = $this->input->post('ratePlc');
+	$this->user_model->update_rates(($ratePlc/100),$id_stored);
+
+	$data['getRate'] = $this->user_model->getRate();
+	$this->load->view('admin/admintimedeposit.php',$data);
 }
 }
 

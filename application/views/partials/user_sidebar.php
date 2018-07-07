@@ -129,6 +129,8 @@
     <!-- Custom scripts for this page-->
     <script  type="text/javascript" src="<?php echo base_url();?>assets/js/sb-admin-datatables.min.js"></script>
     <script  type="text/javascript" src="<?php echo base_url();?>assets/js/sb-admin-charts.min.js"></script>
+
+
   </div>
 
 </body>

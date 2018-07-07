@@ -11,11 +11,12 @@ class Cruduser extends CI_Controller {
   }
 
   function loaddash(){
-    $this->load->view('admin/dashboard');
+
+
     //  $data['user'] = $this->crud_model->get_news();
     //$data['title'] = 'News archive';
     //    $this->load->view('admin/members', $data);
-    //  redirect('cruduser');
+    redirect('cruduser');
 
   }
   function loadmember(){
@@ -34,7 +35,7 @@ class Cruduser extends CI_Controller {
 
     $data['user'] = $this->crud_model->pending();
     //$this->load->view('admin/pendingaccountsview.php',$data2);
-    $this->load->view('admin/pendingaccountsview.php',$data);
+    $this->load->view('admin/dashboard',$data);
   }
 
 
@@ -52,7 +53,7 @@ class Cruduser extends CI_Controller {
 
 
 
-    
+
 
       $data['user'] = $this->crud_model->get_news();
       $this->load->view('admin/members', $data);

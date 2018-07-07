@@ -18,10 +18,10 @@
   <link href="<?php echo base_url('assets/css/sb-admin.css'); ?>" rel="stylesheet">
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer bg-white" id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.php">Feu Tech Banking System</a>
+  <nav class="navbar navbar-expand-lg navbar-white bg-warning fixed-top" id="mainNav">
+    <a class="navbar" href="index.php"><b>TELLER </b>Feu Tech Banking System</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -64,7 +64,9 @@
             <li>
               <a href="<?php echo base_url('/tellertransfer'); ?> ">Send Money</a>
             </li>
-
+            <li>
+              <a href="<?php //echo base_url('transfer/loadfund'); ?> ">Transfer History</a>
+            </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
@@ -73,19 +75,16 @@
             <span class="nav-link-text">Pay Bills</span>
           </a>
         </li>
-
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Account">
+          <a class="nav-link" href="<?php //echo base_url('user/loadmyaccount'); ?>">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">My Account</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Client">
           <a class="nav-link" href="<?php echo base_url('manage'); ?>">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Manage Client Account</span>
-          </a>
-        </li>
-
-
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Change pass">
-          <a class="nav-link" href="<?php echo base_url('user/loadtellerchangepass'); ?>">
-            <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Change Password</span>
           </a>
         </li>
       </ul>

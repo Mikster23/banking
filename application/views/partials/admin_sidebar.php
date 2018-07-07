@@ -18,22 +18,44 @@
   <link href="<?php echo base_url('assets/css/sb-admin.css'); ?>" rel="stylesheet">
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer bg-white" id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.php">Feu Tech Banking System</a>
+  <nav class="navbar navbar-expand-lg navbar-danger bg-danger fixed-top" id="mainNav">
+    <a class="text-light" href="index.php">ADMIN Feu Tech Banking System</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="<?php echo base_url('admin/loaddash');?>">
+          <a class="nav-link" href="<?php echo base_url('cruduser');?>">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">Tranasactions</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a href="<?php echo base_url('deposit');?>">Deposit</a>
+            </li>
+            <li>
 
+              <a href="<?php echo base_url('withdraw');?>">Withdraw</a>
+            </li>
+
+            <li>
+              <a href="<?php echo base_url('admintimedeposit');?>">Change Time Deposit Rate</a>
+            </li>
+            <li>
+
+              <a href="<?php echo base_url('index.php/user/loadtransaction');?>">Transaction History</a>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Accounts">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
@@ -54,13 +76,19 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Change pass">
-          <a class="nav-link" href="<?php echo base_url('user/loadadminchangepass'); ?>">
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Change Password</span>
+            <span class="nav-link-text">Pay Bills</span>
           </a>
         </li>
-
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Account">
+          <a class="nav-link" href="#">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">My Account</span>
+          </a>
+        </li>
       </ul>
 
       <ul class="navbar-nav sidenav-toggler">
