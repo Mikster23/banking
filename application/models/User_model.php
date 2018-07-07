@@ -158,11 +158,12 @@ public function checkexist_acctnum($acctnum){
 
 }
 
-public function checkhave_accttype($acctnum){
+public function checkhave_accttype($acctnum,$id){
 
     $this->db->select('*');
     $this->db->from('accounts');
   $this->db->where('account_name',$acctnum);
+  $this->db->where('holder_id',$id);
      $query = $this->db->get();
      if ($query->num_rows() > 0){
          return true;

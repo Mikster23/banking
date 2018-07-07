@@ -434,7 +434,7 @@ public function enrollacct()
   $id =  (int)$this->session->userdata('user_id');
   $acctid = (int)$this->input->post('user_accttype');
 
-  $checkexist = $this->user_model->checkhave_accttype($acctid);
+  $checkexist = $this->user_model->checkhave_accttype($acctid,$id);
 
   if($checkexist){
     $this->session->set_flashdata('error_msg', 'You already have that account type!');
