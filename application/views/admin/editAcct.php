@@ -50,7 +50,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">OTC Fee: </label>
               </div>
               <div class="col-75">
-                <input  id="accatm" name="acc_otc" style="background:white;" value="<?php echo $news_item['atm_fee']?>" type = "number">
+                <input  id="accatm" name="acc_otc" style="background:white;" value="<?php echo $news_item['otc_fee']?>" type = "number">
               </div>
             </div>
             <div class="row">
@@ -66,7 +66,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <label for="mdays">ATM Fee: </label>
               </div>
               <div class="col-75">
-                <input  id="accatm" name="acc_atm" style="background:white;" value="<?php echo $news_item['otc_fee']?>" type = "number">
+                <input  id="accatm" name="acc_atm" style="background:white;" value="<?php echo $news_item['atm_fee']?>" type = "number">
               </div>
             </div>
 
@@ -214,7 +214,7 @@ $success_msg= $this->session->flashdata('success_msg');
   <footer class="sticky-footer">
     <div class="container">
       <div class="text-center">
-        <small>Copyright © The Digital Library 2018</small>
+        <small>Copyright © FEU TECH BANKING SYSTEM</small>
       </div>
     </div>
   </footer>
