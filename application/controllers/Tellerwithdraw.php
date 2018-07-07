@@ -76,7 +76,7 @@ public function tellermakewithdraw()
   $datafee = $this->teller_model->getotcfee($accounttype);
   $checkcandep = (int) $datafee['withtel'];
     $minwithdraw = (int) $datafee['minwith'];
-
+$transactionfee = $datafee['otc_fee'];
 
 $lastupdated =  $dataacctidtype['created_at'];
     $date2 = new DateTime($lastupdated);

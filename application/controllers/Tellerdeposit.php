@@ -53,7 +53,7 @@ public function tellermakedeposit()
 
 
 
-  $transactionfee = 0;
+  $transactionfee = $datafee['otc_fee'];
   $checkcandep = (int) $datafee['deptel'];
 
   if($checkcandep == 0){
