@@ -56,7 +56,7 @@ public function maketimedep()
 	$curr= $this->input->post('curr');
 	$amtDept = $this->input->post('amtDept');
 	$id =  0; //(int)$this->session->userdata('user_id');
-	
+
 	$data['view_user'] = $this->user_model->check_userA($inptAcct);
 	if ($data['view_user']){
 			$interest=0;
@@ -284,11 +284,11 @@ public function maketimedep()
 				  'remarks'=>$id.' '.$curr
 				);
 			$this->user_model->user_timeDepositTr($addT);
-			
-			
+
+
 			echo json_encode(array("status" => TRUE));
 			//$data1['view_account'] = $this->user_model->get_acctnum(28); //change id
-			
+
 			$data2['view_table'] = $this->user_model->view_timeDepositA($inptAcct);//change id
 			//$data2['view_account'] = $this->user_model->get_acctnum(28); //change id
 			$this->load->view('teller/tellertimedeposit.php',$data2);
@@ -306,7 +306,7 @@ public function maketimedep()
 public function extendTD(){
 	//insert and update of deposit
 	//insert and update of deposit
-	
+
 	//$wDate1= $this->input->post('wDate1');
 	$id =  $this->session->userdata('user_id');
 	$curr = $this->input->post('currch');
@@ -317,20 +317,20 @@ public function extendTD(){
 	$hld_amt = $this->input->post('hld_amt');
 	$amtDept = $this->input->post('amtDep1');
 	$tPlacement = $this->input->post('placement');
-	
+
 	$data['view_user'] = $this->user_model->check_userA($chooseAcctN);
 	if ($data['view_user']){
-	
+
 	echo $acctnum;
 		echo $chooseAcctN;
 		echo ' '.$hld_amt;
 		echo ' '.$id_stored;
 			$data['view_user'] = $this->user_model->view_userA($chooseAcctN); //change id
-		
+
 			foreach ($data['view_user'] as $valuee) {
 						$total=$valuee->balance+$amtDept;
 						$this->user_model->update_userA($total,$chooseAcctN); //change id
-						
+
 						if ($amtDept<$hld_amt){
 							$total=$hld_amt-$amtDept;
 							if ($total>0){
@@ -539,7 +539,7 @@ public function extendTD(){
 						}
 						$datad['datax'] = $this->user_model->getTax();
 				$amtDept = $amtDept-($amtDept*$datad['datax']);
-												
+
 												$tDeposit=array(
 												  'acctID' => $chooseAcctN,
 												  'placement'=>$tPlacement,
@@ -552,18 +552,18 @@ public function extendTD(){
 												  'status'=>0
 												);
 												$this->user_model->user_timeDeposit($tDeposit);
-												
+
 							}
-							
+
 						}
 						else{
 							$this->session->set_flashdata('error_msg', 'Amount is greater than the value');
 						}
 			}
-			
-			
-			
-			
+
+
+
+
 			$addT=array(
 			  'user_id'=> $acctnum,
 			  'action'=>'Time Deposit: Extend',
@@ -573,7 +573,7 @@ public function extendTD(){
 			);
 			$this->user_model->user_timeDepositTr($addT);
 			//$data1['view_account'] = $this->user_model->get_acctnum(28); //change id
-			
+
 			$data2['view_table'] = $this->user_model->view_timeDepositA($chooseAcctN);//change id
 			//$data2['view_account'] = $this->user_model->get_acctnum(28); //change id
 			$this->load->view('teller/tellertimedeposit.php',$data2);
@@ -586,12 +586,12 @@ public function extendTD(){
 	}
 
 
-	
+
 }
 
 public function addTransaction(){
 	//insert and update of deposit
-	
+
 	//$wDate1= $this->input->post('wDate1');
 	$id =  $this->session->userdata('user_id');
 	//$currch = $this->input->post('currch');
@@ -601,7 +601,7 @@ public function addTransaction(){
 	$chooseAcctN = $this->input->post('chooseAcctN1');
 	$hld_amt = $this->input->post('hld_amt');
 	$amtDep1 = $this->input->post('amtDep1');
-	
+
 		echo $acctnum;
 		echo $chooseAcctN;
 		echo ' '.$hld_amt;
@@ -609,18 +609,18 @@ public function addTransaction(){
 		$data1['view_user'] = $this->user_model->check_userA($chooseAcctN);
 	if ($data1['view_user']){
 			$data['view_user'] = $this->user_model->view_userA($chooseAcctN); //change id
-		
+
 			foreach ($data['view_user'] as $valuee) {
 						$total=$valuee->balance+$amtDep1;
 						$this->user_model->update_userA($total,$chooseAcctN); //change id
-						
+
 						if ($amtDep1<$hld_amt){
 							$total=$hld_amt-$amtDep1;
 							if ($total>0){
 								$this->user_model->update_userA($total,$acctnum); //change id
 								$this->user_model->update_timeDepositA(0,$id_stored); //change id
 							}
-							
+
 						}
 						else{
 							$this->session->set_flashdata('error_msg', 'Amount is greater than the value');

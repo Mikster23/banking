@@ -150,8 +150,9 @@ function loadmyaccount(){
   $this->load->view('user/myaccountview.php',$data);
 }
 function loaddash(){
-
-  $this->load->view('user/dashboard.php');
+  $id =  (int)$this->session->userdata('user_id');
+  $data['usertrans'] = $this->user_model->get_history($id);
+  $this->load->view('user/dashboard.php',$data);
 }
 function user_profile(){
 

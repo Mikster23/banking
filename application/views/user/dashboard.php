@@ -42,7 +42,7 @@ if(!$user_id){
   }?>
  <?php echo " <h1> Dashboard </h1>" ; ?>
  <h5>   Hello, what would you like to do? </h5>
- </h5>  Account:<?php echo $this->session->userdata('user_acctnum'); ; ?></h5>
+
  <br><br>
          <!-- Icon Cards-->
       <div class="row">

@@ -54,7 +54,7 @@ redirect('/user/loadlogin');
               </div>
               <div class="mr-5">Deposit Transaction</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('deposit');?>">
+            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('tellerdeposit');?>">
               <span class="float-left">Start Transaction</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -70,7 +70,7 @@ redirect('/user/loadlogin');
               </div>
               <div class="mr-5">Withdraw Transaction</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('withdraw');?>">
+            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('tellerwithdraw');?>">
               <span class="float-left">Start Transaction</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -86,7 +86,7 @@ redirect('/user/loadlogin');
               </div>
               <div class="mr-5">Pay Bills</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('paybill')?>">
+            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('tellerpaybill'); ?>">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -94,22 +94,7 @@ redirect('/user/loadlogin');
             </a>
           </div>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-danger o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-support"></i>
-              </div>
-              <div class="mr-5">My Account</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('user/loadmyaccount'); ?>">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
+
       </div>
 
       <div class="card mb-3">

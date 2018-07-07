@@ -33,29 +33,9 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Tranasactions</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="<?php echo base_url('deposit');?>">Deposit</a>
-            </li>
-            <li>
 
-              <a href="<?php echo base_url('withdraw');?>">Withdraw</a>
-            </li>
 
-            <li>
-              <a href="<?php echo base_url('admintimedeposit');?>">Change Time Deposit Rate</a>
-            </li>
-            <li>
 
-              <a href="<?php echo base_url('index.php/user/loadtransaction');?>">Transaction History</a>
-            </li>
-          </ul>
-        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Accounts">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
@@ -77,32 +57,21 @@
           </ul>
         </li>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pay Bills">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Pay Bills</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Account">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">My Account</span>
-          </a>
-        </li>
-      </ul>
 
-      <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
-            <i class="fa fa-fw fa-angle-left"></i>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Account">
+          <a class="nav-link" href="<?php echo base_url('admintimedeposit');?>">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">Change Time Deposit Rate</span>
           </a>
         </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
+
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('index.php') ?>" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
           </li>
+
+      <ul class="navbar-nav ml-auto">
+
         </ul>
       </div>
     </nav>

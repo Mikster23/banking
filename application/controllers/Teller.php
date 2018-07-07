@@ -16,7 +16,6 @@ function loaddash(){
 
   $data['usertrans'] = $this->teller_model->get_history($id);
   $this->load->view('teller/dashboard.php',$data);
-
 }
 function loadmanage(){
 $this->load->view('teller/manageview.php');

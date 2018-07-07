@@ -42,75 +42,10 @@ if(!$user_id){
   }?>
 <?php echo " <h1> Hello Admin !</h1>" ; ?>
  <?php echo " <h1> Dashboard </h1>" ; ?>
- <h5>   Hello, what would you like to do? </h5>
+
  <br><br>
          <!-- Icon Cards-->
-      <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-primary o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-comments"></i>
-              </div>
-              <div class="mr-5">Deposit Transaction</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('deposit');?>">
-              <span class="float-left">Start Transaction</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-warning o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-list"></i>
-              </div>
-              <div class="mr-5">Withdraw Transaction</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('withdraw');?>">
-              <span class="float-left">Start Transaction</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-success o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-shopping-cart"></i>
-              </div>
-              <div class="mr-5">Pay Bills</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('paybill')?>">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-danger o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-support"></i>
-              </div>
-              <div class="mr-5">My Account</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('user/loadmyaccount'); ?>">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
+
       <div class="card mb-3" style="margin-top:0.5vw;">
           <div class="card-header">
             <i class="fa fa-table"></i> Pending Accounts</div>
