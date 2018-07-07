@@ -70,9 +70,7 @@
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
           </li>
 
-      <ul class="navbar-nav ml-auto">
 
-        </ul>
       </div>
     </nav>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

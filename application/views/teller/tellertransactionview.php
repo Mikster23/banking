@@ -39,7 +39,7 @@ $success_msg= $this->session->flashdata('success_msg');
                 <thead>
                   <th style="text-align:center;">Action</th>
                   <th style="text-align:center;">Amount</th>
-                  <th style="text-align:center;">to_accountnum</th>
+                  <th style="text-align:center;">Recipient</th>
                   <th style="text-align:center;">Transaction Fee</th>
                   <th style="text-align:center;">Penalty</th>
 
@@ -49,7 +49,7 @@ $success_msg= $this->session->flashdata('success_msg');
                   <tr>
                     <th style="text-align:center;">Action</th>
                     <th style="text-align:center;">Amount</th>
-                    <th style="text-align:center;">to_accountnum</th>
+                    <th style="text-align:center;">Recipient</th>
                     <th style="text-align:center;">Transaction Fee</th>
                     <th style="text-align:center;">Penalty</th>
 

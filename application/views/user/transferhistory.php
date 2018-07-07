@@ -42,18 +42,18 @@ if($success_msg){
                      <thead>
                           <tr>
 
-                               <th width="35%">From AccountNumber</th>
+                               <th width="35%">Sender Accountnumber</th>
                                <th width="35%">Action</th>
                                <th width="10%">Amount</th>
                                <th width="10%">Remarks</th>
-                               <th width="10%">To AccountNumber</th>
+                               <th width="10%">Recipient</th>
                                <th width="10%">Date</th>
                           </tr>
                      </thead>
                 </table>
               </div>
             </div>
-          
+
           </div>
            </div>
       </div>
