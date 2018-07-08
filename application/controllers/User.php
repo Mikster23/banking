@@ -368,6 +368,9 @@ public function register_user(){
   $pin = mt_rand(1000, 9999);
   $acctnum = mt_rand(100000000, 999999999);
 
+
+
+
   $user=array(
     'firstname'=>$this->input->post('user_firstname'),
     'lastname'=>$this->input->post('user_lastname'),
@@ -383,10 +386,10 @@ public function register_user(){
   );
 
 
-  print_r($user);
+//  print_r($user);
 
-  echo "latest iD ". $latestid;
-  print_r($addacct);
+  //echo "latest iD ". $latestid;
+//  print_r($addacct);
 
   $email_check=$this->user_model->email_check($user['email']);
 
@@ -403,9 +406,49 @@ public function register_user(){
       'account_name' => $this->input->post('user_accttype'),
       'accountnum' => $acctnum
     );
-    $this->user_model->register_acct($addacct);
-    $this->session->set_flashdata('success_msg', 'Registered successfully. Please Wait for The Confirmation of an Administrator.');
-    redirect('/user/loadlogin');
+
+    $this->load->library('form_validation');
+ // field name, error message, validation rules
+ $config = array(
+     array(
+         'field' => 'user_firstname',
+         'label' => 'First Name',
+         'rules' => 'required|regex_match[/^[a-zA-Z ]+$/]',
+     ),
+     array(
+         'field' => 'user_lastname',
+         'label' => 'Last Name',
+         'rules' => 'required|regex_match[/^[a-zA-Z ]+$/]',
+     ),
+
+     array(
+         'field' => 'user_mobile',
+         'label' => 'Contact Number',
+         'rules' => 'required|exact_length[11]|numeric',
+     ),
+     array(
+         'field' => 'user_password',
+         'label' => 'Password',
+         'rules' => 'required|min_length[8]|max_length[32]',
+     ),
+
+ );
+
+ $this->form_validation->set_rules($config);
+ $this->form_validation->set_error_delimiters('','<br>');
+ if($this->form_validation->run() == FALSE)
+ {
+  $this->session->set_flashdata('error_msg', validation_errors());
+  redirect('user');
+ }
+ else
+ {
+   $this->user_model->register_acct($addacct);
+   $this->session->set_flashdata('success_msg', 'Registered successfully. Please Wait for The Confirmation of an Administrator.');
+   redirect('/user/loadlogin');
+ }
+
+
 
   }
   else{
