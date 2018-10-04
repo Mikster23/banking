@@ -132,6 +132,7 @@ $databal=$this->user_model->getbalance_acctnum($account);
         $datafee = $this->user_model->getatmfee($accounttype);
 
         $transactionfee = (int) $datafee['atm_fee'];
+        $amounttest= (int)$this->input->post('user_amount');
   $amount= (int)$this->input->post('user_amount') - $transactionfee;
   $amounthistory = (int)$this->input->post('user_amount');
 $bal = (int) $databal['balance'];
@@ -147,7 +148,7 @@ $bal = (int) $databal['balance'];
       redirect('/deposit');
     }
 
-    if($amount <0){
+    if($amounttest < 0){
       $this->session->set_flashdata('error_msg', 'No Negative Values');
       redirect('/deposit');
 

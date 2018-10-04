@@ -74,7 +74,7 @@ function pay(){
 
 
   }
-  if($amount <0 ){
+  if($amountcheck <0 ){
 
     $this->session->set_flashdata('error_msg', 'No Negative Input!');
     redirect('paybill');

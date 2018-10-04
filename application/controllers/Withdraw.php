@@ -34,21 +34,41 @@ class Withdraw extends CI_Controller {
 
     $datafee = $this->user_model->getatmfee($accounttype);
 
-    $penaltyfee = (int)$datafee['penalty'];
+
     $transactionfee = (int) $datafee['atm_fee'];
     $minwithdraw = (int) $datafee['minwith'];
     $maintainbal = (int) $datafee['minbalance'];
     $amount= (int)$this->input->post('user_amount') - $transactionfee;
-
+$amounttest= (int)$this->input->post('user_amount');
     $amountcheck = (int)$this->input->post('user_amount');
     $amounthistory = (int)$this->input->post('user_amount');
     $bal = (int) $databal['balance'];
+
+    $lastupdated = $dataacctidtype['updated_at'];
+
+
+    $date2 = new DateTime($lastupdated);
+    $timezone = date_default_timezone_get();
+    date_default_timezone_set('Asia/Singapore');
+    $date = date('m/d/Y h:i:s a', time());
+    $date3 = new DateTime($date);
+
+    $diff=date_diff($date2,$date3);
+
+
+    $diffdate =  $diff->format("%a");
+
+$monthsdelayed = floor($diffdate/30);
     //$balfinal = $bal - $amount;
     $id =  (int)$this->session->userdata('user_id');
     $pin = $this->input->post('user_pin');
     $pintrue =   $this->session->userdata('user_pin');
     $balbefore = $bal;
 
+
+   if($bal < $maintainbal && $monthsdelayed >= 1){
+    $penaltyfee = (int)$datafee['penalty']*$monthsdelayed;
+}
 
     if($bal > $maintainbal){
 
@@ -71,13 +91,13 @@ class Withdraw extends CI_Controller {
     }
 
 
-    if(empty($amount)){
+    if(empty((int)$amount)){
       $this->session->set_flashdata('error_msg', 'Please Fill In Empty fields');
       redirect('withdraw');
 
 
     }
-    if($amount <0 ){
+    if($amounttest <0 ){
 
       $this->session->set_flashdata('error_msg', 'No Negative Input!');
       redirect('withdraw');
@@ -114,14 +134,16 @@ class Withdraw extends CI_Controller {
 
     );
 
-
     $id =  $this->session->userdata('user_id');
 
 
 
 
+
     $withdraw_check=$this->user_model->user_withdraw($id,$account,$user_withdraw);
-        $this->session->set_flashdata('success_msg', 'Withdraw Successful! <br></br> <br> Transaction Fee : PHP '.$transactionfee." <br> Penalty Fee : ". $penaltyfee.'<br>Account Number : '. $account);
+
+
+        $this->session->set_flashdata('success_msg', 'Withdraw Successful! <br></br> <br> Transaction Fee : PHP '.$transactionfee." <br> Penalty Fee : ". $penaltyfee.'<br>Account Number : '. $monthsdelayed);
     //  echo json_encode(array("status" => TRUE));
     redirect('/withdraw');
 
