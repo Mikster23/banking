@@ -64,7 +64,7 @@
                                   <input class="form-control" placeholder="Email" name="user_email" type="email" autofocus>
                               </div>
                               <div class="form-group">
-                                  <input class="form-control" placeholder="Password" name="user_password" type="password" value="">
+                                  <input class="form-control" placeholder="Password" name="user_password" type="password" value="" attern=".{8,}"   required title="Password Must Be minimum of 8 Character">
                               </div>
 
                               <div class="form-group">

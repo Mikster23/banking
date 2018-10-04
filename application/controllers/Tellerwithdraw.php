@@ -75,15 +75,47 @@ public function tellermakewithdraw()
 
   $datafee = $this->teller_model->getotcfee($accounttype);
   $checkcandep = (int) $datafee['withtel'];
-    $penaltyfee = (int)$datafee['penalty'];
+    $minwithdraw = (int) $datafee['minwith'];
+
+
+$lastupdated =  $dataacctidtype['created_at'];
+    $date2 = new DateTime($lastupdated);
+    $timezone = date_default_timezone_get();
+    date_default_timezone_set('Asia/Singapore');
+    $date = date('m/d/Y h:i:s a', time());
+    $date3 = new DateTime($date);
+
+    $diff=date_diff($date2,$date3);
+
+
+    $diffdate =  $diff->format("%a");
+
+  $monthsdelayed = floor($diffdate/30);
+
+
 $maintainbal = (int) $datafee['minbalance'];
+if($bal < $maintainbal && $monthsdelayed >= 1){
+ $penaltyfee = (int)$datafee['penalty']*$monthsdelayed;
+}else{
+
+$penaltyfee = 0 ;
+
+}
+
+
+
 if($bal > $maintainbal){
 
   $penaltyfee = 0;
 
 }
 
-if($amount )
+
+if($amount < $minwithdraw ){
+  $this->session->set_flashdata('error_msg', 'Below Minimum Withdrawable Amount! Minimum : PHP '.$minwithdraw);
+  redirect('/tellerwithdraw');
+
+}
   if($checkcandep == 0){
 
     $this->session->set_flashdata('error_msg', 'Sorry But this account cant Withdraw through teller');
@@ -117,6 +149,7 @@ if(empty($amount)){
 }
 if($balafter<0){
     $this->session->set_flashdata('error_msg', 'Account has insufficient Balance');
+      redirect('/tellerwithdraw');
 }
   $tellerid=  (int)$this->session->userdata('user_id');
 $history=array(

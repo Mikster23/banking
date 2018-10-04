@@ -44,9 +44,13 @@ $amounttest= (int)$this->input->post('user_amount');
     $amounthistory = (int)$this->input->post('user_amount');
     $bal = (int) $databal['balance'];
 
-    $lastupdated = $dataacctidtype['updated_at'];
+    $lastupdated = $dataacctidtype['created_at'];
 
+if($amounttest < $minwithdraw){
 
+  $this->session->set_flashdata('error_msg', 'Below Minimum Withdrawable Amount! Minimum : PHP '.$minwithdraw);
+  redirect('/withdraw');
+}
     $date2 = new DateTime($lastupdated);
     $timezone = date_default_timezone_get();
     date_default_timezone_set('Asia/Singapore');
@@ -65,7 +69,7 @@ $monthsdelayed = floor($diffdate/30);
     $pintrue =   $this->session->userdata('user_pin');
     $balbefore = $bal;
 
-
+$penaltyfee = 0;
    if($bal < $maintainbal && $monthsdelayed >= 1){
     $penaltyfee = (int)$datafee['penalty']*$monthsdelayed;
 }

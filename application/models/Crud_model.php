@@ -202,6 +202,20 @@ class Crud_model extends CI_Model {
       'user_type' => (int)$this->input->post('m_type')
     );
 
+    $data2 = array(
+      'firstname' => $this->input->post('m_fname'),
+      'lastname' => $this->input->post('m_lname'),
+      'address' => $this->input->post('m_address'),
+      'email' => $this->input->post('m_email'),
+      'birthday' => $this->input->post('m_bday'),
+      'age' => $this->input->post('m_age'),
+      'mobile' => $this->input->post('m_mobile'),
+      'pin' => $this->input->post('m_pin'),
+      'password' => $this->input->post('m_pass'),
+      'user_type' => (int)$this->input->post('m_type'),
+      'status' => 1
+    );
+
     if ($id == 0) {
       return $this->db->insert('user', $data);
     } else {
